@@ -4,7 +4,10 @@ import Modal from 'react-bootstrap/Modal';
 import classes from './MovieInfo.module.css';
 import { Row,Col } from 'react-bootstrap';
 
-const MovieInfo = ({show,handleClose}) => {
+const MovieInfo = ({show,handleClose,MoviesInfo}) => {
+   
+  
+
   return (
     <>
         <Modal show={show} onHide={handleClose} size="lg">
@@ -16,66 +19,29 @@ const MovieInfo = ({show,handleClose}) => {
         <Modal.Body className='h-[34rem] overflow-y-auto'>
 
         <div className={classes.imgdiv}>
-          <img src="https://indiaglitz-media.s3.amazonaws.com/telugu/home/rrr-review-250322-1.jpg" alt=''/>
+          <img src={MoviesInfo.imgurl} alt=''/>
         </div>
 
         <div className='mt-[1.5rem]'>
          <div>
             <Row>
-                <Col>
-                <div className={classes.castimg}>
-                  <img src="https://cdn.siasat.com/wp-content/uploads/2023/01/Rajamouli.jpg" alt=""/>
-                </div>
-                <div className={classes.castname}>
-                  <p>Rajamouli</p>
-                </div>
-                </Col>
 
-                <Col>
-                <div className={classes.castimg}>
-                  <img src="https://cdn.siasat.com/wp-content/uploads/2022/08/jr-ntr-health.jpg" alt=""/>
-               </div>
-
-                <div className={classes.castname}>
-                   <p>N.T.RamaRao</p>
-                </div>
-                </Col>
-
-                <Col>
-                 <div className={classes.castimg}>
-                   <img src="https://cdn.gulte.com/wp-content/uploads/2022/06/Ram-Charan-1.jpg" alt=""/>
-                 </div>
-                <div className={classes.castname}>
-                  <p>Ram Charan</p>
-               </div>
-                </Col>
-
-                <Col>
-                <div className={classes.castimg}>
-                 <img src="https://assets.vogue.in/photos/622f9af651da11b2e5b0b176/3:4/w_846,h_1128,c_limit/7%20times%20Alia%20Bhatt%20served%20sublime%20beauty%20moments%20.jpg" alt=""/>
-              </div>
-              <div className={classes.castname}>
-                <p>Alia Bhatt</p>
-              </div>
-                </Col>
-
-                <Col>
-                <div className={classes.castimg}>
-                <img src="https://static.toiimg.com/thumb/msid-99040000,width-1280,resizemode-4/99040000.jpg" alt=""/>
-              </div>
-              <div className={classes.castname}>
-                <p>Keeravani</p>
-              </div>
-                </Col>
-
-                <Col>
-                <div className={classes.castimg}>
+              {MoviesInfo.cast.map((cast,index )=>
                 
+                <Col key={index}>
+                <div className={classes.castimg}>
+                  <img src={cast.castimg} alt=""/>
                 </div>
                 <div className={classes.castname}>
-                  <p></p>
+                  <p>{cast.castname}</p>
                 </div>
                 </Col>
+                      
+
+              )}
+               
+
+                
            </Row>
          </div>
 

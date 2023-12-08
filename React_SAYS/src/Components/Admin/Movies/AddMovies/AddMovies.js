@@ -81,8 +81,8 @@ const AddMovies = ({onSubmit,show,handleClose}) => {
            </div>
   
            <div className={classes.subdiv2}>
-            <label for="castinfo" className={classes.label} {...register("CastImageURL1",{})}>Cast Image URL1:</label>
-            <input type="text"  name="cimg1" className={classes.input} required/><br/>
+            <label for="castinfo" className={classes.label} >Cast Image URL1:</label>
+            <input type="text"  name="cimg1" className={classes.input} {...register("CastImageURL1",{})} required/><br/>
            </div>
         </div>   
 

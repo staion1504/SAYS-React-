@@ -24,7 +24,7 @@ const AdminNav = ({signout}) => {
             <FontAwesomeIcon icon={faEnvelopesBulk} style={{color:"#ffd700",}} className='text-[1.5rem]'/>
           </Link>
           {signout && 
-          <Link className='mr-6'>
+          <Link className='mr-6' to="/">
             <button className=' border-0 bg-[red] text-white rounded-[5px] w-[5rem] h-[2rem]'>LogOut</button>
           </Link>}
          </div>
