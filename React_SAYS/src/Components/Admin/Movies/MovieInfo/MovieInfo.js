@@ -49,25 +49,25 @@ const MovieInfo = ({show,handleClose,MoviesInfo}) => {
           <div className='flex justify-between'>
             <div className='flex flex-col'>
               <h4 className='text-[1.3rem] font-[600]'>Release Date</h4>
-              <p>28th June,2021</p>
+              <p>{MoviesInfo.releasedate}</p>
             </div>
 
             <div className='flex flex-col'>
               <h4 className='text-[1.3rem] font-[600]'>Duration</h4>
-              <p>2h 30min</p>
+              <p>{MoviesInfo.duration}</p>
             </div>
 
              <div className='flex flex-col'>
                <h4 className='text-[1.3rem] font-[600]'>Genre</h4>
-               <p>Action,Historic</p>
+               <p>{MoviesInfo.genre}</p>
              </div>
           </div>
           
            <div className='flex flex-col mt-[1.8rem]'>
             <h3 className='underline text-[1.6rem] font-[600]'>About</h3>
-            <p>RRR[a] is a 2022 Indian Telugu-language epic action drama film directed by S. S. Rajamouli, who co-wrote the film with V. Vijayendra Prasad. It was produced by D. V. V. Danayya of DVV Entertainment. The film stars N. T. Rama Rao Jr., Ram Charan, Ajay Devgn, Alia Bhatt, Shriya Saran, Samuthirakani, Ray Stevenson, Alison Doody, and Olivia Morris.Rajamouli came across stories about the lives of Rama Raju and Bheem and connected the coincidences between them, imagining what would have happened had they met, and been friends.</p>
-           </div>
+            <p>{MoviesInfo.about}</p>
          </div>
+      </div>
       </div>
         
         </Modal.Body>

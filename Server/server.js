@@ -41,197 +41,71 @@ mongoose
 
 
 
+//User Routes
+// const landingpage = require("./routes/user/landingpage");
+const loginpage = require("./routes/user/loginpage");
+// const signout = require("./routes/user/signout");
+// const signup = require("./routes/user/signup");
+// const homeroutes = require("./routes/user/home_routes");
+// const movieroutes = require("./routes/user/movie_routes");
+// const userprofileroutes = require("./routes/user/profile_routes");
+// const snacksroutes = require("./routes/user/snacks_routes");
+// const aboutusroutes = require("./routes/user/aboutus_routes");
+// const recentbookingroutes = require("./routes/user/recentbookings_routes");
+// const movienewsroutes = require("./routes/user/movienews_routes");
+// const moviereviewroutes = require("./routes/user/moviereviews_routes");
+// const theatrereviewroutes = require("./routes/user/theatrereview_routes");
+// const contactusroutes = require("./routes/user/contactus_routes");
+// const usertheatreprofileroutes = require("./routes/user/usertheatre_routes");
+// const moviegameroutes = require("./routes/user/moviegame_routes");
 
+// app.use("/", landingpage);
+app.use("/login", loginpage);
+// app.use("/signout", signout);
+// app.use("/Signup", signup);
+// app.use("/home", homeroutes);
+// app.use("/movies", movieroutes);
+// app.use("/profile", userprofileroutes);
+// app.use("/snacks", snacksroutes);
+// app.use("/aboutus", aboutusroutes);
+// app.use("/recentbooking", recentbookingroutes);
+// app.use("/movienews", movienewsroutes);
+// app.use("/reviews", moviereviewroutes);
+// app.use("/treviews", theatrereviewroutes);
+// app.use("/contactus", contactusroutes);
+// app.use("/usertheatreprofile", usertheatreprofileroutes);
+// app.use("/moviegame", moviegameroutes);
 
+//Theatre Dashboard Routes
+// const Tsignuproutes = require("./routes/Theatre/Tsignup_routes");
+// const Tdashboardroutes = require("./routes/Theatre/Tdashboard_routes");
+// const Tprofileroutes = require("./routes/Theatre/Tprofile_routes");
+// const Tsnackspageroutes = require("./routes/Theatre/Tsnackspage_routes");
+// const Tmdashboardroutes = require("./routes/Theatre/Tmdashboard_routes");
+// const Tscheduleroutes = require("./routes/Theatre/Tschedule_routes");
+const Tloginroutes = require("./routes/Theatre/Tlogin_routes");
+// const Tsignoutroutes = require("./routes/Theatre/Tsignout");
+// const userTheatreinforoutes = require("./routes/Theatre/usertheatreinfo_routes");
 
+// app.use("/TSignup", Tsignuproutes);
+// app.use("/tdashboard", Tdashboardroutes);
+// app.use("/tprofile", Tprofileroutes);
+// app.use("/tsnackspage", Tsnackspageroutes);
+// app.use("/tmdashboard", Tmdashboardroutes);
+// app.use("/tschedule", Tscheduleroutes);
+app.use("/Tlogin", Tloginroutes);
+// app.use("/Tsignout", Tsignoutroutes);
+// app.use("/usertheatreinfo", userTheatreinforoutes);
 
-//LOGIN
-const userinfo = require("./Models/user/signup");
-const theatresignupinfo = require("./Models/theatre/signup");
-//ADMIN SIDE
-const movieinfo = require("./Models/theatre/movieinfo");
-const rentalmovieinfo = require("./Models/theatre/rentalmovieslist");
+//Admin Dashboard Routes
+// const adminhomeroutes = require("./routes/Admin/adminhome_routes");
+const adminmoviesroutes = require("./routes/Admin/adminmovies_routes");
+// const adminclientroutes = require("./routes/Admin/adminclient_routes");
+// const admintheatreroutes = require("./routes/Admin/admintheatre_routes");
+// const adminmassmailroutes = require("./routes/Admin/adminmassmail_routes");
 
-
-app.post("/login", function (req, res) {
-
-  let email = req.body.email;
-  let password = md5(req.body.password);
-
-
-  userinfo.find({ email: email, LoginPassword: password }).then((value) => {
-    if (value.length == 0) {
-      res.json({
-        result: "error",
-      });
-    } else {
-
-      console.log("User Login success");
-      res.cookie("UserReferenceNumber", value[0].UserReferenceNumber);
-      if (email == "saysadmin@gmail.com") {
-        res.json({
-          result: "adminhome"
-        }
-        );
-      }
-      else
-        res.json({
-          result: "home",
-          UserReferenceNumber: value[0].UserReferenceNumber
-        });
-    }
-  });
-});
-
-
-app.post("/Tlogin", function (req, res) {
-
-  let email = req.body.email;
-  let License_Number = req.body.License;
-  let password = md5(req.body.password);
-
-
-  theatresignupinfo
-    .find({
-      temail: email,
-      licensenum: License_Number,
-      LoginPassword: password,
-    })
-    .then((value) => {
-      // console.log(value);
-
-      if (value.length == 0) {
-        res.json({
-          result: "error",
-        });
-      } else {
-        console.log("TLogin success");
-        res.cookie("currtheatrereffnum", value[0].tReferenceNumber);
-        let k =
-          value[0].city.charAt(0).toUpperCase() +
-          value[0].city.slice(1).toLowerCase();
-        res.json({
-          result: "theatre",
-          currtheatrereffnum: value[0].tReferenceNumber,
-          currtheatrecity: k
-        });
-
-      }
-    });
-});
-
-
-
-
-//Admin side
-
-
-app.get("/Adminmovies", async function (req, res) {
-  let rentalmoviearr = await movieinfo.find({});
-  let value1 = await rentalmovieinfo.find({});
-  let rentalmovieslocarr = [];
-  for (let i = 0; i < value1.length; i++) {
-    if (!rentalmovieslocarr.includes(value1[i]["city"])) {
-      rentalmovieslocarr.push(value1[i]["city"]);
-    }
-  }
-
-  res.json({
-    rentalmoviearr: rentalmoviearr,
-    rentalmovieslocarr: rentalmovieslocarr,
-  });
-});
-
-app.post("/adminrentalmovieinfo", async function (req, res) {
-  let mName = req.body.mName;
-  let theatreimgurl = req.body.theatreimgurl;
-  let lang = req.body.lang;
-  let rd = req.body.rd;
-  let duration = req.body.duration;
-  let genre = req.body.genre;
-  let locs = req.body.locs;
-  let cn1 = req.body.cn1;
-  let cimg1 = req.body.cimg1;
-  let cn2 = req.body.cn2;
-  let cimg2 = req.body.cimg2;
-  let cn3 = req.body.cn3;
-  let cimg3 = req.body.cimg3;
-  let cn4 = req.body.cn4;
-  let cimg4 = req.body.cimg4;
-  let cn5 = req.body.cn5;
-  let cimg5 = req.body.cimg5;
-  let aboutmovie = req.body.about;
-  let mid = "SAYS@" + mName;
-
-  let value = await movieinfo.find({ MovieId: mid });
-  if (value.length == 0) {
-    let newdocument = new movieinfo();
-    newdocument.MovieName = mName;
-    newdocument.MovieId = mid;
-    newdocument.imgurl = theatreimgurl;
-    newdocument.releasedate = rd;
-    newdocument.duration = duration;
-    newdocument.genre = genre;
-    newdocument.about = aboutmovie;
-    newdocument.language = lang;
-    let castobjarr = [
-      {
-        castname: cn1,
-        castimg: cimg1,
-      },
-
-      {
-        castname: cn2,
-        castimg: cimg2,
-      },
-
-      {
-        castname: cn3,
-        castimg: cimg3,
-      },
-
-      {
-        castname: cn4,
-        castimg: cimg4,
-      },
-
-      {
-        castname: cn5,
-        castimg: cimg5,
-      },
-    ];
-
-    newdocument.cast = castobjarr;
-    let value2 = await newdocument.save();
-    if (value2) {
-      console.log("New Document Added to movie info with data");
-    }
-  }
-
-  let locsarr = locs.split(",");
-  for (let i = 0; i < locsarr.length; i++) {
-    locsarr[i] =
-      locsarr[i].charAt(0).toUpperCase() + locsarr[i].slice(1).toLowerCase();
-  }
-
-  let rentalarrobj = [];
-  for (let i = 0; i < locsarr.length; i++) {
-    let obj1 = {
-      MovieId: mid,
-      MovieName: mName,
-      city: locsarr[i],
-    };
-
-    rentalarrobj.push(obj1);
-  }
-
-  let value3 = await rentalmovieinfo.insertMany(rentalarrobj);
-  if (value3) {
-    console.log("Rental movies inserted ");
-  }
-
-  res.json("added");
-});
-
-
-
+// app.use("/adminhome", adminhomeroutes);
+app.use("/Adminmovies", adminmoviesroutes);
+// app.use("/adminclient", adminclientroutes);
+// app.use("/admintheatre", admintheatreroutes);
+// app.use("/adminmassmail", adminmassmailroutes);

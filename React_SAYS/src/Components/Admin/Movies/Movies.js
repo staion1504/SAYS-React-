@@ -84,7 +84,7 @@ export const Movies = () => {
     };
      
     console.log(x);
-    let response = await fetch("http://localhost:5000/adminrentalmovieinfo", {
+    let response = await fetch("http://localhost:5000/Adminmovies/adminrentalmovieinfo", {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
