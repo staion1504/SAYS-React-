@@ -62,7 +62,9 @@ app.post("/login", function (req, res) {
       console.log("User Login success");
       res.cookie("UserReferenceNumber", value[0].UserReferenceNumber);
       if (email == "saysadmin@gmail.com") {
-        res.json("adminhome");
+        res.json({
+          result:  "adminhome"}
+          );
       }
       else
         res.json({
