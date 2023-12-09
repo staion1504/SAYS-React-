@@ -69,7 +69,7 @@ function Theatredashboard() {
           <div className={`${internalcss.reviewtable} mt-[1rem] ml-[13rem] w-[75%]`}>
             <table>
               <thead>
-                <tr class="headingrow">
+                <tr className="headingrow">
                   <th>#</th>
                   <th>MailId</th>
                   <th>Name</th>

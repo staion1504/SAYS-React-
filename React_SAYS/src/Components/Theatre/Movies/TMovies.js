@@ -11,8 +11,7 @@ import { EditMovie } from './EditMovie/EditMovie';
 import { RentMovie } from './RentMovie/RentMovie';
 
 
-import { MyContext } from '../../../Contexts/MoviesContext';
-import  { MyContext2 } from '../../../Contexts/UserSideMoviesContex';
+
 
 const TMovies = () => {
 
@@ -85,44 +84,54 @@ const TMovies = () => {
     }
   ]);
 
-   
+
 
 
 
 
 
   function AddedMovieHandler(data) {
-  console.log(data);
-   const ans= MoviesArray.filter((Movie)=>{
-      return (data.MovieName === Movie.MovieName) && (data.status==='Active')
-        
-    })  
-   console.log(ans);
-   setShowMovies([...showMovies,...ans]);
-   setShow2(false)
+    console.log(data);
+    const ans = MoviesArray.filter((Movie) => {
+      return (data.MovieName === Movie.MovieName) && (data.status === 'Active')
+
+    })
+    console.log(ans);
+    setShowMovies([...showMovies, ...ans]);
+    setShow2(false)
   }
 
 
 
+  useEffect(()=>{
+    
+   let renderdata=  async () => {
+
+
+    let response = await fetch("http://localhost:5000/tmdashboard", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: 'include', // <-- Important
+    })
+
+    let x = await response.json();
+    console.log(x);
+    // setMoviesArray(x.rentalmoviearr);
+
+  }
+
+  renderdata();
+
+
+},[]);
 
 
 
-  //useContext (Admin to theatre context)
-  const { dataArray } = useContext(MyContext);
-  useEffect(() => {
-    setMoviesArray([...MoviesArray, ...dataArray,]);
-  }, [dataArray])
-  
 
-  //theatre to user
 
-  const {userDataArray, setUserDataArray } = useContext(MyContext2);   
-  useEffect(() => {
-    setUserDataArray([...showMovies]);
-  }, [showMovies]);
 
- 
-   
 
   const [show1, setShow1] = useState(false);
   const handleClose1 = () => setShow1(false);

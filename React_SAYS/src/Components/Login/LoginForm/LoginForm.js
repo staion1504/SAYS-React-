@@ -46,6 +46,7 @@ const LoginForm = (props) => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(data),
+      credentials: 'include', // <-- Important
     });
 
     const output = await response.json();
