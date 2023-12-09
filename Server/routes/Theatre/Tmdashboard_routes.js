@@ -34,7 +34,8 @@ router.get("/", async function (req, res) {
   let rentalmoviearr = [];
   let activemoviearr = [];
   let inactivemoviearr = [];
-
+  console.log(req.cookies.currtheatrecity);
+  
   let value1 = await rentalmovies.find({ city: req.cookies.currtheatrecity });
 
   if (value1.length == 0) {
@@ -74,15 +75,13 @@ router.get("/", async function (req, res) {
       }
     }
   }
-  if (req.cookies.isTlogin)
-    res.render("moviedashboard", {
+  
+    res.json({
       rentalmoviearr: rentalmoviearr,
       activemoviearr: activemoviearr,
       inactivemoviearr: inactivemoviearr,
     });
-  else {
-    res.redirect("/login");
-  }
+ 
 });
 
 router.post("/rental", async function (req, res) {

@@ -3,11 +3,10 @@ const md5 = require("md5");
 const cors = require('cors');
 const bodyParser = require("body-parser");
 const app = express();
-app.use(cors()); // Enable CORS for all routes
+app.use(cors({ origin: true, credentials: true })); // Enable CORS for all routes(all reuestes are accepted 3000,8000 ports creditonals for allownig cookies)
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(express.static(__dirname + "/public"));
-app.set("view engine", "ejs");
+
 
 app.listen(5000, function () {
   console.log("server straed on port 5000");
@@ -81,7 +80,7 @@ app.use("/login", loginpage);
 // const Tdashboardroutes = require("./routes/Theatre/Tdashboard_routes");
 // const Tprofileroutes = require("./routes/Theatre/Tprofile_routes");
 // const Tsnackspageroutes = require("./routes/Theatre/Tsnackspage_routes");
-// const Tmdashboardroutes = require("./routes/Theatre/Tmdashboard_routes");
+const Tmdashboardroutes = require("./routes/Theatre/Tmdashboard_routes");
 // const Tscheduleroutes = require("./routes/Theatre/Tschedule_routes");
 const Tloginroutes = require("./routes/Theatre/Tlogin_routes");
 // const Tsignoutroutes = require("./routes/Theatre/Tsignout");
@@ -91,7 +90,7 @@ const Tloginroutes = require("./routes/Theatre/Tlogin_routes");
 // app.use("/tdashboard", Tdashboardroutes);
 // app.use("/tprofile", Tprofileroutes);
 // app.use("/tsnackspage", Tsnackspageroutes);
-// app.use("/tmdashboard", Tmdashboardroutes);
+app.use("/tmdashboard", Tmdashboardroutes);
 // app.use("/tschedule", Tscheduleroutes);
 app.use("/Tlogin", Tloginroutes);
 // app.use("/Tsignout", Tsignoutroutes);
@@ -109,3 +108,5 @@ app.use("/Adminmovies", adminmoviesroutes);
 // app.use("/adminclient", adminclientroutes);
 // app.use("/admintheatre", admintheatreroutes);
 // app.use("/adminmassmail", adminmassmailroutes);
+
+
