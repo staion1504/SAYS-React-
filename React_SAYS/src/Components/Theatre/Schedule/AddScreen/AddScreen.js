@@ -21,6 +21,7 @@ const AddScreen = ({ show, handleClose,addScreenHandler}) => {
   const onSubmit = (data) => {
     
     handleShow1();
+    console.log(data);
     setSeatMatrix({
       data:data,
       row:data.numrows,

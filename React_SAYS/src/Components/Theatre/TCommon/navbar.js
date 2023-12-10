@@ -34,9 +34,6 @@ function TNavbar() {
         About Theatre
         </Link>
 
-        
-      <Link to="/User/MoviesPage" style={{ color: 'gold' }}>
-              sdfsd</Link>
 
       </Nav>
 
@@ -51,7 +48,7 @@ function TNavbar() {
           <NavDropdown.Item href="#action/3.1">Profile</NavDropdown.Item>
           <NavDropdown.Item href="#action/3.2">Edit Profile</NavDropdown.Item>
           <NavDropdown.Divider />
-          <NavDropdown.Item href="#action/3.4">Sign Out</NavDropdown.Item>
+          <Link to="/">Sign Out</Link>
         </NavDropdown>
       </div>
 

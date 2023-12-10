@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import classes from './TSchedule.module.css';
 import TNavbar from '../TCommon/navbar';
 import { Container } from 'react-bootstrap';
@@ -23,61 +23,95 @@ const TSchedule = () => {
   // const handleClose4 = () => setShow4(false);
   // const handleShow4 = () => setShow4(true);
 
-  const [screens, setScreens] = useState([
+  const [screens, setScreens] = useState([]);
 
-    {
-      ScreenName: 'A',
-      ScreenCapacity: 100
-    }
-    , {
-      ScreenName: 'B',
-      ScreenCapacity: 50
-    }
+  const [shows, setShows] = useState([])
+  const [MoviesArray,setMoviesArray]=useState([]);
 
+  async function renderDeatils() {
 
-  ]);
+    let res = await fetch("http://localhost:5000/tschedule/", {
 
-  const [shows, setShows] = useState([
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials:'include'
 
-    {
-      ShowTime: "6:30 pm",
-      Duration: "2h 30min",
-      ScreenName: 'A',
-      MovieName: 'Animal',
-      ShowFromDate: "	22-12-2023",
-      ShowToDate: "31-12-2023"
-    },
+    })
+
+    let x = await res.json();
 
 
-  ])
+    console.log(x);
+    setScreens(x.screeninfoarr);
+    setShows(x.movieshowdetails);
+    setMoviesArray(x.curractivemoviesinfo);
 
-  function addScreenHandler(data) {
-
-    setScreens([...screens, { ScreenName: data.screenname, ScreenCapacity: data.screencapacity }]);
 
   }
-  function addShowHandler(data) {
 
-    setShows([...shows,
+  useEffect(() => {
 
-    {
-      ShowTime: data.showtime+" "+data.ampm ,
-      Duration: data.duration,
-      ScreenName: data.selectscreen,
-      MovieName: data.selectmovie,
-      ShowFromDate: data.fromdate,
-      ShowToDate:data.todate
+    renderDeatils();
+
+
+  }, []);
+
+
+
+  async function addScreenHandler(data) {
+    console.log(data);
+
+    let response = await fetch(
+      "http://localhost:5000/tschedule/addscreen",
+      {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials:'include'
+      },
+     
+    );
+    let k = await response.json();
+    k = k.confirm;
+    if (k == 1) {
+      console.log("HI");
+      renderDeatils();
     }
-  
-  ]);
 
+
+ 
+
+  }
+
+ async function addShowHandler(data) {
+
+
+    let response = await fetch(
+      "http://localhost:5000/tschedule/addshow",
+      {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials:'include'
+      },
+     
+    );
+    let k = await response.json();
+ console.log(k);
+ renderDeatils();
   }
 
   return (
     <div>
 
       {show1 && <AddScreen show={show1} handleClose={handleClose1} addScreenHandler={addScreenHandler} />}
-      {show2 && <AddShow show={show2} handleClose={handleClose2} screens={screens} addShowHandler={addShowHandler}/>}
+      {show2 && <AddShow show={show2} handleClose={handleClose2} screens={screens} addShowHandler={addShowHandler}  MoviesArray={MoviesArray}/>}
       {/* {show2 && <AddMovie show={show2} handleClose={handleClose2}/>}
      {show3 && <EditMovie show={show3} handleClose={handleClose3}/>}
      {show4 && <RentMovie show={show4} handleClose={handleClose4}/>} */}
@@ -112,8 +146,8 @@ const TSchedule = () => {
                 {screens.map((screeninfo, index) =>
                   <tr key={index + 1}>
                     <td>{index + 1}</td>
-                    <td>{screeninfo.ScreenName}</td>
-                    <td>{screeninfo.ScreenCapacity}</td>
+                    <td>{screeninfo.screenname}</td>
+                    <td>{screeninfo.screencapacity}</td>
                     <td>
                       <button type="button" className='bg-[blue] w-[6rem] h-[2.2rem] mr-[3rem] rounded-md text-[white] hover:bg-[indianred]'>
                         Edit
@@ -174,14 +208,14 @@ const TSchedule = () => {
 
                 {shows.map((show, index) =>
 
-                  <tr>
+                  <tr key={index}>
                     <td>{index + 1}</td>
-                    <td>{show.ShowTime}</td>
-                    <td>{show.Duration}</td>
-                    <td>{show.ScreenName}</td>
+                    <td>{show.showtime}</td>
+                    <td>{show.duration}</td>
+                    <td>{show.screenname}</td>
                     <td>{show.MovieName}</td>
-                    <td>{show.ShowFromDate}</td>
-                    <td>{show.ShowToDate}</td>
+                    <td>{show.fromdate}</td>
+                    <td>{show.todate}</td>
                     <td>
                       <button type="button" className='bg-[blue] w-[6rem] h-[2.2rem] rounded-md text-[white] hover:bg-[indianred]'>
                         Edit

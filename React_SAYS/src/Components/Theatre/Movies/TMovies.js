@@ -9,6 +9,7 @@ import MovieInfo from '../../Admin/Movies/MovieInfo/MovieInfo';
 import { AddMovie } from './AddMovie/Addmovie';
 import { EditMovie } from './EditMovie/EditMovie';
 import { RentMovie } from './RentMovie/RentMovie';
+import { Await } from 'react-router-dom';
 
 
 
@@ -17,95 +18,79 @@ const TMovies = () => {
 
   const [AddMovieArray, setAddMovieArray] = useState([]);
 
-  const [MoviesArray, setMoviesArray] = useState([{
-    MovieName: "COCO",
-    MovieImageURL: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTegiOTQmvZ9vWL1w6glk1BVBumKxID3fuJpqJOk1oQwiUq8wy2',
-    Language: "English",
-    ReleaseDate: "",
-    Duration: "",
-    Genre: "",
-    Locations: "",
-    CastName1: "",
-    CastImageURL1: "",
-
-    CastName2: "",
-    CastImageURL2: "",
-
-    CastName3: "",
-    CastImageURL3: "",
-
-    CastName4: "",
-    CastImageURL4: "",
-
-    CastName5: "",
-    CastImageURL5: "",
-
-    About: ""
-  }]);
+  const [MoviesArray, setMoviesArray] = useState([]);
 
   const [rentedMovies, SetRentedMovies] = useState({});
 
-  function rentMovieHandler(data) {
+  const [MoviesInfo, setMoviesInfo] = useState();
+  const [tobj, setTobj] = useState(null);
+
+ async function rentMovieHandler(data) {
 
     setShow4(false);
+     let response=await fetch("http://localhost:5000/tmdashboard/rental",{
 
-    setAddMovieArray([...AddMovieArray, {
-      MovieName: data.MovieName,
-      Status: 'InActive'
-    }])
+      method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+          credentials: 'include'
+        
+     });
+
+     let x=await response.json();
+     
+      renderdata();
 
   }
 
-  const [showMovies, setShowMovies] = useState([
-    {
-      MovieName: "Salaar : The caese fire part-1",
-      MovieImageURL: 'https://pbs.twimg.com/profile_images/1723579743361179648/8XbD-Xvd_400x400.jpg',
-      Language: "Telugu",
-      ReleaseDate: "",
-      Duration: "",
-      Genre: "",
-      Locations: "",
-      CastName1: "",
-      CastImageURL1: "",
-
-      CastName2: "",
-      CastImageURL2: "",
-
-      CastName3: "",
-      CastImageURL3: "",
-
-      CastName4: "",
-      CastImageURL4: "",
-
-      CastName5: "",
-      CastImageURL5: "",
-
-      About: ""
-    }
-  ]);
+  const [showMovies, setShowMovies] = useState([]);
 
 
 
-
-
-
-
-  function AddedMovieHandler(data) {
+  async function AddedMovieHandler(data) {
     console.log(data);
-    const ans = MoviesArray.filter((Movie) => {
-      return (data.MovieName === Movie.MovieName) && (data.status === 'Active')
-
-    })
-    console.log(ans);
-    setShowMovies([...showMovies, ...ans]);
+    let res = await fetch(
+      "http://localhost:5000/tmdashboard/addmovie",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+        credentials: 'include'
+      }
+    );
+    let x = await res.json();
+    console.log(x);
     setShow2(false)
   }
 
+  useEffect(() => {
 
+    const gettheatredetails = async () => {
+      console.log("came in");
+      let res = await fetch(
+        "http://localhost:5000/tmdashboard/gettheatredetails",
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          credentials: 'include'
+        }
+      );
+      let tobj = await res.json();
+      console.log(tobj);
+      setTobj(tobj);
 
-  useEffect(()=>{
-    
-   let renderdata=  async () => {
+    }
+    gettheatredetails();
+
+  }, [])
+
+  let renderdata=  async () => {
 
 
     let response = await fetch("http://localhost:5000/tmdashboard", {
@@ -118,9 +103,15 @@ const TMovies = () => {
 
     let x = await response.json();
     console.log(x);
-    // setMoviesArray(x.rentalmoviearr);
+    setMoviesArray(x.rentalmoviearr);
+    setShowMovies(x.activemoviearr);
+    setAddMovieArray(x.inactivemoviearr);
 
   }
+
+  useEffect(()=>{
+    
+  
 
   renderdata();
 
@@ -152,10 +143,10 @@ const TMovies = () => {
   return (
     <div>
 
-      {show1 && <MovieInfo show={show1} handleClose={handleClose1} />}
+      {show1 && <MovieInfo show={show1} handleClose={handleClose1} MoviesInfo={MoviesInfo}/>}
       {show2 && <AddMovie AddedMovieHandler={AddedMovieHandler} AddMovieArray={AddMovieArray} show={show2} handleClose={handleClose2} />}
       {show3 && <EditMovie show={show3} handleClose={handleClose3} />}
-      {show4 && <RentMovie rentMovieHandler={rentMovieHandler} rentedMovies={rentedMovies} show={show4} handleClose={handleClose4} />}
+      {show4 && <RentMovie rentMovieHandler={rentMovieHandler} rentedMovies={rentedMovies} show={show4} handleClose={handleClose4} tobj={tobj} />}
       <TNavbar />
 
       <div className='mt-[3rem]'>
@@ -181,7 +172,7 @@ const TMovies = () => {
           {showMovies.map((Movie, index) =>
             <Col lg={2} key={index}>
               <div className={classes.movie_card}>
-                <img src={Movie.MovieImageURL} alt='' />
+                <img src={Movie.imgurl} alt='' />
                 <div className='flex justify-between'>
                   <p className={classes.movie_name}>{Movie.MovieName}</p>
                 </div>
@@ -191,7 +182,7 @@ const TMovies = () => {
                   </div>
 
                   <div>
-                    <button type="button" className='rounded-[50%] w-[2rem] border-none bg-[#221f1f]' onClick={handleShow1}>
+                    <button type="button" className='rounded-[50%] w-[2rem] border-none bg-[#221f1f]' onClick={()=>{setMoviesInfo(Movie);handleShow1()}} >
                       <FontAwesomeIcon icon={faInfoCircle} className='text-[indianred] text-[1.5rem]' />
                     </button>
                   </div>
@@ -220,7 +211,7 @@ const TMovies = () => {
           {MoviesArray.map((Movie, index) =>
             <Col lg={2} key={index}>
               <div className={classes.movie_card}>
-                <img src={Movie.MovieImageURL} alt='' />
+                <img src={Movie.imgurl} alt='' />
                 <div className='flex justify-between'>
                   <p className={classes.movie_name}>{Movie.MovieName}</p>
                 </div>
@@ -228,7 +219,7 @@ const TMovies = () => {
 
 
                   <div>
-                    <button type="button" className='rounded-[50%] w-[2rem] border-none bg-[#221f1f]' onClick={handleShow1}>
+                    <button type="button" className='rounded-[50%] w-[2rem] border-none bg-[#221f1f]' onClick={()=>{setMoviesInfo(Movie);handleShow1()}}>
                       <FontAwesomeIcon icon={faInfoCircle} className='text-[indianred] text-[1.5rem]' />
                     </button>
                   </div>

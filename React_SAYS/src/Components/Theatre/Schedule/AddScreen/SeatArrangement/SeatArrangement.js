@@ -13,7 +13,7 @@ const SeatArrangement = ({ show, handleClose1, handleClose2, seatMatrix,addScree
 
   const handleCloseHandler = () => {
      
-    addScreenHandler(seatMatrix.data);
+    addScreenHandler({...seatMatrix.data,seatarr:seatarr});
     handleClose1();
     handleClose2();
   }

@@ -15,10 +15,12 @@ router.get("/gettreffnum", function (req, res) {
 });
 
 router.get("/gettheatredetails", function (req, res) {
+
   theatresignupinfo
     .find({ tReferenceNumber: req.cookies.currtheatrereffnum })
     .then((value) => {
       let obj = value[0];
+     
       res.json(obj);
     });
 });
@@ -34,7 +36,7 @@ router.get("/", async function (req, res) {
   let rentalmoviearr = [];
   let activemoviearr = [];
   let inactivemoviearr = [];
-  console.log(req.cookies.currtheatrecity);
+  // console.log(req.cookies.currtheatrecity);
   
   let value1 = await rentalmovies.find({ city: req.cookies.currtheatrecity });
 
@@ -85,7 +87,7 @@ router.get("/", async function (req, res) {
 });
 
 router.post("/rental", async function (req, res) {
-  let movietitle = req.body.movietitle;
+  let movietitle = req.body.MovieName;
   let tname = req.body.tname;
   let temail = req.body.temail;
   let rentaldays = req.body.rentaldays;
@@ -129,7 +131,7 @@ router.post("/rental", async function (req, res) {
         console.log(
           "Inserted updated rented movie data in tmovieinfo database"
         );
-        res.redirect("/tmdashboard");
+        res.json("ok");
       })
       .catch((err) => {
         console.log(err);
@@ -157,7 +159,7 @@ router.post("/rental", async function (req, res) {
         console.log(
           "Inserted updated rented movie data in tmovieinfo database"
         );
-        res.redirect("/tmdashboard");
+        res.json("ok");
       })
       .catch((err) => {
         console.log(err);
@@ -166,8 +168,8 @@ router.post("/rental", async function (req, res) {
 });
 
 router.post("/addmovie", async function (req, res) {
-  let moviename = req.body.moviename;
-  let status = req.body.moviestatus;
+  let moviename = req.body.MovieName;
+  let status = req.body.status;
   let movieid;
   let moviestatusinfoobjarr = [];
   let value1 = await movieinfo.find({ MovieName: moviename });
@@ -275,14 +277,14 @@ router.post("/addmovie", async function (req, res) {
       )
       .then(() => {
         console.log("Inserted updated rented movie data in database");
-        res.redirect("/tmdashboard");
+        res.json("ok");
       })
       .catch((err) => {
         console.log(err);
       });
   } else {
     console.log("No movies Present in theatre!!!");
-    res.redirect("/tmdashboard");
+    res.redirect("No");
   }
 });
 

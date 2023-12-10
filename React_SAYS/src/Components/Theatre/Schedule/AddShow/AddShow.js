@@ -3,27 +3,30 @@ import classes from './AddShow.module.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import Modal from 'react-bootstrap/Modal';
 import { Row,Col} from 'react-bootstrap';
-import { MyContext2 } from '../../../../Contexts/UserSideMoviesContex';
 import { useForm } from 'react-hook-form';
 
-const AddShow = ({show,handleClose,screens,addShowHandler}) => {
+const AddShow = ({show,handleClose,screens,addShowHandler,MoviesArray}) => {
 
   const { register, handleSubmit} = useForm();
-
-
-  const [MoviesArray,setMoviesArray]=useState([]);
-
-  const {userDataArray}=useContext(MyContext2);
    
-  useEffect(()=>{
-   setMoviesArray([...MoviesArray,...userDataArray]);
-  },[userDataArray]);
+  const[duration,setDuration]=useState("")
+  const[selectmovie,setSelectmovie]=useState();
+
+  function durationSettingHandler(e){
+      
+    setDuration(MoviesArray.find((movie) => movie.MovieName === e.target.value).duration);
+    setSelectmovie(e.target.value);
+
+  }
+
+
+  
 
 
   const onSubmit = (data) => {
-    
-   
-    addShowHandler(data);
+    data.duration=duration;
+    // console.log({...data,selectmovie:selectmovie});
+    addShowHandler({...data,selectmovie:selectmovie});
     handleClose();
 
 
@@ -46,8 +49,8 @@ const AddShow = ({show,handleClose,screens,addShowHandler}) => {
             {...register('selectscreen')}
           >
             {screens.map((screeninfo, index) => (
-              <option key={index} value={screeninfo.ScreenName}>
-                {screeninfo.ScreenName}
+              <option key={index} value={screeninfo.screenname}>
+                {screeninfo.screenname}
               </option>
             ))}
           </select>
@@ -58,13 +61,14 @@ const AddShow = ({show,handleClose,screens,addShowHandler}) => {
           <select
             name="selectmovie"
             className='border-black border-2 rounded-[5px]'
-            {...register('selectmovie')}
+            onChange={durationSettingHandler}
+            // {...register('selectmovie')}
           >
               <option key={0} >
                Select Movie
               </option>
-            {MoviesArray.map((Movie) => (
-              <option key={Movie.MovieName} value={Movie.MovieName}>
+            {MoviesArray.map((Movie,index) => (
+              <option key={index} value={Movie.MovieName}  >
                 {Movie.MovieName}
               </option>
             ))}
@@ -78,7 +82,8 @@ const AddShow = ({show,handleClose,screens,addShowHandler}) => {
           <input
             type="text"
             name="duration"
-            className='border-black border-2 rounded-[5px]'
+            className='border-black border-2 rounded-[5px]' 
+            value={duration}
             {...register('duration')}
             required
           />
