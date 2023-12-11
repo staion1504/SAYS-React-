@@ -10,8 +10,6 @@ const Theatre = () => {
   
   const [theatres,settheatres]=useState([]);
 
-
-
   const get_theatres_func=async ()=>{
     let response = await fetch("http://localhost:5000/Admintheatre", {
       method: 'GET',

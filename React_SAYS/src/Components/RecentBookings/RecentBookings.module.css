@@ -1,19 +1,9 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "PT Sans", sans-serif;
-}
-body {
-  position: relative;
-  width: 100%;
-  max-height: 100vh;
-  /* background-blend-mode: normal, lighten, soft-light; */
-}
+
 .backHome {
   position: absolute;
   z-index: 2;
   margin-left: 31px;
+  margin-top: 1.5rem;
 }
 .backHome a {
   text-decoration: none;
@@ -33,9 +23,7 @@ body {
 }
 .background {
   position: absolute;
-  /* background: url("./images/containerticket.png") no-repeat; */
-  /* background: url("/images/recentbooking/ticketbackimg.jpg") no-repeat; */
-
+  background: url("../../Assests/RecentBooking/containerticket.png") no-repeat;
   width: 100%;
   height: 100vh;
   background-size: cover;
@@ -47,56 +35,48 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  position: relative;
+
   width: 75%;
-  height: 550px;
+  height: 560px;
   transform: translateY(16%);
   margin-left: 170px;
   border-radius: 15px;
-  /* background-image: url("/images/recentbooking/ticketbackimg.jpg"); */
   background: black;
   background-size: cover;
   background-position: center;
+  overflow-y:auto;
+  max-height: 35rem;
 }
-.bookings {
-  position: relative;
-  width: 80%;
-  /* margin: 0 auto; */
-  text-align: center;
-}
-.bookings h2 {
+
+ .heading {
   font-size: 30px;
   color: #ffff;
-  margin-bottom: 20px;
+  margin-top: 18rem;
 }
-table {
-  width: 100%;
+.table {
+  width: 80%;
+  padding-top: 1rem;
+  text-align: center;
   border-collapse: collapse;
-  margin-top: 20px;
-  border: 2px solid #616267;
+  border: 2px solid #ddd;
+  margin-bottom: 2rem;
+  margin-top: 2rem;
 }
 
-th,
-td {
+.th,
+.td {
   padding: 10px;
-  border: 1px solid #ddd;
 }
 
-th {
+.th {
   background-color: transparent;
   color: red;
   font-weight: bold;
 }
-td {
+.td {
   color: #fff;
-  /* border-width: 2px ; */
-
-  /* font-weight: bold; */
 }
 
-/* tbody tr:nth-child(al) {
-    background-color: #f2f2f2;
-  } */
 
 .modalbox {
   border: 0px;
@@ -123,12 +103,12 @@ td {
   margin-bottom: 2px;
 }
 
-.poster img {
-  width: 100%;
-  height: 600px;
-  /* src: url("./images/wp5207687-avatar-movie-wallpapers.jpg"); */
+.posterimg {
+  width: 80%;
+  height: 350px;
   border-radius: 10px;
   z-index: 100;
+  margin: auto;
 }
 .title {
   padding: 50px 25px 10px;
@@ -141,7 +121,7 @@ td {
 }
 
 .card {
-  /* position: relative; */
+  
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -150,22 +130,20 @@ td {
   /* bottom:0% ; */
   border: none;
 }
-.card img{
-  max-width: 140%;
-    height: auto;
-}
+
 .content {
   position: absolute;
   display: flex;
   flex-direction: column;
-  /* gap: 9px; */
   gap: 0px;
   margin-left: 40px;
   font-size: 16px;
   font-style: normal;
   font-weight: bold;
   z-index: 1;
+  top:24.5rem;
 }
+
 .card .content .seat_time {
   display: flex;
   flex-direction: column;
