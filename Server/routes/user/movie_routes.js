@@ -118,7 +118,7 @@ router.get("/", async (req, res) => {
   await fillLatestandUpcoming(today, default_city, latestmovies, upcomingmovies);
 
   await CheckLatestMoviesForReviewHub(reviewdata);
-
+  
   res.json({
     checklocaton: default_city,
     checkLangfileter: "",
@@ -390,14 +390,14 @@ router.get("/seatarrangement", async (req, res) => {
       userbookingseatarr = screendetails[i]["userbookingseatarr"];
     }
   }
-  let movieobj = await movieinfo.findOne({ MovieName: mname });
-  if (req.cookies.isUserLogin)
-    res.render("seatarrangement", {
-      movieobj: movieobj,
+  // let movieobj = await movieinfo.findOne({ MovieName: mname });
+
+    res.json({
+      // movieobj: movieobj,
       userbookingseatarr: userbookingseatarr,
       infoobj: infoobj,
     });
-  else res.redirect("/login");
+ 
 });
 
 

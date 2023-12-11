@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faWheelchair} from '@fortawesome/free-solid-svg-icons';
@@ -14,11 +14,34 @@ const SeatArrangement = () => {
     const params = new URLSearchParams(search);
     const MovieArray = JSON.parse(params.get('MovieArray'));
     const tReff=params.get('tReff');
-    
+    const time=params.get('time');
     const navigate=useNavigate();
 
-   
+    const[seatMatrix,setSeatMatrix]=useState([]);
+
     
+     async function renderSeats(){
+
+      let res=await fetch(`http://localhost:5000/movies/seatarrangement?name=${MovieArray.MovieName}&tReff=${tReff}&time=${time}`,{
+        method:"GET",
+        headers:{
+            "Content-Type":"application/json"
+            },
+            credentials:'include'
+      })
+     
+     let x=await res.json();
+
+     console.log(x);
+     setSeatMatrix(x.userbookingseatarr);
+
+     }
+    
+    useEffect(()=>{
+
+      renderSeats();  
+
+    },[]);
 
     
 
