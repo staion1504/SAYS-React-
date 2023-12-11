@@ -108,26 +108,26 @@ async function fillLatestandUpcoming(datevalue, city, latestmovies1, upcomingmov
 }
 
 router.get("/", async (req, res) => {
-  if (req.cookies.isUserLogin) {
-    let latestmovies = [];
-    let upcomingmovies = [];
-    let reviewdata = [];
-    let default_city = "Vijayawada";
-    const date2 = new Date();
-    let today = date2.toISOString().slice(0, 10);
-    await fillLatestandUpcoming(today, default_city, latestmovies, upcomingmovies);
 
-    await CheckLatestMoviesForReviewHub(reviewdata);
+  let latestmovies = [];
+  let upcomingmovies = [];
+  let reviewdata = [];
+  let default_city = "Vijayawada";
+  const date2 = new Date();
+  let today = date2.toISOString().slice(0, 10);
+  await fillLatestandUpcoming(today, default_city, latestmovies, upcomingmovies);
 
-    res.render("moviepage", {
-      checklocaton: default_city,
-      checkLangfileter: "",
-      checkGenrefilter: "",
-      latestmovies: latestmovies,
-      upcomingmovies: upcomingmovies,
-      reviewdata: reviewdata,
-    });
-  } else res.redirect("/login");
+  await CheckLatestMoviesForReviewHub(reviewdata);
+
+  res.json({
+    checklocaton: default_city,
+    checkLangfileter: "",
+    checkGenrefilter: "",
+    latestmovies: latestmovies,
+    upcomingmovies: upcomingmovies,
+    reviewdata: reviewdata,
+  });
+
 });
 
 
@@ -148,15 +148,18 @@ router.get("/individualmovie", async (req, res) => {
 router.get("/timings", async (req, res) => {
   const mname = req.query.name;
   const mcity = req.query.city;
+
+
   let showdetailsarray = [];
   let timingsarray = [];
   let obj = {};
   let timevalue;
 
   let flag = false;
+  // 
+  // let value = await movieinfo.find({ MovieName: mname });
+  // value = value[0];
 
-  let value = await movieinfo.find({ MovieName: mname });
-  value = value[0];
 
   let value1 = await theatresignupinfo.find({ city: mcity });
   for (let i = 0; i < value1.length; i++) {
@@ -203,13 +206,13 @@ router.get("/timings", async (req, res) => {
   }
 
   res.clearCookie("timefilter");
-  if (req.cookies.isUserLogin)
-    res.render("timingspage", {
-      timevalue: timevalue,
-      movieobj: value,
-      showdetailsarray: showdetailsarray,
-    });
-  else res.redirect("/login");
+
+  res.json({
+    timevalue: timevalue,
+    // movieobj: value,
+    showdetailsarray: showdetailsarray,
+  });
+
 });
 
 router.post("/timings", async function (req, res) {

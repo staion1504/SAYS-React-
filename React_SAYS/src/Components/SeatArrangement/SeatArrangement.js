@@ -6,8 +6,23 @@ import classes from './SeatArrangement.module.css';
 import { Link } from 'react-router-dom';
 import { Container,Row} from 'react-bootstrap';
 import Seat from './Seat/Seat';
-
+import { useLocation, useNavigate } from 'react-router-dom';
 const SeatArrangement = () => {
+
+    
+    const { search } = useLocation();
+    const params = new URLSearchParams(search);
+    const MovieArray = JSON.parse(params.get('MovieArray'));
+    const tReff=params.get('tReff');
+    
+    const navigate=useNavigate();
+
+   
+    
+
+    
+
+
   return (
     <div className={classes.body}>
     <div className='bg-[url("https://c1.wallpaperflare.com/preview/330/534/353/seat-chair-theatre-dark.jpg")] bg-no-repeat bg-cover bg-center'>
@@ -20,7 +35,7 @@ const SeatArrangement = () => {
     <div className={classes.main_body}>
 
         <div className={classes.side_image}>
-            <img src="https://m.media-amazon.com/images/M/MV5BYjhiNjBlODctY2ZiOC00YjVlLWFlNzAtNTVhNzM1YjI1NzMxXkEyXkFqcGdeQXVyMjQxNTE1MDA@._V1_FMjpg_UX1000_.jpg" alt=""/>
+            <img src={MovieArray.imgurl}  alt=""/>
         </div>
 
          <Container>

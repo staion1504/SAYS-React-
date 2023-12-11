@@ -4,7 +4,7 @@ import { faClock,faThumbsUp } from '@fortawesome/free-solid-svg-icons';
 import React from 'react';
 import { useNavigate } from "react-router-dom";
 
-const MovieCard=({MovieDetails})=>{
+const MovieCard=({MovieDetails,location})=>{
   
    
   const x=useNavigate();
@@ -12,7 +12,7 @@ const MovieCard=({MovieDetails})=>{
   function onClickHandler(){
     
     
-    x(`/User/IndividualPage?MovieDetails=${JSON.stringify(MovieDetails)}`);
+    x(`/User/IndividualPage?MovieDetails=${JSON.stringify(MovieDetails)}&city=${location}`);
 
   }
   
@@ -20,7 +20,7 @@ const MovieCard=({MovieDetails})=>{
   return (
   <>
 
-    <div className={classes.card} style={{backgroundImage:`url(${MovieDetails.MovieImageURL})`}}>
+    <div className={classes.card} style={{backgroundImage:`url(${MovieDetails.imgurl})`}}>
                <div className={classes.title}>
                  {MovieDetails.MovieName} 
               </div>
@@ -39,7 +39,7 @@ const MovieCard=({MovieDetails})=>{
             <div className={classes.movie_info}>
                 <span>
                   <FontAwesomeIcon icon={faClock} style={{color: "#ff0000",}} />
-                  2h 40min    
+                  {MovieDetails.duration} 
                 </span>
             </div>
 

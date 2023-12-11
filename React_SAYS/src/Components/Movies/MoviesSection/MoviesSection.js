@@ -6,6 +6,7 @@ import classes from './MoviesSection.module.css';
 
 
 import { MyContext2 } from '../../../Contexts/UserSideMoviesContex';
+import { renderMatches } from 'react-router-dom';
 
 
 const MoviesSection=(props)=>{
@@ -13,18 +14,38 @@ const MoviesSection=(props)=>{
   
    const [MoviesArray,setMoviesArray]=useState([]);
    const [movieitemarr,setMovieitemarr]=useState([]);
-   // useContext (theatre to user context)
-   const { userDataArray } = useContext(MyContext2);
+   const[location,setLocation]=useState(""); 
+    
+   async function renderData(){
+    console.log("hi came");
+  let response=await fetch("http://localhost:5000/movies",{
+    method:"GET",
+    headers:{
+      "Content-Type":"application/json"
+    },
+    credentials:'include'
+
+  });
+  console.log("hi came2");
+
+  let x=await response.json();
+  console.log(x);
+  setMoviesArray(x.latestmovies);
+  setLocation(x.checklocaton);
+   
+   } 
+   
    useEffect(() => {
-     setMoviesArray([...MoviesArray, ...userDataArray,]);
-   console.log(userDataArray);
-   }, [userDataArray])
+     
+   renderData();
+
+   }, [])
   
 
 
  useEffect(()=>{
-  const x= MoviesArray.map((Movie)=>{
-    return < MovieCard MovieDetails={Movie} />
+  const x= MoviesArray.map((Movie,index)=>{
+    return < MovieCard MovieDetails={Movie} location={location} />
    })
    setMovieitemarr([...x]);
  }, [MoviesArray])

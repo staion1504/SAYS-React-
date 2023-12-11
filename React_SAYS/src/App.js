@@ -38,7 +38,7 @@ import Movies from "./Pages/Movies/Movies";
 import IndividualPage from './Pages/IndividualMoviePage/Individual';
 import Timings from './Pages/Timing/Timing'
 import SeatArrangementPage from "./Pages/SeatArrangement/SeatArrangement";
-
+import RecentBookings from "./Pages/RecentBooking/RecentBooking";
 
 
 const router = createBrowserRouter([
@@ -119,7 +119,11 @@ const router = createBrowserRouter([
     path: "User/SeatArrangementPage",
     element: <SeatArrangementPage />
   },
-
+  {
+    path: "User/RecentBookings",
+    element: <RecentBookings />
+  },
+  
 
 ]);
 
