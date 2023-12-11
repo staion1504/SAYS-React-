@@ -3,9 +3,51 @@ import classes from './Theatre.module.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import AdminNav from '../../Common/Admin/Navbar/AdminNav';
 import {Container} from 'react-bootstrap';
+import { useState,useEffect } from 'react';
 
 
 const Theatre = () => {
+  
+  const [theatres,settheatres]=useState([]);
+
+
+
+  const get_theatres_func=async ()=>{
+    let response = await fetch("http://localhost:5000/Admintheatre", {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    const res = await response.json();
+    settheatres(res.theatres);
+   }
+
+    useEffect(()=>{
+      get_theatres_func();
+    },[]);
+
+
+    const RemoveHandler=async (tid)=>{
+    
+    let response = await fetch("http://localhost:5000/Admintheatre/removetheatre", {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body:JSON.stringify({tid : tid})
+    });
+    const res = await response.json();
+    
+     if(res.k===1)
+     {
+         get_theatres_func();
+     }
+     else
+      {
+        console.log("Unable to remove Theatre");
+      }
+  }
   return (
     <>
      <AdminNav signout={false}/>
@@ -13,10 +55,11 @@ const Theatre = () => {
         <div className={classes.heading}>
             <h4>THEATRES</h4>
         </div>
-          {/* <p className='text-[gold] text-[2rem] items-center'>No Theatres Registered for the Website...Till Date</p>        */}
+          {theatres.length===0 && <p className='text-[gold] text-[2rem] items-center text-center mt-[2rem]'>No Theatres Registered for the Website...Till Date</p>   }    
+           {theatres.length!==0 && 
            <Container className='mt-[2rem] ml-[9rem] w-[90%]'>
             <div className={classes.theatretable}>  
-                    <table>
+                    <table className={classes.table}>
                           <thead>
                             <tr className={classes.headingrow}>
                               <th>Theatre ReffNo.</th>
@@ -28,25 +71,31 @@ const Theatre = () => {
                           
                           <tbody>
                          
-                            <tr>
-                              <td>SAYSTheatreIMAX@gmail.com</td>
-                              <td>IMAX@gmail.com</td>
-                              <td>IMAX</td>
-                              <td>Guntur</td>
-                              <td>
-                                <div className='flex'>
-                                    <button className='rounded-md bg-[blue] text-white p-2 w-[6rem]'>
-                                        Remove
-                                    </button>
-                                </div> 
-                              </td>
-                            </tr>
+                            {theatres.map((theatre)=>{
+                               return(<>
+                                 <tr>
+                                   <td className={classes.td}>{theatre.tReferenceNumber}</td>
+                                   <td className={classes.td}>{theatre.temail}</td>
+                                   <td className={classes.td}>{theatre.tName}</td>
+                                   <td className={classes.td}>{theatre.city}</td>
+                                   <td className={classes.td}>
+                                     <div className='flex'>
+                                       <button onClick={()=>RemoveHandler(theatre.tReferenceNumber)} className='rounded-md bg-[blue] hover:bg-[indianred] text-white p-2 w-[6rem]'>
+                                          Remove
+                                       </button>
+                                     </div> 
+                                   </td>
+                                 </tr>
+                               
+                               </>)
+                    
+                            })}
                          
                           </tbody>
                 </table>
                     
                   </div>      
-          </Container>
+          </Container>}
 
 
         

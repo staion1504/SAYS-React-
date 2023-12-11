@@ -99,14 +99,14 @@ app.use("/Tlogin", Tloginroutes);
 //Admin Dashboard Routes
 // const adminhomeroutes = require("./routes/Admin/adminhome_routes");
 const adminmoviesroutes = require("./routes/Admin/adminmovies_routes");
-// const adminclientroutes = require("./routes/Admin/adminclient_routes");
-// const admintheatreroutes = require("./routes/Admin/admintheatre_routes");
+const adminclientroutes = require("./routes/Admin/adminclient_routes");
+const admintheatreroutes = require("./routes/Admin/admintheatre_routes");
 // const adminmassmailroutes = require("./routes/Admin/adminmassmail_routes");
 
 // app.use("/adminhome", adminhomeroutes);
 app.use("/Adminmovies", adminmoviesroutes);
-// app.use("/adminclient", adminclientroutes);
-// app.use("/admintheatre", admintheatreroutes);
+app.use("/Adminclient", adminclientroutes);
+app.use("/Admintheatre", admintheatreroutes);
 // app.use("/adminmassmail", adminmassmailroutes);
 
 

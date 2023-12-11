@@ -107,9 +107,33 @@ export const Movies = () => {
   }, [MoviesArray]);
 
 
+  // Remove movie
+  const [removemovie,setremovemovie]=useState("Select Movie");
+
+  const RemoveHandler=async ()=>{
+    let response = await fetch("http://localhost:5000/Adminmovies/adminremovemovie", {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body:JSON.stringify({moviename : removemovie})
+  });
+  const res = await response.json();
+  
+   if(res.k===1)
+   {
+    renderMovies();
+   }
+   else
+    {
+      console.log("Unable to remove movie");
+    }
+  }
+
+
   return (
     <div className={classes.body}>
-      {show1 && <RemoveModal show={show1} handleClose={handleClose1} />}
+      {show1 && <RemoveModal show={show1} handleClose={handleClose1} MoviesArray={MoviesArray} RemoveHandler={RemoveHandler} setremovemovie={setremovemovie} removemovie={removemovie} />}
       {show2 && <AddMovies onSubmit={onSubmit} show={show2} handleClose={handleClose2} />}
       {show3 && <MovieInfo show={show3} handleClose={handleClose3} MoviesInfo={MoviesInfo} />}
 
@@ -148,7 +172,6 @@ export const Movies = () => {
         </div>
 
         <Row>
-          <div className="flex">
             {MoviesArray.map((movieIndex, index) =>
               <Col lg={2} md={2} key={index}>
                 <div className={classes.movie_card}>
@@ -166,11 +189,6 @@ export const Movies = () => {
                 </div>
               </Col>
             )}
-
-
-
-          </div>
-
         </Row>
 
 

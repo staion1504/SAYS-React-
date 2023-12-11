@@ -1,10 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import Modal from 'react-bootstrap/Modal';
 import Dropdown from 'react-bootstrap/Dropdown';
 
 
-export const RemoveModal = ({show,handleClose}) => {
+
+export const RemoveModal = ({show,handleClose,MoviesArray,RemoveHandler,setremovemovie,removemovie}) => {
+   const selectedvalue=(e)=>
+    {
+       setremovemovie(e);
+    }
+
   return (
     <>
       <Modal show={show} onHide={handleClose}>
@@ -12,22 +18,25 @@ export const RemoveModal = ({show,handleClose}) => {
            <Modal.Title>Remove Movie</Modal.Title>
         </Modal.Header>
         <Modal.Body className='bg-[lightgoldenrodyellow]'>
-        <form method="post" action="/adminmovies/adminremovemovie"  className="w-[80%] flex justify-center">  
+        <form  className="w-[80%] flex justify-center">  
          <div className='flex flex-col'>
-          <label for="movie_title" className='text-[1.3rem]'>Movie Title:</label>
-          <Dropdown className='border-none ml-2'>
+          <label for="movie_title" className='text-[1.2rem] text-[#221f1f]'>Movie Title:</label>
+          <Dropdown className='border-none ml-2' onSelect={selectedvalue}>
              <Dropdown.Toggle className='text-black bg-white border-none' variant='none'>
-                Salaar
+                {removemovie}
              </Dropdown.Toggle>
 
-            <Dropdown.Menu>
-              <Dropdown.Item href="#/action-1">Reaady</Dropdown.Item>
-              <Dropdown.Item href="#/action-2">Guntur Kaaram</Dropdown.Item>
-              <Dropdown.Item href="#/action-3">Simple</Dropdown.Item>
+            <Dropdown.Menu className=' overflow-auto max-h-[15rem]'>
+            {MoviesArray.length===0 && <Dropdown.Item eventKey="No Movies">No Movies</Dropdown.Item>}
+              
+              {MoviesArray.map(movie=>{
+                return <Dropdown.Item eventKey={movie.MovieName}>{movie.MovieName}</Dropdown.Item>
+              })}
             </Dropdown.Menu>
           </Dropdown>
 
-          <button type="submit" className='mt-[2rem] border-none bg-[green] text-white w-[6rem] rounded-[5px] p-2 ml-[12rem]'>Confirm</button>
+          {MoviesArray.length!==0 && <button onClick={RemoveHandler} type="submit" className='mt-[2rem] border-none bg-[green] text-white w-[6rem] rounded-[5px] p-2 ml-[12rem]'>Confirm</button>}
+          {MoviesArray.length===0 && <button type="submit" className='mt-[2rem] border-none bg-[indianred] text-white w-[6rem] rounded-[5px] p-2 ml-[12rem]' disabled>Confirm</button>}
          </div>
       </form>
 
