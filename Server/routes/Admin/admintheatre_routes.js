@@ -12,21 +12,24 @@ const showdatailsinfo = require("../../models/theatre/movieshowdetails");
 
 router.get("/", async function (req, res) {
   let value = await theatresignupinfo.find({});
-  if (req.cookies.isUserLogin)
-    res.render("admintheatre", { value: value });
-  else {
-    res.redirect("/login");
-  }
+  // if (req.cookies.isUserLogin)
+    res.json({theatres:value});
+  // else {
+  //   res.redirect("/login");
+  // }
 });
 
 router.post("/removetheatre", async function (req, res) {
-  let treffnum = req.body.treffnum;
+  let treffnum = req.body.tid;
   await theatresignupinfo.deleteOne({ tReferenceNumber: treffnum });
   await userTinfo.deleteOne({ tReferenceNumber: treffnum });
   await theatrerentedmovieinfo.deleteOne({ tReferenceNumber: treffnum });
   await snackinfo.deleteOne({ tReferenceNumber: treffnum });
   await screeninfo.deleteOne({ tReferenceNumber: treffnum });
   await movieshowinfo.deleteOne({ tReferenceNumber: treffnum });
+
+
+  console.log("Removed the Theatre with Treffnum :"+ treffnum);
 
   res.json({ k: 1 });
 });

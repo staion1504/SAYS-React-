@@ -116,9 +116,6 @@ router.post("/adminrentalmovieinfo", async function (req, res) {
 
 
 
-
-
-  
 router.post("/adminremovemovie", async function (req, res) {
   let mName = req.body.moviename;
   let value1 = await movieinfo.find({ MovieName: mName });
@@ -127,7 +124,7 @@ router.post("/adminremovemovie", async function (req, res) {
   await movieinfo.deleteOne({ MovieId: mid });
   await rentalmovieinfo.deleteMany({ MovieId: mid });
   console.log("Movie Removed by Admin");
-  res.redirect("/adminmovies");
+  res.json({k:1});
 });
 
 router.post("/getmovieinfo", async function (req, res) {
