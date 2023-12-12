@@ -8,6 +8,7 @@ import classes from "./RecentBookings.module.css";
 import ticketbg from '../../Assests/RecentBooking/ticketbg.png'
 
 const MyVerticallyCenteredModal = (props) => {
+  
   return (
     <>
       <Modal
@@ -18,9 +19,9 @@ const MyVerticallyCenteredModal = (props) => {
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-vcenter">
             <h2 className={classes.logo}>
-              <i class="bx bxl-firebase"></i>      
+              {/* <i class="bx bxl-firebase"></i>       */}
               SAYS
-            </h2>{" "}
+            </h2>
           </Modal.Title>
         </Modal.Header>
         <Modal.Body className="h-[35rem] text-center">
@@ -28,7 +29,7 @@ const MyVerticallyCenteredModal = (props) => {
             <Row>
               <Col>
                 <div className="text-center">
-                  <img className={classes.posterimg} src="https://m.media-amazon.com/images/M/MV5BOTk4ZDQ1ZTctNzU3MC00NmY4LWJjMzItNDMwZTA2ODhiYWM5XkEyXkFqcGdeQXVyMTUzNTgzNzM0._V1_.jpg"/>  
+                  <img className={classes.posterimg} src={props.ticket.Movieimgurl}/>  
                 </div>
               </Col>
             </Row>
@@ -39,14 +40,10 @@ const MyVerticallyCenteredModal = (props) => {
                   <span className="font-[500px] text-[13px] text-[#9D9EA3] mt-0">
                     Movie
                   </span>
-                  <p className="mname">Avatar:The way of water</p>
-                  <div
-                    class="person_name tname"
-                    style={{
-                      display: "flex",
-                      justifyContent: "space-between",
-                    }}>
-                    <div class="subdiv1" style={{ display: "block" }}>
+                  <p className="mname">{props.ticket.MovieName}</p>
+
+                  <div className=" flex justify-between">
+                    <div style={{ display: "block" }}>
                       <span
                         style={{
                           fontWeight: "500px",
@@ -55,10 +52,10 @@ const MyVerticallyCenteredModal = (props) => {
                         }}>
                         Theatre
                       </span>
-                      <p class="theatrename">Imax Hyderabad</p>
+                      <p>{props.ticket.theatrename}</p>
                     </div>
 
-                    <div class="subdiv2" style={{ display: "block" }}>
+                    <div style={{ display: "block" }}>
                       <span
                         style={{
                           fontWeight: "500px",
@@ -67,7 +64,7 @@ const MyVerticallyCenteredModal = (props) => {
                         }}>
                         Screen
                       </span>
-                      <p class="sname">A</p>
+                      <p>{props.ticket.screenname}</p>
                     </div>
                   </div>
                   <div className={classes.seat_time}>
@@ -76,8 +73,8 @@ const MyVerticallyCenteredModal = (props) => {
                       <span>TIME</span>
                     </div>
                     <div className={classes.span1}>
-                      <span className={classes.seatnum}>A1,A2,A3,A4</span>
-                      <span className={classes.showtime}>12:00</span>
+                      <span className="text-[0.95rem]">{props.ticket.seats.map((seat,index)=>{return (index!=props.ticket.seats.length-1?(seat+","):(seat))})}</span>
+                      <span className="text-[0.95rem]">{props.ticket.time}</span>
                     </div>
                   </div>
                 </div>
@@ -86,7 +83,7 @@ const MyVerticallyCenteredModal = (props) => {
           </Container>
         </Modal.Body>
         <Modal.Footer>
-          <button onClick={props.onHide} className="p-2 bg-[#0d6efd] text-[white] w-[6rem] rounded-[0.5rem] font-light text-[0.95rem] hover:bg-[indianred]">Close</button>
+          {/* <button onClick={props.onHide} className="p-2 bg-[#0d6efd] text-[white] w-[6rem] rounded-[0.5rem] font-light text-[0.95rem] hover:bg-[indianred]">Close</button> */}
       </Modal.Footer>
       </Modal>
     </>

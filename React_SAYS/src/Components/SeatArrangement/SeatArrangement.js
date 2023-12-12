@@ -70,7 +70,8 @@ const SeatArrangement = () => {
             body: JSON.stringify(obj1),
             headers: {
                 "Content-Type": 'application/json'
-            }
+            },
+            credentials: 'include', 
         });
 
 
@@ -80,7 +81,8 @@ const SeatArrangement = () => {
             body: JSON.stringify(obj3),
             headers: {
                 "Content-Type": 'application/json'
-            }
+            },
+            credentials: 'include', 
           });
         
           let k1=await res3.json();
@@ -89,7 +91,7 @@ const SeatArrangement = () => {
         
           if(k1.k===1 && k.k===1)
           {
-            console.log("Ticket booked succesfully!!!");
+            navigate("/User/RecentBookings");
           }
 
     }

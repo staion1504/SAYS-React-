@@ -1,25 +1,32 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import classes from "./RecentBookings.module.css";
 import Bookings from "./Bookings";
 import NoRecentBookings from "./NoRecentBookings";
 import { Link } from "react-router-dom";
 
 const Recentbookings = () => {
-  const tickets = [
-    { ticketId: "SAYS1001", movieName: "Leo", bookingDate:"23-07-2021" },
-    { ticketId: "SAYS1002", movieName: "Vikram", bookingDate:"23-07-2021" },
-    { ticketId: "SAYS1003", movieName: "Jawan", bookingDate:"23-07-2021" },
-    { ticketId: "SAYS1001", movieName: "Leo", bookingDate:"23-07-2021" },
-    { ticketId: "SAYS1002", movieName: "Vikram", bookingDate:"23-07-2021" },
-    { ticketId: "SAYS1003", movieName: "Jawan", bookingDate:"23-07-2021" },
-    { ticketId: "SAYS1003", movieName: "Jawan", bookingDate:"23-07-2021" },
-    { ticketId: "SAYS1003", movieName: "Jawan", bookingDate:"23-07-2021" },
-    { ticketId: "SAYS1003", movieName: "Jawan", bookingDate:"23-07-2021" },
-    { ticketId: "SAYS1003", movieName: "Jawan", bookingDate:"23-07-2021" },
-    { ticketId: "SAYS1003", movieName: "Jawan", bookingDate:"23-07-2021" },
-  ];
+
+  const [tickets,settickets]=useState([]);
+
+  const rendertickets=async ()=>{
+    let res=await fetch(`http://localhost:5000/recentbooking/`,{
+      method:"GET",
+      headers:{
+          "Content-Type":"application/json"
+          },
+      credentials:'include'
+    })
+   
+   let response=await res.json();
+   settickets(response.ticketarr);
+  }
+
+  useEffect(()=>{
+    rendertickets();
+  },[]);
+
  
-  if (tickets.length != 0) {
+  
     return (
       <>
         <div className={classes.backHome}>
@@ -30,18 +37,7 @@ const Recentbookings = () => {
         <Bookings tickets={tickets} />
       </>
     );
-  } else {
-    return (
-      <>
-        <div className={classes.backHome}>
-        <Link to="/User/HomePage">
-          <button>Back to Home</button>{" "}
-        </Link>
-        <NoRecentBookings />
-        </div>
-      </>
-    );
-  }
+ 
 };
 
 export default Recentbookings;

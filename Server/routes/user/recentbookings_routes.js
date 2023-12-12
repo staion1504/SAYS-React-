@@ -18,10 +18,8 @@ router.get("/", async function (req, res) {
       ticketarr = value1[0]["Ticketinfo"];
       k = 1;
     }
-  
-    if (req.cookies.isUserLogin)
-      res.render("recentbooking", { ticketarr: ticketarr, k: k });
-    else res.redirect("/login");
+
+      res.json({ ticketarr: ticketarr, k: k });
   });
   
   router.post("/getticketinfo", async function (req, res) {

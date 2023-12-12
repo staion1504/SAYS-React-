@@ -123,6 +123,18 @@ const router = createBrowserRouter([
     path: "User/RecentBookings",
     element: <RecentBookings />
   },
+
+  {
+    path: "User/Profile",
+    element: <UserProfilePage/>
+  },
+
+  {
+    path: "User/EditProfile",
+    element: <UserProfileEditPage/>
+  },
+
+
   
 
 ]);
