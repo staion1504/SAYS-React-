@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import classes from './UserProfile.module.css';
 import { Col, Container, Row } from 'react-bootstrap';
@@ -13,6 +13,27 @@ import { Link } from 'react-router-dom';
 
 const UserProfile = () => {
     const [key, setKey] = useState("about");
+
+
+    const [userdetails,setuserdetails]=useState({});
+
+    const renderUserDetails=async ()=>{
+         const res=await fetch('http://localhost:5000/profile/laptopprofilepage/getdetails',{
+           method:'get',
+           headers: {
+              "Content-Type": 'application/json'
+           },
+           credentials:'include',
+          });
+
+          const response=await res.json();
+          console.log(response[0]);
+          setuserdetails(response[0]);
+    }
+
+    useEffect(()=>{
+      renderUserDetails();
+    },[]);
   
     return (
     <Container>
@@ -47,14 +68,14 @@ const UserProfile = () => {
             <div className={classes.profile_head}>
                    <div className='flex justify-between'>
                    <h5 className={classes.name}>
-                       Rupesh Chowdary
+                       {userdetails.firstName}
                     </h5>
                 
                     <Link to="/user/editprofile"><button className={classes.profile_edit_btn} type="button">Edit Profile</button></Link>
                    </div>
 
                   <p className={classes.profile_rating}>User Reference Number :  
-                    <span className="pl-2 text-[#495057] font-[600] text-[15px]">SAHI143RUP2222</span>
+                    <span className="pl-2 text-[#495057] font-[600] text-[15px]">{userdetails.UserReferenceNumber}</span>
                   </p>
 
                   
@@ -75,7 +96,7 @@ const UserProfile = () => {
                                 </Col>
                             
                                 <Col md={6}>
-                                   <p className='text-[#daa520]'>rupesh</p>
+                                   <p className='text-[#daa520]'>{userdetails.firstName}</p>
                                 </Col>
                             </Row>
                             
@@ -86,7 +107,7 @@ const UserProfile = () => {
                               </Col>
 
                               <Col md={6}>
-                                <p className='text-[#daa520]'>Chowdary</p>
+                                <p className='text-[#daa520]'>{userdetails.lastName}</p>
                               </Col> 
                             </Row> 
 
@@ -97,7 +118,7 @@ const UserProfile = () => {
                                 </Col>
 
                                <Col md={6}>
-                                 <p className='text-[#daa520]'>Rupesh@gmail.com</p>
+                                 <p className='text-[#daa520]'>{userdetails.email}</p>
                                </Col> 
                             </Row> 
 
@@ -108,7 +129,7 @@ const UserProfile = () => {
                                      </Col>
 
                                      <Col md={6}>
-                                      <p className='text-[#daa520]'>91+ 7803256563</p>
+                                      <p className='text-[#daa520]'>91+ {userdetails.MobileNumber}</p>
                                     </Col> 
                                     </Row>
 
@@ -119,7 +140,7 @@ const UserProfile = () => {
                                      </Col>
 
                                      <Col md={6}>
-                                     <p className='text-[#daa520]'>Male</p>
+                                     <p className='text-[#daa520]'>{userdetails.Gender}</p>
                                     </Col> 
                                     </Row>
 
@@ -130,7 +151,7 @@ const UserProfile = () => {
                                      </Col>
 
                                      <Col md={6}>
-                                     <p className='text-[#daa520]'>17-10-2003</p>
+                                     <p className='text-[#daa520]'>{new Date(userdetails.DOB).toLocaleString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</p>
                                     </Col> 
                                     </Row>
                         </div>
@@ -144,7 +165,7 @@ const UserProfile = () => {
                                      </Col>
         
                                      <Col md={6}>
-                                       <p className='text-[#daa520]'> RUPESH</p>
+                                       <p className='text-[#daa520]'>{userdetails.cardName}</p>
                                     </Col> 
                                     </Row>
 
@@ -154,7 +175,7 @@ const UserProfile = () => {
                                      </Col>
 
                                      <Col md={6}>
-                                     <p className='text-[#daa520]'>12341234XXXXXXXX</p>
+                                     <p className='text-[#daa520]'>{"xxxx xxxx xxxx "+ String(userdetails.cardNumber).slice(-4)}</p>
                                     </Col> 
                                     </Row>
 
@@ -165,7 +186,7 @@ const UserProfile = () => {
                                      </Col>
 
                                      <Col md={6}>
-                                     <p className='text-[#daa520]'>XXX</p>
+                                     <p className='text-[#daa520]'>xxx</p>
                                     </Col> 
                                     </Row>
 
@@ -176,7 +197,7 @@ const UserProfile = () => {
                                      </Col>
 
                                      <Col md={6}>
-                                     <p className='text-[#daa520]'>XX</p>
+                                     <p className='text-[#daa520]'>xx</p>
                                     </Col> 
                                     </Row>
 
@@ -186,7 +207,7 @@ const UserProfile = () => {
                                      </Col>
 
                                      <Col md={6}>
-                                     <p className='text-[#daa520]'>rupesh@gmail.com</p>
+                                     <p className='text-[#daa520]'>{userdetails.email}</p>
                                     </Col> 
                                     </Row>
                         </div>
@@ -194,7 +215,7 @@ const UserProfile = () => {
               </Tabs>
 
                 <div className={classes.back_home}>
-                   <Link to="/user/home"> 
+                   <Link to="/User/HomePage"> 
                     <button>Back to home</button>
                    </Link>
 

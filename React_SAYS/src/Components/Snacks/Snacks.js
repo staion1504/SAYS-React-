@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
@@ -11,6 +11,35 @@ const Snacks = () => {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  const [ticketarr,setticketarr]=useState([]);
+  const [fooditemarr,setfooditemarr]=useState([]);
+
+  const renderSnacks=async ()=>{
+    const res = await fetch(
+      "http://localhost:5000/snacks/",
+      {
+        method: "get",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials:'include',
+      }
+    );
+    const obj = await res.json();
+    console.log(obj);
+    const ticketarr=[];
+    for(let i=obj.ticketarr.length-1;i>=0;i--)
+    {
+       ticketarr.push(obj.ticketarr[i]);
+    }
+    setticketarr(ticketarr);
+    setfooditemarr(obj.fooditem);
+  }
+
+  useEffect(()=>{
+     renderSnacks();
+  },[]);
 
   return (
     <>
@@ -77,18 +106,13 @@ const Snacks = () => {
             <div className={classes.add_box}>
               <form method="post" id="ticketidform">
                 <label>Ticket Id :</label>
-                <select name="Ticketid"  className={classes.ticketid} onclick="submitForms()">   
-                    <option value="SAYS1001" onclick="submitForms()" >
-                      SAYS1001
-                    </option> 
-
-                    <option value="SAYS1002" onclick="submitForms()" >
-                      SAYS1002
-                    </option> 
-
-                    <option value="SAYS1003" onclick="submitForms()" >
-                      SAYS1003
-                    </option> 
+                <select name="Ticketid"  className={classes.ticketid}>   
+                    {ticketarr.map(ticket=>{
+                      return (
+                      <option value={ticket.TicketId}>
+                         {ticket.TicketId}
+                     </option> )
+                    })} 
                 </select>
               </form>
             </div>
@@ -111,196 +135,195 @@ const Snacks = () => {
 
 
     <div className={classes.food_items}>
-            <div className={classes.biriyani}>
-              <p className={classes.category_name}>Popcorn</p>
-                  <div className={classes.item_card}>
-                    <img src="https://www.shutterstock.com/image-photo/bowl-buddha-buckwheat-pumpkin-chicken-260nw-1259570605.jpg" alt=''/>
-                    <div className={classes.foodinfo}>
-                      <p className={classes.item_name}>
-                         Chicken Popcorn
-                      </p>
-                      <p className={classes.item_price}>
-                      <FontAwesomeIcon icon={faIndianRupeeSign} style={{color: "#ffd700",}}  />
-                        <span>
-                         100
-                        </span>
-                      </p>
-                    </div>
+               <div className={classes.biriyani}>
+                    <p className={classes.category_name}>Popcorn</p>
+                       {fooditemarr.map(fooditem=>{
+                           if(fooditem.category==="Popcorn")
+                           {
+                            return ( 
+                              <div className={classes.item_card}>
+                                <img src={fooditem.imgurl} alt=''/>
+                                <div className={classes.foodinfo}>
+                                  <p className={classes.item_name}>
+                                     {fooditem.SnackName}
+                                  </p>
+                                  <p className={classes.item_price}>
+                                  <FontAwesomeIcon icon={faIndianRupeeSign} style={{color: "#ffd700",}}  />
+                                    <span>
+                                     {fooditem.price}
+                                    </span>
+                                  </p>
+                                </div>
+            
+                                <div className={classes.card_top}>
+                                <div>
+                                <FontAwesomeIcon icon={faStar} style={{color: "#ffd700",}} />
+                                <span className='text-white'>
+                                  4.5
+                                </span>
+                                </div>
+                                  <FontAwesomeIcon icon={faPlusCircle} style={{color: "white"}} className='w-[1.2rem] h-[1.2rem]' />
+                                </div>
+                             </div>)
+                           }
 
-                    <div className={classes.card_top}>
-                    <div>
-                    <FontAwesomeIcon icon={faStar} style={{color: "#ffd700",}} />
-                    <span className='text-white'>
-                            4.5
-                    </span>
-                    </div>
-                      <FontAwesomeIcon icon={faPlusCircle} style={{color: "white"}} className='w-[1.2rem] h-[1.2rem]' />
-                    </div>
-                 </div>
-
-                 <div className={classes.item_card}>
-                    <img src="https://www.shutterstock.com/image-photo/bowl-buddha-buckwheat-pumpkin-chicken-260nw-1259570605.jpg" alt=''/>
-                    <div className={classes.foodinfo}>
-                      <p className={classes.item_name}>
-                         Chicken Popcorn
-                      </p>
-                      <p className={classes.item_price}>
-                      <FontAwesomeIcon icon={faIndianRupeeSign} style={{color: "#ffd700",}}  />
-                        <span>
-                         100
-                        </span>
-                      </p>
-                    </div>
-
-                    <div className={classes.card_top}>
-                    <div>
-                    <FontAwesomeIcon icon={faStar} style={{color: "#ffd700",}} />
-                    <span className='text-white'>
-                            4.5
-                    </span>
-                    </div>
-                      <FontAwesomeIcon icon={faPlusCircle} style={{color: "white"}} className='w-[1.2rem] h-[1.2rem]' />
-                    </div>
-                 </div>
-
-                 <div className={classes.item_card}>
-                    <img src="https://www.shutterstock.com/image-photo/bowl-buddha-buckwheat-pumpkin-chicken-260nw-1259570605.jpg" alt=''/>
-                    <div className={classes.foodinfo}>
-                      <p className={classes.item_name}>
-                         Chicken Popcorn
-                      </p>
-                      <p className={classes.item_price}>
-                      <FontAwesomeIcon icon={faIndianRupeeSign} style={{color: "#ffd700",}}  />
-                        <span>
-                         100
-                        </span>
-                      </p>
-                    </div>
-
-                    <div className={classes.card_top}>
-                    <div>
-                    <FontAwesomeIcon icon={faStar} style={{color: "#ffd700",}} />
-                    <span className='text-white'>
-                            4.5
-                    </span>
-                    </div>
-                      <FontAwesomeIcon icon={faPlusCircle} style={{color: "white"}} className='w-[1.2rem] h-[1.2rem]' />
-                    </div>
-                 </div>
-            </div>
-
-            <div className={classes.biriyani}>
-              <p className={classes.category_name}>Popcorn</p>
-                  <div className={classes.item_card}>
-                    <img src="https://www.shutterstock.com/image-photo/bowl-buddha-buckwheat-pumpkin-chicken-260nw-1259570605.jpg" alt=''/>
-                    <div className={classes.foodinfo}>
-                      <p className={classes.item_name}>
-                         Chicken Popcorn
-                      </p>
-                      <p className={classes.item_price}>
-                      <FontAwesomeIcon icon={faIndianRupeeSign} style={{color: "#ffd700",}}  />
-                        <span>
-                         100
-                        </span>
-                      </p>
-                    </div>
-
-                    <div className={classes.card_top}>
-                    <div>
-                    <FontAwesomeIcon icon={faStar} style={{color: "#ffd700",}} />
-                    <span className='text-white'>
-                            4.5
-                    </span>
-                    </div>
-                      <FontAwesomeIcon icon={faPlusCircle} style={{color: "white"}} className='w-[1.2rem] h-[1.2rem]' />
-                    </div>
-                 </div>
-            </div>
+                        
+                       })}
+    
+                  </div>
 
 
-            <div className={classes.biriyani}>
-              <p className={classes.category_name}>Popcorn</p>
-                  <div className={classes.item_card}>
-                    <img src="https://www.shutterstock.com/image-photo/bowl-buddha-buckwheat-pumpkin-chicken-260nw-1259570605.jpg" alt=''/>
-                    <div className={classes.foodinfo}>
-                      <p className={classes.item_name}>
-                         Chicken Popcorn
-                      </p>
-                      <p className={classes.item_price}>
-                      <FontAwesomeIcon icon={faIndianRupeeSign} style={{color: "#ffd700",}}  />
-                        <span>
-                         100
-                        </span>
-                      </p>
-                    </div>
 
-                    <div className={classes.card_top}>
-                    <div>
-                    <FontAwesomeIcon icon={faStar} style={{color: "#ffd700",}} />
-                    <span className='text-white'>
-                            4.5
-                    </span>
-                    </div>
-                      <FontAwesomeIcon icon={faPlusCircle} style={{color: "white"}} className='w-[1.2rem] h-[1.2rem]' />
-                    </div>
-                 </div>
-            </div>
+                  <div className={classes.biriyani}>
+                    <p className={classes.category_name}>Drinks</p>
+                       {  
+                       fooditemarr.map(fooditem=>{
+                           if(fooditem.category==="Soft Drinks" || fooditem.category==="Water Bottle")
+                           {
+                            return ( 
+                              <div className={classes.item_card}>
+                                <img src={fooditem.imgurl} alt=''/>
+                                <div className={classes.foodinfo}>
+                                  <p className={classes.item_name}>
+                                     {fooditem.SnackName}
+                                  </p>
+                                  <p className={classes.item_price}>
+                                  <FontAwesomeIcon icon={faIndianRupeeSign} style={{color: "#ffd700",}}  />
+                                    <span>
+                                     {fooditem.price}
+                                    </span>
+                                  </p>
+                                </div>
+            
+                                <div className={classes.card_top}>
+                                <div>
+                                <FontAwesomeIcon icon={faStar} style={{color: "#ffd700",}} />
+                                <span className='text-white'>
+                                  4.5
+                                </span>
+                                </div>
+                                  <FontAwesomeIcon icon={faPlusCircle} style={{color: "white"}} className='w-[1.2rem] h-[1.2rem]' />
+                                </div>
+                             </div>)
+                           }
 
-            <div className={classes.biriyani}>
-              <p className={classes.category_name}>Popcorn</p>
-                  <div className={classes.item_card}>
-                    <img src="https://www.shutterstock.com/image-photo/bowl-buddha-buckwheat-pumpkin-chicken-260nw-1259570605.jpg" alt=''/>
-                    <div className={classes.foodinfo}>
-                      <p className={classes.item_name}>
-                         Chicken Popcorn
-                      </p>
-                      <p className={classes.item_price}>
-                      <FontAwesomeIcon icon={faIndianRupeeSign} style={{color: "#ffd700",}}  />
-                        <span>
-                         100
-                        </span>
-                      </p>
-                    </div>
+                        
+                       })}
+    
+                  </div>
 
-                    <div className={classes.card_top}>
-                    <div>
-                    <FontAwesomeIcon icon={faStar} style={{color: "#ffd700",}} />
-                    <span className='text-white'>
-                            4.5
-                    </span>
-                    </div>
-                      <FontAwesomeIcon icon={faPlusCircle} style={{color: "white"}} className='w-[1.2rem] h-[1.2rem]' />
-                    </div>
-                 </div>
-            </div>
 
-            <div className={classes.biriyani}>
-              <p className={classes.category_name}>Popcorn</p>
-                  <div className={classes.item_card}>
-                    <img src="https://www.shutterstock.com/image-photo/bowl-buddha-buckwheat-pumpkin-chicken-260nw-1259570605.jpg" alt=''/>
-                    <div className={classes.foodinfo}>
-                      <p className={classes.item_name}>
-                         Chicken Popcorn
-                      </p>
-                      <p className={classes.item_price}>
-                      <FontAwesomeIcon icon={faIndianRupeeSign} style={{color: "#ffd700",}}  />
-                        <span>
-                         100
-                        </span>
-                      </p>
-                    </div>
+                  <div className={classes.biriyani}>
+                    <p className={classes.category_name}>Pizza's and Burger's</p>
+                       {fooditemarr.map(fooditem=>{
+                           if(fooditem.category.includes('Pizza') || fooditem.category.includes('Burger'))
+                           {
+                            return ( 
+                              <div className={classes.item_card}>
+                                <img src={fooditem.imgurl} alt=''/>
+                                <div className={classes.foodinfo}>
+                                  <p className={classes.item_name}>
+                                     {fooditem.SnackName}
+                                  </p>
+                                  <p className={classes.item_price}>
+                                  <FontAwesomeIcon icon={faIndianRupeeSign} style={{color: "#ffd700",}}  />
+                                    <span>
+                                     {fooditem.price}
+                                    </span>
+                                  </p>
+                                </div>
+            
+                                <div className={classes.card_top}>
+                                <div>
+                                <FontAwesomeIcon icon={faStar} style={{color: "#ffd700",}} />
+                                <span className='text-white'>
+                                  4.5
+                                </span>
+                                </div>
+                                  <FontAwesomeIcon icon={faPlusCircle} style={{color: "white"}} className='w-[1.2rem] h-[1.2rem]' />
+                                </div>
+                             </div>)
+                           }
 
-                    <div className={classes.card_top}>
-                    <div>
-                    <FontAwesomeIcon icon={faStar} style={{color: "#ffd700",}} />
-                    <span className='text-white'>
-                            4.5
-                    </span>
-                    </div>
-                      <FontAwesomeIcon icon={faPlusCircle} style={{color: "white"}} className='w-[1.2rem] h-[1.2rem]' />
-                    </div>
-                 </div>
-            </div>
+                        
+                       })}
+    
+                  </div>
+
+                  <div className={classes.biriyani}>
+                    <p className={classes.category_name}>Samosa and Puff's</p>
+                       {fooditemarr.map(fooditem=>{
+                           if(fooditem.category.includes('Samosa') || fooditem.category.includes('puff'))
+                           {   
+                            return ( 
+                              <div className={classes.item_card}>
+                                <img src={fooditem.imgurl} alt=''/>
+                                <div className={classes.foodinfo}>
+                                  <p className={classes.item_name}>
+                                     {fooditem.SnackName}
+                                  </p>
+                                  <p className={classes.item_price}>
+                                  <FontAwesomeIcon icon={faIndianRupeeSign} style={{color: "#ffd700",}}  />
+                                    <span>
+                                     {fooditem.price}
+                                    </span>
+                                  </p>
+                                </div>
+            
+                                <div className={classes.card_top}>
+                                <div>
+                                <FontAwesomeIcon icon={faStar} style={{color: "#ffd700",}} />
+                                <span className='text-white'>
+                                  4.5
+                                </span>
+                                </div>
+                                  <FontAwesomeIcon icon={faPlusCircle} style={{color: "white"}} className='w-[1.2rem] h-[1.2rem]' />
+                                </div>
+                             </div>)
+                           }
+
+                        
+                       })}
+    
+                  </div>
+
+
+           <div className={classes.biriyani}>
+                    <p className={classes.category_name}>Chicken Recipe's </p>
+                       {fooditemarr.map(fooditem=>{
+                           if(fooditem.category==="Chicken Reciepe")
+                           {
+                            return ( 
+                              <div className={classes.item_card}>
+                                <img src={fooditem.imgurl} alt=''/>
+                                <div className={classes.foodinfo}>
+                                  <p className={classes.item_name}>
+                                     {fooditem.SnackName}
+                                  </p>
+                                  <p className={classes.item_price}>
+                                  <FontAwesomeIcon icon={faIndianRupeeSign} style={{color: "#ffd700",}}  />
+                                    <span>
+                                     {fooditem.price}
+                                    </span>
+                                  </p>
+                                </div>
+            
+                                <div className={classes.card_top}>
+                                <div>
+                                <FontAwesomeIcon icon={faStar} style={{color: "#ffd700",}} />
+                                <span className='text-white'>
+                                  4.5
+                                </span>
+                                </div>
+                                  <FontAwesomeIcon icon={faPlusCircle} style={{color: "white"}} className='w-[1.2rem] h-[1.2rem]' />
+                                </div>
+                             </div>)
+                           }
+
+                        
+                       })}
+    
+                  </div>
 
             </div>
 

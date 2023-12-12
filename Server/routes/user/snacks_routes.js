@@ -52,12 +52,13 @@ router.get("/", async (req, res) => {
     // console.log(value3);
 
     res.clearCookie("TicketIdForSnacks");
-    res.render("snackspage", {
+    res.json({
       TicketId: ticketid,
       fooditem: value3,
       ticketarr: ticketarr,
     });
-  } else res.redirect("/login");
+  } 
+  // else res.redirect("/login");
 });
 
 

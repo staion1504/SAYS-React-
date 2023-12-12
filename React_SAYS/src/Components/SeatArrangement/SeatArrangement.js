@@ -93,7 +93,6 @@ const SeatArrangement = () => {
           {
             navigate("/User/RecentBookings");
           }
-
     }
 
   return (

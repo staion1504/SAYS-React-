@@ -24,7 +24,7 @@ function TNavbar() {
         <Link to='/Theatre/MoviesPage' className='mt-2 ml-2'  style={{ color: 'gold' }}>
         Movies  
         </Link>
-        <Link to='/' className='mt-2 ml-2'  style={{ color: 'gold' }}>
+        <Link to='/Theatre/Snacks' className='mt-2 ml-2'  style={{ color: 'gold' }}>
         Snacks
         </Link>
         <Link to='/Theatre/TSchedule' className='mt-2 ml-2'  style={{ color: 'gold' }}>
@@ -45,8 +45,8 @@ function TNavbar() {
           onClick={handleDropdownToggle}
         />
         <NavDropdown show={dropdownOpen} onToggle={handleDropdownToggle} id="basic-nav-dropdown" className="text-[gold] mr-[6rem]">
-          <NavDropdown.Item href="#action/3.1">Profile</NavDropdown.Item>
-          <NavDropdown.Item href="#action/3.2">Edit Profile</NavDropdown.Item>
+          <NavDropdown.Item>Profile</NavDropdown.Item>
+          <NavDropdown.Item>Edit Profile</NavDropdown.Item>
           <NavDropdown.Divider />
           <Link to="/">Sign Out</Link>
         </NavDropdown>

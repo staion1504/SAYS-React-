@@ -25,7 +25,7 @@ import Theatredashboard from './Components/Theatre/theatredashboard/theatredashb
 import TMovies from './Pages/Theatre/Movies';
 import TSchedule from "./Components/Theatre/Schedule/TSchedule";
 import Usertheatreinfo from './Components/Theatre/About Theatre/usertheatreinfo'
-
+import TSnacks from "./Pages/Theatre/Snacks";
 
 
 //user
@@ -39,6 +39,7 @@ import IndividualPage from './Pages/IndividualMoviePage/Individual';
 import Timings from './Pages/Timing/Timing'
 import SeatArrangementPage from "./Pages/SeatArrangement/SeatArrangement";
 import RecentBookings from "./Pages/RecentBooking/RecentBooking";
+
 
 
 const router = createBrowserRouter([
@@ -90,6 +91,11 @@ const router = createBrowserRouter([
   {
     path: "Theatre/Usertheatreinfo",
     element: <Usertheatreinfo />
+  },
+
+  {
+    path: "Theatre/Snacks",
+    element: <TSnacks/>
   },
 
 

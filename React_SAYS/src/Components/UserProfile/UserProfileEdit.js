@@ -1,9 +1,34 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import classes from './UserProfileEdit.module.css';
 import { Row,Col,Container} from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 const UserProfileEdit = () => {
+  
+  const [userdetails,setuserdetails]=useState({});
+
+  const renderUserDetails=async ()=>{
+       const res=await fetch('http://localhost:5000/profile/laptopprofilepage/getdetails',{
+         method:'get',
+         headers: {
+            "Content-Type": 'application/json'
+         },
+         credentials:'include',
+        });
+
+        const response=await res.json();
+        console.log(response[0]);
+        setuserdetails(response[0]);
+  }
+
+  useEffect(()=>{
+    renderUserDetails();
+  },[]);  
+  
+  
+  
+  
+  
   return (
     <>
     <div className={classes.errormessage}>error</div> 
@@ -44,14 +69,14 @@ const UserProfileEdit = () => {
                 <Row className='mt-2'>
                     <Col md={6} lg={6} className='flex flex-col'>
                     <label className="text-[11px]">First Name</label>
-                    <input type="text" className={classes.form_control} placeholder="First name"
-                     value="rupesh" name="First_Name"/>
+                    <input type="text" className={classes.form_control} placeholder={userdetails.firstName}
+                     value="" name="First_Name"/>
                     </Col>
 
                     <Col md={6} lg={6} className='flex flex-col'>
                     <label className="text-[11px]">Last Name</label>
                     <input type="text" className={classes.form_control}
-                      placeholder="Surname" value="chowdary" name="Last_Name"/>
+                      placeholder={userdetails.lastName} value="" name="Last_Name"/>
                     </Col>
                 </Row>
 

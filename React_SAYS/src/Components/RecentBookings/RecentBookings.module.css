@@ -162,12 +162,12 @@
   justify-content: space-between;
   color: #9d9ea3;
 }
-thead tr th {
+.th {
   border-color: inherit;
   border-style: solid;
   border-width: 2px;
 }
-tbody tr td {
+.td {
   border-color: inherit;
   border-style: solid;
   border-width: 2px;

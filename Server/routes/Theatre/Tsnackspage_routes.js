@@ -64,9 +64,7 @@ router.post("/removesnack", async function (req, res) {
         snackinfoarr.push(arr[i]);
       }
     }
-    if (req.cookies.isTlogin)
-      res.render("theatresnackspage", { snackinfoarr: snackinfoarr });
-    else res.redirect("/login");
+       res.json({ snackinfoarr: snackinfoarr });
   });
   
   router.post("/addsnack", async function (req, res) {
@@ -75,7 +73,7 @@ router.post("/removesnack", async function (req, res) {
       let words = str.split(" ");
       let capitalized = words.map(
         (word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
-      ); // capitalize the first letter of each word and convert the rest of the letters to lowercase
+      );
       let result = capitalized.join(" ");
       return result;
     };
@@ -84,9 +82,6 @@ router.post("/removesnack", async function (req, res) {
     let scategory = convertstr(req.body.category);
     let sprice = req.body.price;
     let simgurl = req.body.snackimg;
-    console.log(sname);
-    console.log(scategory);
-    console.log("Hello addsnack");
     let value = await snackinfo.find({
       tReferenceNumber: req.cookies.currtheatrereffnum,
     });
@@ -123,7 +118,7 @@ router.post("/removesnack", async function (req, res) {
         )
         .then(() => {
           console.log("Inserted new snack data in snackinfo database");
-          res.redirect("/tsnackspage");
+          res.json({k:1});
         })
         .catch((err) => {
           console.log(err);
@@ -155,14 +150,14 @@ router.post("/removesnack", async function (req, res) {
           )
           .then(() => {
             console.log("Inserted new snack data in snackinfo database");
-            res.redirect("/tsnackspage");
+            res.json({k:1});
           })
           .catch((err) => {
             console.log(err);
           });
       } else {
         console.log("Already Snack Present in your Theatre");
-        res.redirect("/tsnackspage");
+        res.json({k:1});
       }
     }
   });
@@ -172,17 +167,43 @@ router.post("/removesnack", async function (req, res) {
     oldsname: "",
     oldscategory: "",
   };
-  
-  router.post("/editsavesnack/olddetails", function (req, res) {
-    let oldsname = req.body.oldsname;
-    let oldscategory = req.body.oldscategory;
-    olddetails = {
-      oldsname: oldsname,
-      oldscategory: oldscategory,
-    };
-  
-    return;
+
+  router.post("/getsnackdetails", function (req, res) {
+    let sname = req.body.sname;
+    let scategory = req.body.category;
+    snackinfo
+      .find({ tReferenceNumber: req.cookies.currtheatrereffnum })
+      .then((value) => {
+        let obj = value[0];
+        let obj2;
+        let snackarr = obj["snackarr"];
+        for (let i = 0; i < snackarr.length; i++) {
+          if (
+            snackarr[i].SnackName == sname &&
+            snackarr[i].category == scategory
+          ) {
+            obj2 = snackarr[i];
+            olddetails = {
+              oldsname: sname,
+              oldscategory: scategory,
+            };
+          }
+        }
+        res.json(obj2);
+      });
   });
+
+  
+  // router.post("/editsavesnack/olddetails", function (req, res) {
+  //   let oldsname = req.body.oldsname;
+  //   let oldscategory = req.body.oldscategory;
+  //   olddetails = {
+  //     oldsname: oldsname,
+  //     oldscategory: oldscategory,
+  //   };
+  
+  //   res.json({k:1});
+  // });
   
   router.post("/editsavesnack", async function (req, res) {
     let flag = 0;
@@ -209,6 +230,8 @@ router.post("/removesnack", async function (req, res) {
         ) {
           snackarr[i].SnackName = sname;
           snackarr[i].category = scategory;
+          snackarr[i].price=sprice;
+          snackarr[i].imgurl=simgurl;
         }
       }
   
@@ -221,38 +244,45 @@ router.post("/removesnack", async function (req, res) {
           }
         )
         .then(() => {
-          console.log("Inserted new snack data in snackinfo database");
-          res.redirect("/tsnackspage");
+          console.log("Updated new snack data in snackinfo database");
+          res.json({k:1});
         })
         .catch((err) => {
           console.log(err);
         });
-    } else {
-      res.redirect("/tsnackspage");
-    }
-  
-    return;
-  });
-  
-  router.post("/getsnackdetails", function (req, res) {
-    let sname = req.body.sname;
-    let scategory = req.body.category;
-    snackinfo
-      .find({ tReferenceNumber: req.cookies.currtheatrereffnum })
-      .then((value) => {
-        let obj = value[0];
-        let obj2;
-        let snackarr = obj["snackarr"];
-        for (let i = 0; i < snackarr.length; i++) {
-          if (
-            snackarr[i].SnackName == sname &&
-            snackarr[i].category == scategory
-          ) {
-            obj2 = snackarr[i];
-          }
+    } 
+    
+    
+    else {
+      for (let i = 0; i < snackarr.length; i++) {
+        if (
+          snackarr[i].SnackName == sname &&
+          snackarr[i].category == scategory
+        ) {
+          snackarr[i].SnackName = sname;
+          snackarr[i].category = scategory;
+          snackarr[i].price=sprice;
+          snackarr[i].imgurl=simgurl;
         }
-        res.json(obj2);
-      });
+      }
+  
+      snackinfo
+        .updateOne(
+          { tReferenceNumber: req.cookies.currtheatrereffnum },
+          {
+            tReferenceNumber: req.cookies.currtheatrereffnum,
+            snackarr: snackarr,
+          }
+        )
+        .then(() => {
+          console.log("Updated existing snack data in snackinfo database");
+          res.json({k:1});
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
   });
+  
 
   module.exports = router;
