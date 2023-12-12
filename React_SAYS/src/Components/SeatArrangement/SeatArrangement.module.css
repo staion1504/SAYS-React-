@@ -1,28 +1,13 @@
 @import url("https://fonts.googleapis.com/css?family=Lato&display=swap");
 
-/* * {
-  box-sizing: border-box;
-  font-family: 'Playfair Display', serif;
-font-family: 'Roboto Slab', serif;
-} */
 
-.body {
-  background-color: #242333;
+.body { 
   color: #fff;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
   font-family: "Lato", sans-serif !important;
   margin: 0;
-
-  box-sizing: border-box;
   font-family: 'Playfair Display', serif;
-font-family: 'Roboto Slab', serif;
+   font-family: 'Roboto Slab', serif;
 }
-
-
 
 .back_to_home{
   

@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {faWheelchair} from '@fortawesome/free-solid-svg-icons';
 import classes from './SeatArrangement.module.css';
 import { Link } from 'react-router-dom';
 import { Container,Row} from 'react-bootstrap';
@@ -18,7 +16,8 @@ const SeatArrangement = () => {
     const navigate=useNavigate();
 
     const[seatMatrix,setSeatMatrix]=useState([]);
-
+    const [updatedseatarr,setupdatedseatarr]=useState([]);
+    const [infoobj,setinfoobj]=useState({});
     
      async function renderSeats(){
 
@@ -31,10 +30,10 @@ const SeatArrangement = () => {
       })
      
      let x=await res.json();
-
-     console.log(x);
      setSeatMatrix(x.userbookingseatarr);
-
+     const copyArray = x.userbookingseatarr.map(row => [...row]);
+     setupdatedseatarr(copyArray);
+     setinfoobj(x.infoobj);
      }
     
     useEffect(()=>{
@@ -43,20 +42,69 @@ const SeatArrangement = () => {
 
     },[]);
 
-    
+    const [selectedseatcount,setselectedseatcount]=useState(0);
+    const [totalseatsprice,settotalseatsprice]=useState(0);
+    const [selectedseatnums,setselectedseatnums]=useState([]);
 
+    const OnProceed=async ()=>{
+      
+        const obj3={
+            seatarr:updatedseatarr,
+            tReff:infoobj.tReff,
+            sname:infoobj.screenname,
+          }
+        
+          
+        const obj1=
+        {
+          MovieName:infoobj.mname,
+          time:infoobj.showtime,
+          screenname:infoobj.screenname,
+          seatnumarr:selectedseatnums,
+          tReff:infoobj.tReff,
+        }
+        
+        
+        let res2 = await fetch('http://localhost:5000/movies/seatarrangement/addticket', {
+            method: 'post',
+            body: JSON.stringify(obj1),
+            headers: {
+                "Content-Type": 'application/json'
+            }
+        });
+
+
+        let k=await res2.json();
+        let res3 = await fetch('http://localhost:5000/movies/seatarrangement/updateseatsarr', {
+            method: 'post',
+            body: JSON.stringify(obj3),
+            headers: {
+                "Content-Type": 'application/json'
+            }
+          });
+        
+          let k1=await res3.json();
+          console.log(k);
+          console.log(k1);
+        
+          if(k1.k===1 && k.k===1)
+          {
+            console.log("Ticket booked succesfully!!!");
+          }
+
+    }
 
   return (
     <div className={classes.body}>
     <div className='bg-[url("https://c1.wallpaperflare.com/preview/330/534/353/seat-chair-theatre-dark.jpg")] bg-no-repeat bg-cover bg-center'>
 
 <div className={classes.back_to_home}>
-    <Link to="/movies" className='relative z-10 '> <button>Back to Movies</button>
+    <Link to="/User/MoviesPage" className='relative z-10 '> 
+      <button>Back to Movies</button>
     </Link>
 </div>
 
     <div className={classes.main_body}>
-
         <div className={classes.side_image}>
             <img src={MovieArray.imgurl}  alt=""/>
         </div>
@@ -64,80 +112,58 @@ const SeatArrangement = () => {
          <Container>
             <ul className={classes.display}>
                 <li>
-                     <Seat type="Normal"></Seat>
+                     <Seat type={2}></Seat>
                     <small>Available</small>
                 </li>
 
                 <li>
-                     <Seat type="showcaseselected"></Seat>
+                     <Seat type={5}></Seat>
                     <small>Selected </small>
                 </li>
 
                 <li>
-                    <Seat type="SoldOut"></Seat>
+                    <Seat type={4}></Seat>
                     <small>Sold Out </small>
                 </li>
 
                <li>
-                <Seat type="Premium"></Seat>
+                <Seat type={3}></Seat>
                 <small>Premium</small>
               </li>
 
               <li>
-                <Seat type="Normal"></Seat>
+                <Seat type={2}></Seat>
                 <small>Normal</small>
               </li>
               
              <li>
-                 <Seat type="Disabled">
-                 <FontAwesomeIcon icon={faWheelchair} className='w-[1rem] h-[1rem] px-2 py-1 text-black' /> 
-                 </Seat>
+                 <Seat type={1}></Seat>
                 <small>Disabled</small>
             </li>
         </ul>   
-            
-            
+                     
             <div className={classes.movie_title}>
                  <h1>
-                    Avatar: The Way of Water
+                    {infoobj.mname}
                 </h1> 
             </div>
-
-           
+     
             <div className='flex justify-center mt-5'>
-                   <div>
-                   <Row className='flex'>        
-                        <Seat type="Premium"></Seat>
-                      
-                        <Seat type="Normal"></Seat>
-                      
-                        <Seat type="Disabled">
-                           <FontAwesomeIcon icon={faWheelchair} className='w-[1.1rem] h-[1.1rem] pt-1 text-black' /> 
-                        </Seat>
-                      
-                            <Seat type="Emptyspace"></Seat>
-                      
-                            <Seat type="Soldout"></Seat>
-                            
-                    </Row>
+                <div>
+                  {seatMatrix.map((row,rownum)=>{
+                    return (
+                    <Row className='flex'>
+                        {row.map((seat,colnum)=>{      
+                          return <Seat type={seat}  rownum={rownum} colnum={colnum} 
+                          setselectedseatcount={setselectedseatcount} selectedseatcount={selectedseatcount}
+                          settotalseatsprice={settotalseatsprice} totalseatsprice={totalseatsprice}
+                          infoobj={infoobj} updatedseatarr={updatedseatarr}
+                          setupdatedseatarr={setupdatedseatarr} selectedseatnums={selectedseatnums} setselectedseatnums={setselectedseatnums}></Seat>        
+                        })} 
+                    </Row>)
 
-                    <Row className='flex'>        
-                        <Seat type="Premium"></Seat>
-                      
-                        <Seat type="Normal"></Seat>
-                      
-                        <Seat type="Disabled">
-                           <FontAwesomeIcon icon={faWheelchair} className='w-[1.1rem] h-[1.1rem] pt-1 text-black' /> 
-                        </Seat>
-                      
-                            <Seat type="Emptyspace"></Seat>
-                      
-                            <Seat type="Soldout"></Seat>
-                    </Row>
-
-                    
-                  
-                   </div>
+                  })}         
+                </div>
             </div>
 
              <div className="mt-[3rem]">
@@ -147,34 +173,27 @@ const SeatArrangement = () => {
        
             <div className="flex justify-center mt-4">
                 <div className={classes.proceed_button}>
-                     <div className='rounded-md flex justify-center'>
-                       <button className='bg-[blue] p-2 text-[1.1rem] rounded-md'>Proceed</button>
-                     </div>
+                     {selectedseatcount<=4 &&
+                     <>
+                     {selectedseatcount>0 && 
+                      <div className='rounded-md flex justify-center'>
+                       <button onClick={OnProceed} className='bg-[blue] p-2 text-[1.1rem] rounded-md hover:bg-[green]'>Proceed</button>
+                     </div>}
 
                     <p className={classes.text}>
-                        You have selected <span id="count">0</span> seat(s) for a price of RS.<span id="total">0</span>
+                        You have selected <span id="count">{selectedseatcount}</span> seat(s) for a price of RS.<span id="total">{totalseatsprice}</span>
                     </p>
+                     </>}
+
+                    {selectedseatcount>4 && 
+                     <p className={classes.text}>
+                        You can only book a <span className='text-[1.1rem]'>maximum of 4 seats at a time</span>
+                    </p>}
                 </div>
             </div>
 
         </Container>
-
-         {/* <div class="info" style="display: none;">
-          <p class="mname"><%=infoobj["mname"]%></p>
-          <p class="treff"><%=infoobj["tReff"]%></p>
-          <p class="stime"><%=infoobj["showtime"]%></p>
-          <p class="pprice"><%=infoobj["premiumprice"]%></p>
-          <p class="nprice"><%=infoobj["normalprice"]%></p>
-          <p class="sname"><%=infoobj["screenname"]%></p>
-         </div> */}
-
     </div>
-
-
-
-
-
-
     </div>
     </div>
   )

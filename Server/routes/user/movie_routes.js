@@ -257,6 +257,7 @@ router.post("/seatarrangement/addticket", async function (req, res) {
   let value1 = await movieinfo.find({ MovieName: MovieName });
   let imgurl = value1[0]["imgurl"];
   let currtid;
+  console.log(req.cookies.UserReferenceNumber);
   let value2 = await ticketinfo.find({
     UserReferenceNumber: req.cookies.UserReferenceNumber,
   });
