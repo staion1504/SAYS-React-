@@ -67,7 +67,7 @@ router.post("/", async (req, res) => {
 
   res.cookie("TicketIdForSnacks", ticketid);
 
-  res.redirect("/snacks");
+  res.json({k:1});
 });
 
 module.exports = router;
