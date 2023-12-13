@@ -3,7 +3,7 @@ import SearchBarFilters from '../../Components/Movies/SearchBarFilters/SearchBar
 import NavBar from '../../Components/Common/NavBar/NavBar';
 import MoviesSection from '../../Components/Movies/MoviesSection/MoviesSection';
 import Footer from '../../Components/Common/Footer/Footer';
-import ReviewSection from '../../Components/Movies/ReviewHub/ReviewSection';
+
 const Movies=()=>{
   return (
     <>
@@ -13,7 +13,6 @@ const Movies=()=>{
    </div>
     <MoviesSection title="Latest Movies" style={{}}/>
     <MoviesSection title="Upcoming Movies" style={{marginTop:"4rem"}}/>
-    <ReviewSection/>   
      <Footer/>
   </>
   );

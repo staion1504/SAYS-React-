@@ -3,6 +3,7 @@ import MultiItemCarousel from "../../Common/MultiItemCarousel/MultiItemCarousal"
 import SectionTitle from "../SectionTitle/SectionTitle";
 import MovieCard from "./MovieCard/MovieCard";
 import classes from './MoviesSection.module.css';
+import ReviewSection   from '../ReviewHub/ReviewSection'
 
 
 import { MyContext2 } from '../../../Contexts/UserSideMoviesContex';
@@ -14,6 +15,7 @@ const MoviesSection=(props)=>{
   
    const [MoviesArray,setMoviesArray]=useState([]);
    const [movieitemarr,setMovieitemarr]=useState([]);
+   const [ReviewArray,setReviewArray]=useState([]);
    const[location,setLocation]=useState(""); 
     
    async function renderData(){
@@ -30,7 +32,14 @@ const MoviesSection=(props)=>{
 
   let x=await response.json();
   console.log(x);
-  setMoviesArray(x.latestmovies);
+  if(props.title==="Latest Movies"){
+    setMoviesArray(x.latestmovies);
+  }
+ 
+else
+setMoviesArray(x.upcomingmovies)
+
+ setReviewArray(x.reviewdata);
   setLocation(x.checklocaton);
    
    } 
@@ -45,19 +54,25 @@ const MoviesSection=(props)=>{
 
  useEffect(()=>{
   const x= MoviesArray.map((Movie,index)=>{
-    return < MovieCard MovieDetails={Movie} location={location} />
+    return < MovieCard MovieDetails={Movie} location={location} title={props.title}/>
    })
    setMovieitemarr([...x]);
  }, [MoviesArray])
    
                
      return (
+      <>
     <section className={classes.moviessection} style={props.style}>
 
          <SectionTitle title={props.title}/>
           
       <MultiItemCarousel  itemarr={movieitemarr}/>  
     </section>
+     
+    {props.title==="Latest Movies"?<></>:<ReviewSection ReviewArray={ReviewArray}/>}   
+
+     </>
+ 
 )
 }
 
