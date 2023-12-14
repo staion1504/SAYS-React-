@@ -47,7 +47,7 @@ const AboutUs = () => {
           <Row>
             <Col>
               <h1
-                className="display-2 font-weight-normal text-center py-3 "
+                className={styles.h1}
                 style={{
                   color: "gold",
                   fontWeight: "normal",
@@ -56,7 +56,7 @@ const AboutUs = () => {
                 {" "}
                 About Us{" "}
               </h1>
-              <p className="lead  text-white mb-2 px-3">
+              <p className={styles.p}>
                 Welcome respective visitors to <strong>SAYS</strong> (Service At
                 Your Seat).SAYS website is always ready to help you and our aim
                 is to save your time and provide you a wonderful experience at
@@ -84,7 +84,7 @@ const AboutUs = () => {
                 {" "}
                 Our Goal{" "}
               </h1>
-              <p class="lead  text-white mb-2 px-3">
+              <p className={styles.p}>
                 {" "}
                 We are a team of movie enthusiasts who are passionate about
                 bringing the best movie-watching experience to our users. Our
@@ -130,7 +130,7 @@ const AboutUs = () => {
               <h5>Rupesh</h5>
               <span>CEO-Founder</span>
               <ul className={styles.socialList}>
-                <li>
+                <li className={styles.li}>
                   {" "}
                   <a href="/">
                     <FontAwesomeIcon
@@ -140,7 +140,7 @@ const AboutUs = () => {
                     />
                   </a>
                 </li>
-                <li>
+                <li className={styles.li}>
                   <a href="/">
                     <FontAwesomeIcon
                       icon={faTwitter}
@@ -149,7 +149,7 @@ const AboutUs = () => {
                     />
                   </a>
                 </li>
-                <li>
+                <li className={styles.li}>
                   {" "}
                   <a href="/">
                     <FontAwesomeIcon
@@ -159,7 +159,7 @@ const AboutUs = () => {
                     />
                   </a>
                 </li>
-                <li>
+                <li className={styles.li}>
                   {" "}
                   <a href="/">
                     <FontAwesomeIcon
@@ -185,7 +185,7 @@ const AboutUs = () => {
               <h5>Rupesh</h5>
               <span>CEO-Founder</span>
               <ul className={styles.socialList}>
-                <li>
+                <li className={styles.li}>
                   {" "}
                   <a href="/">
                     <FontAwesomeIcon
@@ -195,7 +195,7 @@ const AboutUs = () => {
                     />
                   </a>
                 </li>
-                <li>
+                <li className={styles.li}>
                   <a href="/">
                     <FontAwesomeIcon
                       icon={faTwitter}
@@ -204,7 +204,7 @@ const AboutUs = () => {
                     />
                   </a>
                 </li>
-                <li>
+                <li className={styles.li}>
                   {" "}
                   <a href="/">
                     <FontAwesomeIcon
@@ -214,7 +214,7 @@ const AboutUs = () => {
                     />
                   </a>
                 </li>
-                <li>
+                <li className={styles.li}>
                   {" "}
                   <a href="/">
                     <FontAwesomeIcon
@@ -239,7 +239,7 @@ const AboutUs = () => {
               <h5>Rupesh</h5>
               <span>CEO-Founder</span>
               <ul className={styles.socialList}>
-                <li>
+                <li className={styles.li}>
                   {" "}
                   <a href="/">
                     <FontAwesomeIcon
@@ -249,7 +249,7 @@ const AboutUs = () => {
                     />
                   </a>
                 </li>
-                <li>
+                <li className={styles.li}>
                   <a href="/">
                     <FontAwesomeIcon
                       icon={faTwitter}
@@ -258,7 +258,7 @@ const AboutUs = () => {
                     />
                   </a>
                 </li>
-                <li>
+                <li className={styles.li}>
                   {" "}
                   <a href="/">
                     <FontAwesomeIcon
@@ -268,7 +268,7 @@ const AboutUs = () => {
                     />
                   </a>
                 </li>
-                <li>
+                <li className={styles.li}>
                   {" "}
                   <a href="/">
                     <FontAwesomeIcon
@@ -293,7 +293,7 @@ const AboutUs = () => {
               <h5>Rupesh</h5>
               <span>CEO-Founder</span>
               <ul className={styles.socialList}>
-                <li>
+                <li className={styles.li}>
                   {" "}
                   <a href="/">
                     <FontAwesomeIcon
@@ -303,7 +303,7 @@ const AboutUs = () => {
                     />
                   </a>
                 </li>
-                <li>
+                <li className={styles.li}>
                   <a href="/">
                     <FontAwesomeIcon
                       icon={faTwitter}
@@ -312,7 +312,7 @@ const AboutUs = () => {
                     />
                   </a>
                 </li>
-                <li>
+                <li className={styles.li}>
                   {" "}
                   <a href="/">
                     <FontAwesomeIcon
@@ -322,7 +322,7 @@ const AboutUs = () => {
                     />
                   </a>
                 </li>
-                <li>
+                <li className={styles.li}>
                   {" "}
                   <a href="/">
                     <FontAwesomeIcon
@@ -347,7 +347,7 @@ const AboutUs = () => {
               <h5>Rupesh</h5>
               <span>CEO-Founder</span>
               <ul className={styles.socialList}>
-                <li>
+                <li className={styles.li}>
                   {" "}
                   <a href="/">
                     <FontAwesomeIcon
@@ -357,7 +357,7 @@ const AboutUs = () => {
                     />
                   </a>
                 </li>
-                <li>
+                <li className={styles.li}>
                   <a href="/">
                     <FontAwesomeIcon
                       icon={faTwitter}
@@ -366,7 +366,7 @@ const AboutUs = () => {
                     />
                   </a>
                 </li>
-                <li>
+                <li className={styles.li}>
                   {" "}
                   <a href="/">
                     <FontAwesomeIcon
@@ -376,7 +376,7 @@ const AboutUs = () => {
                     />
                   </a>
                 </li>
-                <li>
+                <li className={styles.li}>
                   {" "}
                   <a href="/">
                     <FontAwesomeIcon

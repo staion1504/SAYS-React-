@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./MovieNews.module.css";
-import "./MovieNews.css";
+import "./MovieNews2.module.css";
 
 const MovieNews = () => {
   return (
@@ -49,7 +49,7 @@ const MovieNews = () => {
           </div>
           <div className={styles.bannerSubContent}>
             <div className={styles.hotTopic}>
-              <img alt="" src={require("./images/11.jpg")} />
+              <img className={styles.img} alt="" src={require("./images/11.jpg")} />
               <div class={styles.hotTopicContent}>
                 <h2>
                   Congratulations! to Critics Choice SUPER Award winners Tom
@@ -98,8 +98,8 @@ const MovieNews = () => {
             </div>
           </div>
         </section>
-        <hr />
-        <main>
+        <hr className={styles.hr}/>
+        <main className={styles.main}>
           <h2>Top Stories</h2>
           <section className={styles.mainContainerLeft}>
             <div className={styles.containerTopLeft}>
