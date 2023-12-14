@@ -39,6 +39,7 @@ import IndividualPage from './Pages/IndividualMoviePage/Individual';
 import Timings from './Pages/Timing/Timing'
 import SeatArrangementPage from "./Pages/SeatArrangement/SeatArrangement";
 import RecentBookings from "./Pages/RecentBooking/RecentBooking";
+import ReviewPage from "./Pages/Review/ReviewPage";
 
 
 
@@ -140,8 +141,10 @@ const router = createBrowserRouter([
     element: <UserProfileEditPage/>
   },
 
-
-  
+  {
+    path: "User/MovieReview",
+    element: <ReviewPage/>
+  },
 
 ]);
 

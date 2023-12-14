@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import SectionTitle from "../SectionTitle/SectionTitle";
 import ReviewHubCaurosel from "./ReviewHubCaurosel/ReviewHubCaurosel";
 // import classes from "./ReviewSection.module.css";
@@ -9,7 +10,7 @@ const ReviewSection=()=>{
          <SectionTitle title="Review Hub"/>
        </div>
        <div className="m-4">   
-         <ReviewHubCaurosel/>
+        <Link to="/User/MovieReview"><ReviewHubCaurosel/></Link>
        </div>
 </>);
 }
