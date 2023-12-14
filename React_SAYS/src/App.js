@@ -26,6 +26,7 @@ import TMovies from './Pages/Theatre/Movies';
 import TSchedule from "./Components/Theatre/Schedule/TSchedule";
 import Usertheatreinfo from './Components/Theatre/About Theatre/usertheatreinfo'
 import TSnacks from "./Pages/Theatre/Snacks";
+import ProfilePage from "./Pages/Theatre/ProfilePage"
 
 
 //user
@@ -97,6 +98,11 @@ const router = createBrowserRouter([
   {
     path: "Theatre/Snacks",
     element: <TSnacks/>
+  },
+  {
+    path: "Theatre/Profile",
+    element:<ProfilePage/>
+
   },
 
 

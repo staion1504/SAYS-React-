@@ -8,7 +8,11 @@ const snackinfo = require("../../models/theatre/snackinfo");
 
 
 router.get("/", async (req, res) => {
+
+  console.log("hi");
+
   let ticketarr = [];
+  console.log(req.cookies.UserReferenceNumber);
   let value1 = await ticketinfo.find({
     UserReferenceNumber: req.cookies.UserReferenceNumber,
   });
@@ -52,6 +56,13 @@ router.get("/", async (req, res) => {
     // console.log(value3);
 
     res.clearCookie("TicketIdForSnacks");
+
+    console.log({
+      TicketId: ticketid,
+      fooditem: value3,
+      ticketarr: ticketarr,
+    });
+
     res.json({
       TicketId: ticketid,
       fooditem: value3,

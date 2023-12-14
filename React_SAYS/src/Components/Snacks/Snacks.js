@@ -36,7 +36,8 @@ const Snacks = () => {
       }
     );
     const obj = await res.json();
-    console.log(obj);
+    console.log("hi",obj);
+
     setticketid(obj.TicketId);
     const ticketarr=[];
     for(let i=obj.ticketarr.length-1;i>=0;i--)
