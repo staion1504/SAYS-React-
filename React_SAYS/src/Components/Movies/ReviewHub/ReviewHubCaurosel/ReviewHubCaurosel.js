@@ -56,9 +56,7 @@ export default class ReviewHubCaurosel extends Component {
                     </div>
 
                     <div className="lg:text-[1.15rem] md:text-[1.1rem] xs:text-[0.8rem] 2xs:text-[0.45rem] sm:leading-[1.5rem] xs:leading-[1.3rem] mt-2">
-                      UFGFBUY UFUYDSGFUDSG DHUHSGBUY SDBGUYiuhdish sibsdhf sduhfdsdfbdsjh bsuh fu
-                      UFGFBUY UFUYDSGFUDSG DHUHSGBUY SDBGUYiuhdish sibsdhf sduhfdsdfbdsjh bsuh fu
-                      UFGFBUY UFUYDSGFUDSG DHUHSGBUY SDBGUYiuhdish sibsdhf sduhfdsdfbdsjh bsuh fu
+                   Movie is good but it has some ......
                     </div>
                   </div>
                 </div>
