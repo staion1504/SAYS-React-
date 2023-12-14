@@ -151,7 +151,7 @@ const TMovies = () => {
 
       <div className='mt-[3rem]'>
         <div className='flex justify-between'>
-          <h3 className={classes.title}>LATEST MOVIES SCREENING</h3>
+          <h3 className={classes.title} style={{width:"25rem"}}>LATEST MOVIES SCREENING</h3>
           <div>
             <button type="button" className='bg-[red] w-[7rem] h-[2.2rem] mr-[3rem] rounded-md text-[white] hover:bg-[indianred]' onClick={handleShow2}>
               Add movie
