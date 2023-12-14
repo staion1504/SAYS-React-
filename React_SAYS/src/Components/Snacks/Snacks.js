@@ -111,7 +111,6 @@ const Snacks = () => {
 
   return (
     <>
-     
         {show && <Cart show={show} handleClose={handleClose} cartItems={cartItems} setcartItems={setcartItems} 
           totalprice={totalprice} totalitems={totalitems} ticketid={ticketid} calc_total_items_n_price={calc_total_items_n_price}/>}
       <div className={classes.header}>
@@ -136,18 +135,10 @@ const Snacks = () => {
             </button>
 
       </div>
-
+   
     
-    
-    
-    
-    
-  
-
-
-
-    <div className={classes.food_items}>
-               <div className={classes.biriyani}>
+      <div className={classes.food_items}>
+            <div className={classes.biriyani}>
                     <p className={classes.category_name}>Popcorn</p>
                        {  
                         fooditemarr.map(fooditem=>{
