@@ -69,7 +69,7 @@ setMoviesArray(x.upcomingmovies)
       <MultiItemCarousel  itemarr={movieitemarr}/>  
     </section>
      
-    {props.title==="Latest Movies"?<></>:<ReviewSection ReviewArray={ReviewArray}/>}   
+    {props.title==="Latest Movies"?<></>:<ReviewSection ReviewArray={ReviewArray} />}   
 
      </>
  

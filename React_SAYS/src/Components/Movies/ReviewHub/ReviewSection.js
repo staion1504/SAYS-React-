@@ -10,7 +10,7 @@ const ReviewSection=({ReviewArray})=>{
          <SectionTitle title="Review Hub"/>
        </div>
        <div className="m-4">   
-          <ReviewHubCaurosel ReviewArray={ReviewArray}/>
+          <ReviewHubCaurosel ReviewArray={ReviewArray} />
        </div>
 </>);
 }

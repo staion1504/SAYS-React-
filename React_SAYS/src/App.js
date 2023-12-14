@@ -42,7 +42,8 @@ import SeatArrangementPage from "./Pages/SeatArrangement/SeatArrangement";
 import RecentBookings from "./Pages/RecentBooking/RecentBooking";
 import ReviewPage from "./Pages/Review/ReviewPage";
 
-
+import NewsPage from "./Components/News/MovieNews"
+import Aboutus from "./Components/AboutUs/AboutUs"
 
 const router = createBrowserRouter([
 
@@ -151,6 +152,14 @@ const router = createBrowserRouter([
     path: "User/MovieReview",
     element: <ReviewPage/>
   },
+  {
+    path: "User/News",
+    element: <NewsPage/>
+  }
+  ,{
+    path:"User/Aboutus",
+    element:<Aboutus/>
+  }
 
 ]);
 

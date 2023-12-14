@@ -31,7 +31,7 @@ const UserProfileEdit = () => {
   
   return (
     <>
-    <div className={classes.errormessage}>error</div> 
+    {/* <div className={classes.errormessage}>error</div>  */}
 <Container className='mt-5 rounded-md'>
         <Row className='h-[100%]'>
           <Col md={3} lg={3}>

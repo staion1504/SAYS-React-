@@ -3,7 +3,14 @@ import Slider from "react-slick";
 import classes from "../ReviewSection.module.css";
 import { AiFillStar, AiFillClockCircle } from 'react-icons/ai';
 import { BsFillProjectorFill } from 'react-icons/bs';
+import { Link } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 export default class ReviewHubCaurosel extends Component {
+   
+
+
+
+
   render() {
     const settings = {
       dots: true,
@@ -20,8 +27,8 @@ export default class ReviewHubCaurosel extends Component {
         <Slider {...settings}>
           {this.props.ReviewArray.map((Movie, index) => {
             return (
-
-              <div className={classes.contentdiv} key={index}>
+            <Link to='/User/MovieReview'>
+              <div className={classes.contentdiv} key={index} >
                 <img src={Movie.imgurl} alt="" />
                 <div className={classes.content}>
 
@@ -61,7 +68,7 @@ export default class ReviewHubCaurosel extends Component {
                   </div>
                 </div>
               </div>
-
+              </Link>
 
             )
           })}

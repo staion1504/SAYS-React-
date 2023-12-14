@@ -21,8 +21,8 @@ const MainNavBar=()=>{
                 <Link to='/User/HomePage'><span className={`${classes.navtext} ml-1 mr-3`} ><FontAwesomeIcon icon={faHouseChimney} style={{color: "#ffd700",}} /></span></Link> 
                 <Link to='/User/MoviesPage'><span className={`${classes.navtext} mr-3`}>Movies</span></Link>  
                 <Link to='/User/SnacksPage'><span className={`${classes.navtext} mr-3`}>Snacks</span></Link>  
-                <Link to='/user/news'><span className={`${classes.navtext} mr-3`}>News</span></Link>   
-                <Link to='/user/about'><span className={`${classes.navtext} mr-3`}>About</span></Link>
+                <Link to='/User/News'><span className={`${classes.navtext} mr-3`}>News</span></Link>   
+                <Link to='/User/Aboutus'><span className={`${classes.navtext} mr-3`}>About</span></Link>
                 <Link to='/user/contactus'><span className={`${classes.navtext} mr-3`}>ContactUs</span></Link>
           </Nav>     
       </Navbar.Collapse>
