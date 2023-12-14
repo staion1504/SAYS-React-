@@ -44,7 +44,7 @@ async function CheckLatestMoviesForReviewHub(reviewdata) {
     // console.log(x);
 
     if (x.length != 0) {
-      // console.log("hi icame here");
+      // console.log(reviewdata[i]['MovieName']);
       reviewdata[i]["rating"] = x[0]["rating"];
       reviewdata[i]["reviewdesc"] = x[0]["reviewdesc"];
     } else {
@@ -118,6 +118,7 @@ router.get("/", async (req, res) => {
   await fillLatestandUpcoming(today, default_city, latestmovies, upcomingmovies);
 
   await CheckLatestMoviesForReviewHub(reviewdata);
+  // console.log(reviewdata);
   
   res.json({
     checklocaton: default_city,

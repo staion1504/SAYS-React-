@@ -4,7 +4,7 @@ import { faClock,faThumbsUp } from '@fortawesome/free-solid-svg-icons';
 import React from 'react';
 import { useNavigate } from "react-router-dom";
 
-const MovieCard=({MovieDetails,location})=>{
+const MovieCard=({MovieDetails,location,title})=>{
   
    
   const x=useNavigate();
@@ -56,7 +56,7 @@ const MovieCard=({MovieDetails,location})=>{
           </div>
 
           <div className={classes.movie_info}>               
-             <button type="button" onClick={onClickHandler} className={classes.bookbtn}><p className={classes.btnname}>Book</p></button>  
+          {title==="Latest Movies"? <button type="button" onClick={onClickHandler} className={classes.bookbtn}><p className={classes.btnname}>Book</p></button>:<button type="button"  className={classes.bookbtn}><p className={classes.btnname}>Upcoming</p></button> }   
           </div>
       </div>
     </div>
