@@ -1,11 +1,12 @@
 * {
   font-family: "popppins", sans-serif;
 }
-body {
+.body {
   background: black;
   max-width: 100%;
   min-height: 100vh;
   cursor: pointer;
+  font-family: "popppins", sans-serif;
 }
 .about_theatre {
   size: inherit;

@@ -45,7 +45,7 @@ const Timings = (props) => {
  }
 
   return (
-    <>
+    <div className={classes.body}>
       <div id={classes.timevalue}>
         <p> timevalue</p>
       </div>
@@ -91,8 +91,7 @@ const Timings = (props) => {
             return (
               <div className={classes.theatre} key={iterationNumber}>
                 <div className={classes.sub_theatre}>
-                  <h2>{showDetail.tName}  <IoInformationCircleOutline /> </h2>
-
+                  <h2 className="flex text-[1.2rem] mb-[1rem]">{showDetail.tName}  <IoInformationCircleOutline className="text-[white] ml-[1.2rem]" /> </h2>
 
                   {showDetail.timingsarray.map((tArray, index) => {
                     return (
@@ -110,7 +109,7 @@ const Timings = (props) => {
 
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
