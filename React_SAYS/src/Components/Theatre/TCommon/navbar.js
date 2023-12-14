@@ -18,19 +18,19 @@ function TNavbar() {
     <Navbar.Collapse id="basic-navbar-nav">
 
       <Nav className="me-auto">
-        <Link to='/Theatre/Theatredashboard' className='mt-2 ml-2'  style={{ color: 'gold' }}>
+        <Link to='/Theatre/Theatredashboard' className='mt-2 ml-2 text-[1.2rem]'  style={{ color: 'gold' }}>
           Home
         </Link>
-        <Link to='/Theatre/MoviesPage' className='mt-2 ml-2'  style={{ color: 'gold' }}>
+        <Link to='/Theatre/MoviesPage' className='mt-2 ml-4 text-[1.2rem]'  style={{ color: 'gold' }}>
         Movies  
         </Link>
-        <Link to='/Theatre/Snacks' className='mt-2 ml-2'  style={{ color: 'gold' }}>
+        <Link to='/Theatre/Snacks' className='mt-2 ml-4 text-[1.2rem]'  style={{ color: 'gold' }}>
         Snacks
         </Link>
-        <Link to='/Theatre/TSchedule' className='mt-2 ml-2'  style={{ color: 'gold' }}>
+        <Link to='/Theatre/TSchedule' className='mt-2 ml-4 text-[1.2rem]'  style={{ color: 'gold' }}>
         Theatre
         </Link>
-        <Link to='/Theatre/Usertheatreinfo' className='mt-2 ml-2'  style={{ color: 'gold' }}>
+        <Link to='/Theatre/Usertheatreinfo' className='mt-2 ml-4 text-[1.2rem]'  style={{ color: 'gold' }}>
         About Theatre
         </Link>
 
@@ -48,7 +48,7 @@ function TNavbar() {
           <NavDropdown.Item>Profile</NavDropdown.Item>
           <NavDropdown.Item>Edit Profile</NavDropdown.Item>
           <NavDropdown.Divider />
-          <Link to="/">Sign Out</Link>
+          <div className="ml-4"><Link to="/">Sign Out</Link></div>
         </NavDropdown>
       </div>
 
