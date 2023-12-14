@@ -159,6 +159,16 @@ const router = createBrowserRouter([
   ,{
     path:"User/Aboutus",
     element:<Aboutus/>
+  },
+  {
+    path:"User/Registor",
+    element:<Register type="user"/>
+  
+  },
+  {
+    path:"Theatre/Registor",
+    element:<Register type="theatre"/>
+  
   }
 
 ]);

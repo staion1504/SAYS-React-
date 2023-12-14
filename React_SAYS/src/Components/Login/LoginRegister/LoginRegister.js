@@ -25,7 +25,7 @@ const LoginRegister=(props)=>{
     return (<div className={classes.loginregister}>
         
         <p className={classes.clientregister}>New {name}? 
-           <Link to={props.type==="User"?"/Signup":"/TSignup"}>
+           <Link to={props.type==="User"?"User/Registor":"Theatre/Registor"}>
               Register
            </Link>
         </p>
