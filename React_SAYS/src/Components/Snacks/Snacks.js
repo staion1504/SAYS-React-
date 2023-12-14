@@ -25,6 +25,7 @@ const Snacks = () => {
 
 
   const renderSnacks=async ()=>{
+    console.log("hi came");
     const res = await fetch(
       "http://localhost:5000/snacks/",
       {
@@ -36,8 +37,7 @@ const Snacks = () => {
       }
     );
     const obj = await res.json();
-    console.log("hi",obj);
-
+    console.log(obj);
     setticketid(obj.TicketId);
     const ticketarr=[];
     for(let i=obj.ticketarr.length-1;i>=0;i--)

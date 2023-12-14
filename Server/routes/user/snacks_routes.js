@@ -19,7 +19,7 @@ router.get("/", async (req, res) => {
   if (value1 != null)
     ticketarr = value1[0]["Ticketinfo"];
   let n = ticketarr.length;
-  if (req.cookies.isUserLogin) {
+
     let ticketid;
     let theatrename;
     let location;
@@ -30,16 +30,16 @@ router.get("/", async (req, res) => {
       ticketid = ticketarr[n - 1]["TicketId"];
     }
 
-    let value1 = await ticketinfo.findOne({
+    let value11 = await ticketinfo.findOne({
       UserReferenceNumber: req.cookies.UserReferenceNumber,
     });
 
-    value1 = value1.Ticketinfo;
+    value11 = value11.Ticketinfo;
 
     for (let i = 0; value1.length; i++) {
-      if (ticketid == value1[i]["TicketId"]) {
-        theatrename = value1[i]["theatrename"];
-        location = value1[i]["location"];
+      if (ticketid == value11[i]["TicketId"]) {
+        theatrename = value11[i]["theatrename"];
+        location = value11[i]["location"];
         break;
       }
     }
@@ -57,11 +57,11 @@ router.get("/", async (req, res) => {
 
     res.clearCookie("TicketIdForSnacks");
 
-    console.log({
-      TicketId: ticketid,
-      fooditem: value3,
-      ticketarr: ticketarr,
-    });
+    // console.log({
+    //   TicketId: ticketid,
+    //   fooditem: value3,
+    //   ticketarr: ticketarr,
+    // });
 
     res.json({
       TicketId: ticketid,
@@ -70,7 +70,7 @@ router.get("/", async (req, res) => {
     });
   } 
   // else res.redirect("/login");
-});
+);
 
 
 router.post("/", async (req, res) => {
