@@ -11,15 +11,15 @@ import { Container } from "react-bootstrap";
 
 const Home=()=>{
     return (<div>
-      <NavBar firstsection={FirstSection} pagename="Movies"/>
+      <NavBar firstsection={FirstSection} pagename="Home"/>
      <Container>
      <div className={classes.laptopfirstsection}>
-       <FirstSection/>
+       <FirstSection landingpage={false}/>
      </div>
        <div className={classes.fline}></div>
        <SecondSection/>
        <div className={classes.line}></div>
-       <ThirdSection/>
+       <ThirdSection landingpage={false}/>
        <div className={classes.line}></div>
        <FourthSection/>
        <FifthSection/>

@@ -3,20 +3,22 @@ const router = express.Router();
 const nodemailer = require("nodemailer");
 const userinfo=require("../../models/user/signup");
 const theatresignupinfo = require("../../models/theatre/signup");
-router.get("/", function (req, res) {
-  if (req.cookies.isUserLogin)
-    res.render("adminmailpage");
-  else {
-    res.redirect("/login");
-  }
-});
+
+
+// router.get("/", function (req, res) {
+//   if (req.cookies.isUserLogin)
+//     res.render("adminmailpage");
+//   else {
+//     res.redirect("/login");
+//   }
+// });
 
 router.post("/", async function (req, res) {
   let subject = req.body.subject;
   let message = req.body.message;
   let toaddress2 = req.body.tomail;
   let toaddress = req.body.toaddress;
-  let fromaddress = req.body.fromaddress;
+  // let fromaddress = req.body.fromaddress;
   let emailarr = [];
   if (toaddress == "None" && toaddress2 != "") {
     emailarr.push(toaddress2);
@@ -64,7 +66,7 @@ router.post("/", async function (req, res) {
     }
   });
 
-  res.redirect("/adminhome");
+  res.json({k:1});
 });
 
   module.exports = router;

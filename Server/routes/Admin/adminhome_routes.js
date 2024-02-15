@@ -22,22 +22,32 @@ router.get("/", async function (req, res) {
       msgobjarr.push(value[i]["msginfo"][j]);
     }
   }
-  if (msgobjarr.length != 0) msgobjarr.sort((a, b) => b.date - a.date);
+  if (msgobjarr.length != 0) msgobjarr.sort((a, b) => new Date(b.date) - new Date(a.date));
 
-  let value1 = await theatresignupinfo.find({});
-  let tnum = value1.length;
-  let value2 = await userinfo.find({});
-  let unum = value2.length;
-  if (req.cookies.isUserLogin)
-    res.render("adminhomepage", {
-      msgobjarr: msgobjarr,
-      tnum: tnum,
-      unum: unum,
-      theatreverificationarr: theatreverificationarr,
-    });
-  else {
-    res.redirect("/login");
-  }
+  const value1 = await theatresignupinfo.find({});
+  const tnum = value1.length;
+  const value2 = await userinfo.find({});
+  const unum = value2.length;
+ 
+  const obj={
+        msgobjarr: msgobjarr,
+        tnum: tnum,
+        unum: unum,
+        theatreverificationarr: theatreverificationarr,
+      }
+
+  res.json(obj);
+
+  // if (req.cookies.isUserLogin)
+  //   res.render("adminhomepage", {
+  //     msgobjarr: msgobjarr,
+  //     tnum: tnum,
+  //     unum: unum,
+  //     theatreverificationarr: theatreverificationarr,
+  //   });
+  // else {
+  //   res.redirect("/login");
+  // }
 });
 
 router.post("/accepttheatre", async function (req, res) {

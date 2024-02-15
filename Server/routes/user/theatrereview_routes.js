@@ -9,17 +9,17 @@ const userinfo = require("../../models/user/signup");
 
 router.get("/", async (req, res) => {
   if (req.cookies.isUserLogin) {
-    const tno = req.query.tref;
+    const tno = req.query.treff;
     let value = await theatresignupinfo.findOne({ tReferenceNumber: tno });
     let tname = value.tName;
     let review2 = await theatrereviewdata.find({ tReferenceNumber: tno });
-    res.render("theatrereview", { tname: tname, reviewdata: review2 });
+    res.json({ tname: tname, reviewdata: review2});
 }
 });
 
 
   router.post("/", async (req, res) => {
-    const tno = req.query.tref;
+    const tno = req.query.treff;
     const review1 = req.body.review;
     const rating1 = req.body.rating;
   
@@ -39,7 +39,7 @@ router.get("/", async (req, res) => {
     let theatrereviewmodel = new theatrereviewdata(myobj2);
     await theatrereviewmodel.save();
   
-    res.redirect("/treviews?tref=" + tno);
+    res.json({k:1});
   });
 
   module.exports = router;

@@ -45,7 +45,7 @@ mongoose
 const loginpage = require("./routes/user/loginpage");
 // const signout = require("./routes/user/signout");
 // const signup = require("./routes/user/signup");
-// const homeroutes = require("./routes/user/home_routes");
+const homeroutes = require("./routes/user/home_routes");
 const movieroutes = require("./routes/user/movie_routes");
 const userprofileroutes = require("./routes/user/profile_routes");
 const snacksroutes = require("./routes/user/snacks_routes");
@@ -53,16 +53,16 @@ const snacksroutes = require("./routes/user/snacks_routes");
 const recentbookingroutes = require("./routes/user/recentbookings_routes");
 // const movienewsroutes = require("./routes/user/movienews_routes");
 // const moviereviewroutes = require("./routes/user/moviereviews_routes");
-// const theatrereviewroutes = require("./routes/user/theatrereview_routes");
-// const contactusroutes = require("./routes/user/contactus_routes");
-// const usertheatreprofileroutes = require("./routes/user/usertheatre_routes");
+const theatrereviewroutes = require("./routes/user/theatrereview_routes");
+const contactusroutes = require("./routes/user/contactus_routes");
+const usertheatreprofileroutes = require("./routes/user/usertheatre_routes");
 // const moviegameroutes = require("./routes/user/moviegame_routes");
 
 // app.use("/", landingpage);
 app.use("/login", loginpage);
 // app.use("/signout", signout);
 // app.use("/Signup", signup);
-// app.use("/home", homeroutes);
+app.use("/home", homeroutes);
 app.use("/movies", movieroutes);
 app.use("/profile", userprofileroutes);
 app.use("/snacks", snacksroutes);
@@ -70,10 +70,11 @@ app.use("/snacks", snacksroutes);
 app.use("/recentbooking", recentbookingroutes);
 // app.use("/movienews", movienewsroutes);
 // app.use("/reviews", moviereviewroutes);
-// app.use("/treviews", theatrereviewroutes);
-// app.use("/contactus", contactusroutes);
-// app.use("/usertheatreprofile", usertheatreprofileroutes);
+app.use("/treviews", theatrereviewroutes);
+app.use("/contactus", contactusroutes);
+app.use("/usertheatreprofile", usertheatreprofileroutes);
 // app.use("/moviegame", moviegameroutes);
+
 
 //Theatre Dashboard Routes
 // const Tsignuproutes = require("./routes/Theatre/Tsignup_routes");
@@ -97,16 +98,16 @@ app.use("/Tlogin", Tloginroutes);
 // app.use("/usertheatreinfo", userTheatreinforoutes);
 
 //Admin Dashboard Routes
-// const adminhomeroutes = require("./routes/Admin/adminhome_routes");
+const adminhomeroutes = require("./routes/Admin/adminhome_routes");
 const adminmoviesroutes = require("./routes/Admin/adminmovies_routes");
 const adminclientroutes = require("./routes/Admin/adminclient_routes");
 const admintheatreroutes = require("./routes/Admin/admintheatre_routes");
-// const adminmassmailroutes = require("./routes/Admin/adminmassmail_routes");
+const adminmassmailroutes = require("./routes/Admin/adminmassmail_routes");
 
-// app.use("/adminhome", adminhomeroutes);
+app.use("/adminhome", adminhomeroutes);
 app.use("/Adminmovies", adminmoviesroutes);
 app.use("/Adminclient", adminclientroutes);
 app.use("/Admintheatre", admintheatreroutes);
-// app.use("/adminmassmail", adminmassmailroutes);
+app.use("/adminmassmail", adminmassmailroutes);
 
 

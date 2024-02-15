@@ -1,10 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styles from "./Reviews.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faStar as solidStar,
-  faStar as regularStar,
-} from "@fortawesome/free-solid-svg-icons";
+import {faStar as solidStar,faStar as regularStar} from "@fortawesome/free-solid-svg-icons";
 import { faStar as farStar } from "@fortawesome/free-regular-svg-icons";
 import { Link } from "react-router-dom";
 
@@ -14,7 +11,7 @@ const Review = () => {
       "https://s3.ap-south-1.amazonaws.com/media.hittvtelugu.com/wp-content/uploads/2023/11/hai.jpg",
   };
   const maxStars = 5;
-
+  
   const reviewData = [
     {
       criticname: "Saiteja",
@@ -67,6 +64,9 @@ const Review = () => {
       rating: "1",
     },
   ];
+
+
+  
 
   return (
     <>

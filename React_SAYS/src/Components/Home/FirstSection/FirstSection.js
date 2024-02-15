@@ -1,23 +1,23 @@
 import Section from '../Section/Section';
 
-const FirstSection=()=>{  
+const FirstSection=({landingpage})=>{  
   const CauroselImgObjs=[
   {
       id:"1",
       imglink:"https://www.deccanrummy.com/rummy-promotions/images/movie-mania/movie-mania.jpg?rand=1",
-      href:"/moviegame",
+      href:"#",
       interval:1000,
   },
   {
       id:"2",
       imglink:"https://cdn.grabon.in/gograbon/images/web-images/uploads/1618571888087/movie-ticket-offers.jpg",
-      href:"/",
+      href:"#",
       interval:500,
   },
   {
       id:"3",
       imglink:"https://assetscdn1.paytm.com/images/catalog/view_item/942171/1646452176861.jpg",
-      href:"/",
+      href:"#",
       interval:400,
   }
 ]
@@ -46,12 +46,12 @@ const sectioncontent={
   title:"Don't you love a cushioned seat in a corner, by the fireside, with your slippers on your feet?",
   subtitle:"Reserve your Seats to Experience the Quality of the movie that make you stop & stare",
   btnname:"Book now",
-  btnhref:"/movies",
+  btnhref:"/User/MoviesPage",
 }
   
   return (
    
-       <Section responsiveobj={responsiveobj} 
+       <Section responsiveobj={responsiveobj} landingpage={landingpage}
     imgobjarr={CauroselImgObjs} 
     content={sectioncontent}
     />

@@ -25,6 +25,7 @@ const Section=(props)=>{
                   subtitle={props.content.subtitle} 
                   btnname={props.content.btnname} 
                   btnhref={props.content.btnhref} 
+                  landingpage={props.landingpage}
                />
           
              </Col>

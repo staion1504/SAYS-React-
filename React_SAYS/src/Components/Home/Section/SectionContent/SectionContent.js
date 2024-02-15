@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import classes from './SectionContent.module.css';
 import SecSubTitle from './SubTitle/SecSubTitle';
 import SecTitle from './Title/SecTitle';
@@ -6,7 +7,9 @@ const SectionContent=(props)=>{
   <div className={classes.firstseccontent}>
      <SecTitle title={props.title}/>
      <SecSubTitle subtitle={props.subtitle}/>
-    <div><a href={props.btnhref} className={classes.booknowbtn}>{props.btnname}</a></div>
+     {props.landingpage===true && <Link to="/login"><button className={classes.booknowbtn}>{props.btnname}</button></Link>}
+     {props.landingpage===false && <Link to={props.btnhref}><button className={classes.booknowbtn}>{props.btnname}</button></Link>}
+    
   </div>
   )
 }

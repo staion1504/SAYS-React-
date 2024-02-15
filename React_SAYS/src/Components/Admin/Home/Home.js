@@ -1,19 +1,43 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import classes from './Home.module.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import AdminNav from '../../Common/Admin/Navbar/AdminNav';
 import { Row,Col,Container } from 'react-bootstrap';
 import ProgressBar from 'react-bootstrap/ProgressBar';
 import { useState } from 'react';
-import Button from 'react-bootstrap/Button';
-import Modal from 'react-bootstrap/Modal';
+import QueryModal from './QueryModal';
 
 
 const Home = () => {
   const [show, setShow] = useState(false);
-
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const [msg,setmsg] = useState("");
+  const [msgobjarr,setmsgobjarr]=useState([]);
+  const [tnum,settnum] = useState(0);
+  const [unum,setunum] = useState(0);
+  const [tverificationarr,settverificationarr]=useState([]);
+
+  const getdetails=async ()=>{
+    const response2 = await fetch("http://localhost:5000/adminhome", {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      credentials: 'include', 
+    });
+
+  const res2=await response2.json();
+  setmsgobjarr(res2.msgobjarr);
+  settnum(res2.tnum);
+  setunum(res2.unum);
+  settverificationarr(res2.theatreverificationarr);
+  }
+
+  useEffect(()=>{
+    getdetails();
+  },[]);
+
   
   return (
     <div className='w-[100%] bg-black'>
@@ -27,7 +51,7 @@ const Home = () => {
            <Col lg={3} md={4} sm={6}>  
               <div className='bg-[#221f1f] text-white rounded-[5px] w-[15rem] h-[8rem] text-[1.6rem] font-semibold'>
                 <h3  className='pl-[1rem] pt-[0.5rem] text-[1.7rem]'>Theatres Registered</h3>
-                <h4  className='pl-[1rem] pt-[0.5rem] text-[gold] text-[1.5rem]'>30</h4>
+                <h4  className='pl-[1rem] pt-[0.5rem] text-[gold] text-[1.5rem]'>{tnum}</h4>
               </div>
           </Col>
 
@@ -35,51 +59,21 @@ const Home = () => {
             
             <div className='bg-[#221f1f] text-white rounded-[5px] w-[14rem] h-[8rem] font-semibold'>
               <h3 className='pl-[1rem] pt-[0.5rem] text-[1.8rem]'>Users Registered</h3>
-              <h4 className='pl-[1rem] pt-[0.5rem] text-[gold] text-[1.5rem]'>7</h4>
+              <h4 className='pl-[1rem] pt-[0.5rem] text-[gold] text-[1.5rem]'>{unum}</h4>
             </div>
 
           </Col>
     </Row>
 
-    <Modal show={show} onHide={handleClose} animation={false} 
-      size="md"
-      aria-labelledby="contained-modal-title-vcenter"
-      centered>
-        <Modal.Header className='bg-[#221f1f] text-[gold]'>
-          <Modal.Title>#Query</Modal.Title>
-        </Modal.Header>
-
-        <Modal.Body className='bg-[antiquewhite]'>
-        <div className={classes.reviewbox}>
-          <div className={classes.box_top}>   
-              <div className={classes.profile}>
-                  <div className={classes.profile_img}>
-                      <img src="https://cdn.siasat.com/wp-content/uploads/2022/08/jr-ntr-health.jpg" alt='' />
-                  </div>
-
-                    <div className={classes.name_user}>
-                      <strong>N.T.Rama Rao</strong>
-                      <span>#ishuru@gmail.com</span>
-                    </div>
-              </div>
-
-          </div>
-
-          <div className={classes.client_comment}>
-              <p>Theatre is very good at maintainence....</p>
-          </div>
-      </div>
-        </Modal.Body>
-        <Modal.Footer>
-        <button className=' border-0 bg-[red] text-white rounded-[5px] w-[5.5rem] h-[2.5rem]' onClick={handleClose}>Close</button>
-        </Modal.Footer>
-      </Modal>
-
+    
+     {show && <QueryModal show={show} handleClose={handleClose} msg={msg}/>}
 
      <Container className='mt-[5rem] w-[80%]'> 
           <div className={classes.websitereviews}>
             <h4 className='w-[16rem] text-[1.6rem] font-semibold'>Theatre Verification</h4>
-              {/* <p className='text-[gold] text-[2rem] mt-1'>No Theatres For Verification</p>      */}
+            {tverificationarr.length===0 &&  <p className='text-[gold] text-[2rem] mt-1'>No Theatres For Verification</p>}
+             {tverificationarr.length!=0 && 
+             
               <div className={classes.reviewtable}>
                 <table className={classes.table}>
                   <thead>
@@ -94,9 +88,10 @@ const Home = () => {
                   </thead>
                   
                   <tbody>
-              
-                    <tr>
-                      <td>1</td>
+                   {tverificationarr.map((item,index)=>{
+                    return ( 
+                    <tr key={index}>
+                      <td>{index+1}</td>
                       <td>SAYS1001</td>
                       <td>apsara@gmail.com</td> 
                       <td>Apsara</td>
@@ -106,24 +101,12 @@ const Home = () => {
 
                       <button className=' border-0 bg-[red] text-white rounded-[5px] w-[5rem] h-[2rem] m-2 mt-0 mb-0'>Reject</button>
                       </td>
-                    </tr>
-
-                    <tr>
-                      <td>1</td>
-                      <td>SAYS1001</td>
-                      <td>apsara@gmail.com</td> 
-                      <td>Apsara</td>
-                      <td>Vijayawada</td>
-                      <td>
-                      <button className='border-0 bg-green-500 text-white rounded-[5px] w-[5rem] h-[2rem] m-2 mt-0 mb-0'>Accept</button>
-
-                      <button className=' border-0 bg-[red] text-white rounded-[5px] w-[5rem] h-[2rem] m-2 mt-0 mb-0'>Reject</button>
-                      </td>
-                    </tr>
-                      
+                    </tr>);
+                   })}             
                   </tbody>
                 </table>
             </div>
+             }
          
           </div>
         </Container>
@@ -148,17 +131,23 @@ const Home = () => {
                   </thead>
                   
                   <tbody>
+
+                    {msgobjarr.map((item,index)=>{
+
+                      return (
+                      <tr key={index}>
+                        <td>{index+1}</td>
+                        <td>{item.UserReferenceNumber}</td>
+                        <td>{item.mailid}</td> 
+                        <td>{item.date}</td>
+                        <td>{item.name}</td>
+                        <td>
+                        <button className='border-0 bg-[blue] text-white rounded-[5px] w-[8rem] h-[2.5rem] m-2 mt-0 mb-0' onClick={() => {setShow(true);setmsg({msg:item.message,mail:item.mailid,name:item.name})}}>See full Query</button>
+                        </td>
+                      </tr>);
+
+                    })}
               
-                    <tr>
-                      <td>1</td>
-                      <td>SAYSUSERsaiteja@gmail.com</td>
-                      <td>rupeshp@gmail.com</td> 
-                      <td>2023-04-26</td>
-                      <td>Peddineni Rupesh chowdary</td>
-                      <td>
-                      <button className='border-0 bg-[blue] text-white rounded-[5px] w-[8rem] h-[2.5rem] m-2 mt-0 mb-0' onClick={handleShow}>See full Query</button>
-                      </td>
-                    </tr>
                       
                   </tbody>
                 </table>

@@ -41,16 +41,23 @@ import Timings from './Pages/Timing/Timing'
 import SeatArrangementPage from "./Pages/SeatArrangement/SeatArrangement";
 import RecentBookings from "./Pages/RecentBooking/RecentBooking";
 import ReviewPage from "./Pages/Review/ReviewPage";
+import ContactUsPage from "./Pages/ContactUs/ContactUsPage";
+import UserViewTheatreProfile from "./Pages/UserViewTheatreProfile/UserViewTheatreProfile";
 
 import NewsPage from "./Components/News/MovieNews"
 import Aboutus from "./Components/AboutUs/AboutUs"
+import LandingPage from "./Components/LandingPage/LandingPage";
+import TheatreReview from "./Components/Review/TheatreReview";
+
 
 const router = createBrowserRouter([
-
-
-
+  
   {
     path: "/",
+    element: <LandingPage/>
+  },
+  {
+    path: "/login",
     element: <Login />
   },
   {
@@ -159,6 +166,21 @@ const router = createBrowserRouter([
   ,{
     path:"User/Aboutus",
     element:<Aboutus/>
+  },
+
+  {
+    path:"User/Contactus",
+    element:<ContactUsPage/>
+  },
+
+  {
+    path:"User/ViewTheatreProfile",
+    element:<UserViewTheatreProfile/>
+  },
+
+  {
+    path:"User/Treview",
+    element:<TheatreReview/>
   },
   {
     path:"User/Registor",

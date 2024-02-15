@@ -9,7 +9,7 @@ import SuggLocName from './SuggestionsLocName/SuggLocName';
 const LocDropDown=(props)=>{
     const [locname,setlocname]=useState("Vijayawada");
     const [locationsarr,setlocations]=useState(locations);
-   
+      
    const selectedvalue=(e)=>{
        setlocname(e);
      }

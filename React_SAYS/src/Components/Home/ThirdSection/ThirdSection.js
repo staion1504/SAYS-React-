@@ -1,24 +1,24 @@
 import Section from '../Section/Section';
 
 
-const ThirdSection=()=>{
+const ThirdSection=({landingpage})=>{
   const CauroselImgObjs=[
     {
         id:"1",
         imglink:"https://miro.medium.com/max/1400/1*Ic13gSTEtkiIth4_MjJR8Q.png",
-        href:"/snacks",
+        href:"#",
         interval:1000,
     },
     {
         id:"2",
         imglink:"https://in.bmscdn.com/webin/static/group-halprice2.jpg",
-        href:"/snacks",
+        href:"#",
         interval:500,
     },
     {
         id:"3",
         imglink:"https://b.zmtcdn.com/data/menus/180/19335180/9d7b8db90d56eeaa98a464c4c5a6fd7f.jpg",
-        href:"/snacks",
+        href:"#",
         interval:400,
     }
   ]
@@ -27,7 +27,7 @@ const ThirdSection=()=>{
     title:"If you are what you eat, then You only want to eat the good stuff ?",
     subtitle:"Don't Miss Your Movie Watch Time,Order your snack from your Seat",
     btnname:"Order Your Snacks",
-    btnhref:"/snacks",
+    btnhref:"/User/SnacksPage",
   }
 
 
@@ -51,7 +51,7 @@ const ThirdSection=()=>{
   }
   
   return (       
-    <Section responsiveobj={responsiveobj} 
+    <Section responsiveobj={responsiveobj} landingpage={landingpage} 
     imgobjarr={CauroselImgObjs} 
     content={sectioncontent}
     />   
