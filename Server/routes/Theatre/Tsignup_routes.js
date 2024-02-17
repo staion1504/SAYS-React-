@@ -14,10 +14,15 @@ router.get("/", function (req, res) {
   });
 
 router.post("/", function (req, res) {
+
+    // console.log(req.body);
+
+    
+
     let Theatre_Name = req.body.Theatre_Name;
     let email = req.body.email;
-    let num1 = req.body.Mobile_Number1;
-    let num2 = req.body.Mobile_Number1;
+    let num1 = req.body.Contact_Number1;
+    let num2 = req.body.Contact_Number2;
     let street = req.body.Street;
     let City = req.body.City;
     let State = req.body.State;
@@ -39,9 +44,9 @@ router.post("/", function (req, res) {
     let email_len = email.length;
   
     if (email_len < 10 && !flag) {
-      res.cookie("show_error", "Email should be greater than length 10");
+      res.json( "Email should be greater than length 10");
       flag = true;
-      res.redirect("/TSignup");
+    
     }
   
     let i = email_len - 1;
@@ -54,67 +59,65 @@ router.post("/", function (req, res) {
     str = str.split("").reverse().join("");
   
     if (str != "@gmail.com" && !flag) {
-      res.cookie("show_error", "Email should have domain as @gmail.com");
+      res.json( "Email should have domain as @gmail.com");
       flag = true;
-      res.redirect("/TSignup");
+      
     }
   
     if (!phoneRegex.test(num1) && !flag) {
-      res.cookie("show_error", "Enter correct Mobile number");
+      res.json(  "Enter correct Mobile number");
       flag = true;
-      res.redirect("/TSignup");
+     
     }
   
     if (!phoneRegex.test(num2) && !flag) {
-      res.cookie("show_error", "Enter correct Mobile number");
+      res.json(  "Enter correct Mobile number");
       flag = true;
-      res.redirect("/TSignup");
+      
     }
     if (!pincoderegex.test(Pincode) && !flag) {
-      res.cookie("show_error", "Enter correct pinicode number");
+      res.json( "Enter correct pinicode number");
       flag = true;
-      res.redirect("/TSignup");
+      
     }
     if (!License_Numberregex.test(License_Number) && !flag) {
-      res.cookie("show_error", "Enter correct License Number of length 6");
+      res.json(  "Enter correct License Number of length 6");
       flag = true;
-      res.redirect("/TSignup");
+     
     }
     if (Login_password.includes("#")) {
-      res.cookie(
-        "show_error",
+      res.json( 
         "passwords should not contain # symbol for security"
       );
       flag = true;
-      res.redirect("/TSignup");
+      
     }
     if (Login_password.length < 8 && !flag) {
-      res.cookie("show_error", "Login password should greater than length 8");
+      res.json( "Login password should greater than length 8");
       flag = true;
-      res.redirect("/TSignup");
+     
     }
     if (
       Login_password.charAt(0) != Login_password.charAt(0).toUpperCase() &&
       !flag
     ) {
-      res.cookie(
-        "show_error",
+      res.json( 
         "Login password first character should be capital"
       );
       flag = true;
-      res.redirect("/TSignup");
+      
     }
     if (!flag) {
       theatresignupinfo.find({ licensenum: License_Number }).then((value) => {
         //    console.log(value);
         if (value.length != 0) {
-          res.cookie("show_error", "License Number already registered");
-          res.redirect("/TSignup");
+          res.json(  "License Number already registered");
+          
         } else {
           theatresignupinfo.find({ email: email }).then((value) => {
             if (value.length != 0) {
-              res.cookie("show_error", "Email already registered");
-              res.redirect("/TSignup");
+              res.json(  "Email already registered");
+              
             } else {
               let TheatreReferenceNumber = "SAYSTheatre" + email;
   
@@ -166,7 +169,7 @@ router.post("/", function (req, res) {
                   console.log(
                     "Inserted TSignup data in  theatre verification database"
                   );
-                  res.clearCookie("show_error");
+                  
   
                   let mailtransporter = nodemailer.createTransport({
                     service: "gmail",
@@ -190,7 +193,7 @@ router.post("/", function (req, res) {
                     }
                   });
   
-                  res.redirect("/login");
+                  res.json( "/login");
                 })
                 .catch((err) => {
                   console.log(err);

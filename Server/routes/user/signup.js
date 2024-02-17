@@ -11,6 +11,10 @@ router.get("/", function (req, res) {
   });
 
   router.post("/", function (req, res) {
+       
+    // console.log("came");
+  
+
     let email = req.body.email;
     let num = req.body.Mobile_Number;
     let Login_password = req.body.Login_password;
@@ -34,9 +38,8 @@ router.get("/", function (req, res) {
     let email_len = email.length;
   
     if (email_len < 10 && !flag) {
-      res.cookie("show_error", "Email should be greater than length 10");
+      res.json("Email should be greater than length 10");
       flag = true;
-      res.redirect("/Signup");
     }
   
     let i = email_len - 1;
@@ -49,96 +52,95 @@ router.get("/", function (req, res) {
     str = str.split("").reverse().join("");
   
     if (str != "@gmail.com" && !flag) {
-      res.cookie("show_error", "Email should have domain as @gmail.com");
+      res.json("Email should have domain as @gmail.com");
       flag = true;
-      res.redirect("/Signup");
     }
   
     if (!phoneRegex.test(num) && !flag) {
-      res.cookie("show_error", "Enter correct Mobile number");
+      res.json( "Enter correct Mobile number");
       flag = true;
-      res.redirect("/Signup");
+ 
     }
   
     if (Login_password.includes("#")) {
-      res.cookie(
-        "show_error",
+      res.json(
+      
         "passwords should not contain # symbol for security"
       );
       flag = true;
-      res.redirect("/Signup");
+      
     }
     if (Login_password.length < 8 && !flag) {
-      res.cookie("show_error", "Login password should greater than length 8");
+      res.json( "Login password should greater than length 8");
       flag = true;
-      res.redirect("/Signup");
+      
     }
     if (
       Login_password.charAt(0) != Login_password.charAt(0).toUpperCase() &&
       !flag
     ) {
-      res.cookie(
-        "show_error",
+      res.json(
+        
         "Login password first character should be capital"
       );
       flag = true;
-      res.redirect("/Signup");
+    
     }
   
     if (Profile_password.includes("#")) {
-      res.cookie(
-        "show_error",
+      res.json(
+       
         "passwords should not contain # symbol for security"
       );
       flag = true;
-      res.redirect("/Signup");
+      
     }
   
     if (Profile_password.length < 8 && !flag) {
-      res.cookie("show_error", "Profile password should greater than length 8");
+      res.json( "Profile password should greater than length 8");
       flag = true;
-      res.redirect("/Signup");
+     
     }
     if (
       Profile_password.charAt(0) != Profile_password.charAt(0).toUpperCase() &&
       !flag
     ) {
-      res.cookie(
-        "show_error",
+      res.json(
+        
         "Profile password first character should be capital"
       );
       flag = true;
-      res.redirect("/Signup");
+      
     }
   
     if (!alphabetRegex.test(CardName) && !flag) {
-      res.cookie("show_error", "Enter correct Crad Holder Name");
+      res.json("Enter correct Crad Holder Name");
       flag = true;
-      res.redirect("/Signup");
+      
     }
   
     if (!cardNumberRegex.test(CardNum) && !flag) {
-      res.cookie("show_error", "Enter correct 16 digit Crad Number");
+      res.json( "Enter correct 16 digit Crad Number");
       flag = true;
-      res.redirect("/Signup");
+      
     }
   
     if (!numbersRegex.test(CVV) && !flag) {
-      res.cookie("show_error", "Enter correct CVV");
+      res.json( "Enter correct CVV");
       flag = true;
-      res.redirect("/Signup");
+      
     }
     if (!numbersRegex2.test(Expiry) && !flag) {
-      res.cookie("show_error", "Enter correct two digit expiry year");
+      res.json( "Enter correct two digit expiry year");
       flag = true;
-      res.redirect("/Signup");
+      
     }
   
     if (!flag) {
       userinfo.find({ email: email }).then((value) => {
         if (value.length != 0) {
-          res.cookie("show_error", "Email already registered");
-          res.redirect("/Signup");
+          res.json( "Email already registered");
+         
         } else {
           let UserReferenceNumber = "SAYSUSER" + email;
   
@@ -184,8 +186,7 @@ router.get("/", function (req, res) {
             .save()
             .then(() => {
               console.log("Inserted Signup data in database");
-              res.clearCookie("show_error");
-              res.redirect("/login");
+              res.json("/login");
             })
             .catch((err) => {
               console.log(err);

@@ -44,7 +44,7 @@ mongoose
 // const landingpage = require("./routes/user/landingpage");
 const loginpage = require("./routes/user/loginpage");
 // const signout = require("./routes/user/signout");
-// const signup = require("./routes/user/signup");
+const signup = require("./routes/user/signup");
 const homeroutes = require("./routes/user/home_routes");
 const movieroutes = require("./routes/user/movie_routes");
 const userprofileroutes = require("./routes/user/profile_routes");
@@ -61,7 +61,7 @@ const usertheatreprofileroutes = require("./routes/user/usertheatre_routes");
 // app.use("/", landingpage);
 app.use("/login", loginpage);
 // app.use("/signout", signout);
-// app.use("/Signup", signup);
+app.use("/Signup", signup);
 app.use("/home", homeroutes);
 app.use("/movies", movieroutes);
 app.use("/profile", userprofileroutes);
@@ -77,7 +77,7 @@ app.use("/usertheatreprofile", usertheatreprofileroutes);
 
 
 //Theatre Dashboard Routes
-// const Tsignuproutes = require("./routes/Theatre/Tsignup_routes");
+const Tsignuproutes = require("./routes/Theatre/Tsignup_routes");
 // const Tdashboardroutes = require("./routes/Theatre/Tdashboard_routes");
 // const Tprofileroutes = require("./routes/Theatre/Tprofile_routes");
 const Tsnackspageroutes = require("./routes/Theatre/Tsnackspage_routes");
@@ -87,7 +87,7 @@ const Tloginroutes = require("./routes/Theatre/Tlogin_routes");
 // const Tsignoutroutes = require("./routes/Theatre/Tsignout");
 // const userTheatreinforoutes = require("./routes/Theatre/usertheatreinfo_routes");
 
-// app.use("/TSignup", Tsignuproutes);
+app.use("/TSignup", Tsignuproutes);
 // app.use("/tdashboard", Tdashboardroutes);
 // app.use("/tprofile", Tprofileroutes);
 app.use("/tsnackspage", Tsnackspageroutes);
