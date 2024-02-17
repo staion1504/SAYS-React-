@@ -12,15 +12,10 @@ const AddShow = ({show,handleClose,screens,addShowHandler,MoviesArray}) => {
   const[duration,setDuration]=useState("")
   const[selectmovie,setSelectmovie]=useState();
 
-  function durationSettingHandler(e){
-      
+  function durationSettingHandler(e){     
     setDuration(MoviesArray.find((movie) => movie.MovieName === e.target.value).duration);
     setSelectmovie(e.target.value);
-
   }
-
-
-  
 
 
   const onSubmit = (data) => {

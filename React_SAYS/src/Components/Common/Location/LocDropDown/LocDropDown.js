@@ -12,6 +12,7 @@ const LocDropDown=(props)=>{
       
    const selectedvalue=(e)=>{
        setlocname(e);
+       props.setloc(e);
      }
   
      const locfilter=(e)=>{

@@ -15,11 +15,12 @@ router.get("/", async function (req, res) {
   }
 
   if (req.cookies.isTlogin) {
-    res.render("theatredashboard", { treviewsarr: treviewsarr });
+    res.json({ treviewsarr: treviewsarr,isLogin:true });
   }
 
   else
-    res.redirect("/login")
+  res.json({isLogin:false});
+   
 });
 
 module.exports = router;

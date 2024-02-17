@@ -78,24 +78,25 @@ app.use("/usertheatreprofile", usertheatreprofileroutes);
 
 //Theatre Dashboard Routes
 // const Tsignuproutes = require("./routes/Theatre/Tsignup_routes");
-// const Tdashboardroutes = require("./routes/Theatre/Tdashboard_routes");
+const Tdashboardroutes = require("./routes/Theatre/Tdashboard_routes");
 // const Tprofileroutes = require("./routes/Theatre/Tprofile_routes");
 const Tsnackspageroutes = require("./routes/Theatre/Tsnackspage_routes");
 const Tmdashboardroutes = require("./routes/Theatre/Tmdashboard_routes");
 const Tscheduleroutes = require("./routes/Theatre/Tschedule_routes");
 const Tloginroutes = require("./routes/Theatre/Tlogin_routes");
 // const Tsignoutroutes = require("./routes/Theatre/Tsignout");
-// const userTheatreinforoutes = require("./routes/Theatre/usertheatreinfo_routes");
+const userTheatreinforoutes = require("./routes/Theatre/usertheatreinfo_routes");
 
 // app.use("/TSignup", Tsignuproutes);
-// app.use("/tdashboard", Tdashboardroutes);
+app.use("/tdashboard", Tdashboardroutes);
 // app.use("/tprofile", Tprofileroutes);
 app.use("/tsnackspage", Tsnackspageroutes);
 app.use("/tmdashboard", Tmdashboardroutes);
 app.use("/tschedule", Tscheduleroutes);
 app.use("/Tlogin", Tloginroutes);
 // app.use("/Tsignout", Tsignoutroutes);
-// app.use("/usertheatreinfo", userTheatreinforoutes);
+app.use("/usertheatreinfo", userTheatreinforoutes);
+
 
 //Admin Dashboard Routes
 const adminhomeroutes = require("./routes/Admin/adminhome_routes");

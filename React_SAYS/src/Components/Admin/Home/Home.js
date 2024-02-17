@@ -38,6 +38,39 @@ const Home = () => {
     getdetails();
   },[]);
 
+
+  const AcceptHandler=async (temail)=>{
+    const response = await fetch("http://localhost:5000/adminhome/accepttheatre",
+    {
+      method: "POST",
+      body: JSON.stringify({temail:temail}),
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials:'include',
+    },
+   
+  );
+  const res = await response.json();
+  console.log(res);
+  }
+
+  const RejectHandler=async (temail)=>{
+    const response = await fetch("http://localhost:5000/adminhome/rejecttheatre",
+    {
+      method: "POST",
+      body: JSON.stringify({temail:temail}),
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials:'include',
+    },
+   
+  );
+  const res = await response.json();
+  console.log(res);
+  }
+
   
   return (
     <div className='w-[100%] bg-black'>
@@ -92,14 +125,14 @@ const Home = () => {
                     return ( 
                     <tr key={index}>
                       <td>{index+1}</td>
-                      <td>SAYS1001</td>
-                      <td>apsara@gmail.com</td> 
-                      <td>Apsara</td>
-                      <td>Vijayawada</td>
+                      <td>{item.licensenum}</td>
+                      <td>{item.temail}</td> 
+                      <td>{item.tName}</td>
+                      <td>{item.city}</td>
                       <td>
-                      <button className='border-0 bg-green-500 text-white rounded-[5px] w-[5rem] h-[2rem] m-2 mt-0 mb-0'>Accept</button>
+                      <button onClick={()=>AcceptHandler(item.temail)} className='border-0 bg-green-500 text-white rounded-[5px] w-[5rem] h-[2rem] m-2 mt-0 mb-0'>Accept</button>
 
-                      <button className=' border-0 bg-[red] text-white rounded-[5px] w-[5rem] h-[2rem] m-2 mt-0 mb-0'>Reject</button>
+                      <button onClick={()=>RejectHandler(item.temail)} className=' border-0 bg-[red] text-white rounded-[5px] w-[5rem] h-[2rem] m-2 mt-0 mb-0'>Reject</button>
                       </td>
                     </tr>);
                    })}             

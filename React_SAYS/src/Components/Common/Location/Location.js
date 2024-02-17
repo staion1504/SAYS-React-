@@ -7,7 +7,7 @@ const Location=(props)=>{
   return (
     <div className={classes.locationdiv} style={props.styleobj}>
         <LocationIcon/>
-        <LocDropDown styleobj={props.styleobj} showcity={props.showcity}/>
+        <LocDropDown styleobj={props.styleobj} showcity={props.showcity} setloc={props.setloc} loc={props.loc}/>
    </div>
   )
 }

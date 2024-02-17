@@ -13,9 +13,50 @@ import MultiItemCarousalWrapper from '../../Common/MultiItemCarousel/MultiItemCa
 import CarousalTitle from './CarousalTitle/CarousalTitle';
 import TheatreCard from './TheatreCard/TheatreCard'
 import classes from './SecondSection.module.css';
+import { useEffect, useState } from 'react';
+import { faL } from '@fortawesome/free-solid-svg-icons';
 // Use Redux to store all theatres info based on location and convert that array of obj's into cards and send that to Multi Item carousal component
 
 const SecondSection=()=>{ 
+  
+  const [Tname,setTname]=useState("");
+  const [loc,setloc]=useState("Vijayawada");
+  const [flag,setflag]=useState(true);
+  const [Titemarr,setTitemarr]=useState([]);
+  const [Theatrearr,setTheatrearr]=useState([]);
+
+  const getDetails=async ()=>{
+    const response = await fetch(`http://localhost:5000/home`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      credentials: 'include', 
+      body:JSON.stringify({loc:loc,Tname:Tname}),
+    });
+
+    const res = await response.json();
+    if(res.Tdetails.length===0)
+    {
+      setflag(false);
+    }
+
+    setTheatrearr(res.Tdetails);
+  };
+
+  useEffect(()=>{
+     //getDetails();
+  },[]);
+
+  // useEffect(()=>{
+  //   const x= Theatrearr.map((Theatre,index)=>{
+  //     return <TheatreCard  TDetails={Theatre}/>
+  //    })
+  //    setTitemarr([...x]);
+  // },[Theatrearr]);
+
+ 
+   
   const theatreitemarr=[<TheatreCard/>,<TheatreCard/>,<TheatreCard/>,
                         <TheatreCard/>,<TheatreCard/>,<TheatreCard/>,
                         <TheatreCard/>,<TheatreCard/>];
@@ -29,15 +70,16 @@ const SecondSection=()=>{
       <SearchDiv>
         <Row>
            <Col lg={{span: 6, order: 1}} md={{span: 6, order: 1}} sm={{span: 12, order: 2}} xs={{span: 12, order: 2}}>
-             <SearchBar/>
+             <SearchBar setTname={setTname} Tname={Tname}/>
           </Col>
 
            <Col lg={{span: 6, order: 2}} md={{span: 6, order: 2}} sm={{span: 12, order: 1}} xs={{span: 12, order: 1}}>
-            <Location styleobj={{}} showcity={true}/>
+            <Location styleobj={{}} showcity={true} setloc={setloc} loc={loc}/>
           </Col>
         </Row>
       </SearchDiv>
           
+          {flag && 
           <Row style={{marginTop:"2.5rem"}}>
              <CarousalTitle/>
          
@@ -48,7 +90,9 @@ const SecondSection=()=>{
     
                 </MultiItemCarousalWrapper>   
                
-          </Row>
+          </Row>}
+
+          {!flag && <p className='text-[1rem] text-[gold]'>No Theatres Found</p>}
       </Container>
   </TheatreSearch>
   </div>);

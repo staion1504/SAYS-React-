@@ -23,8 +23,11 @@ router.post("/", async function (req, res) {
     let value = await userTinfo.find({
       tReferenceNumber: req.cookies.currtheatrereffnum,
     });
+    // let value2 = await theatresignupinfo.find({
+    //   tReferenceNumber: req.cookies.currtheatrereffnum,
+    // });
     let value2 = await theatresignupinfo.find({
-      tReferenceNumber: req.cookies.currtheatrereffnum,
+      tReferenceNumber: req.body.treff,
     });
     let tname = value2[0]["tName"];
     let imgurl1 = req.body.theatreimgurl1;
@@ -52,10 +55,11 @@ router.post("/", async function (req, res) {
         .save()
         .then(() => {
           console.log("Inserted a new document into Abouttheatre in database");
-          res.redirect("/usertheatreinfo");
+          res.json({k:1});
         })
         .catch((err) => {
           console.log(err);
+          res.json({k:0});
         });
     } else {
       value[0]["imgurl1"] = imgurl1;
@@ -71,10 +75,11 @@ router.post("/", async function (req, res) {
         .updateOne({ tReferenceNumber: req.cookies.currtheatrereffnum }, value[0])
         .then(() => {
           console.log("Updated User Movie theatre Info in database");
-          res.redirect("/usertheatreinfo");
+          res.json({k:1});
         })
         .catch((err) => {
           console.log(err);
+          res.json({k:0});
         });
     }
   });

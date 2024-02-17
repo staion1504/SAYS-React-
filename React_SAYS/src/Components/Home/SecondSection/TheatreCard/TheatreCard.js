@@ -18,4 +18,17 @@ const TheatreCard=()=>{
      );
 }
 
+{/* <div className={classes.card} style={{backgroundImage:`url(${Tdetails.imgurl1})`}}>
+<div className={classes.cardbody}>
+    <h2 className={classes.title}>{Tdetails.tName}</h2>
+     <div className={classes.specifications}>
+     <p>{Tdetails.screentype}</p>
+     <p><FontAwesomeIcon icon={faCheck} style={{color: "#46d312",}} /> {Tdetails.snacks==="Available"? "Snacks":"No Snacks"}</p>
+     <p className={classes.type}>{Tdetails.Ttype}</p>
+     </div>
+     <p className={classes.description}>{Tdetails.about}</p>
+    <h5>{Tdetails.sound}</h5>
+</div>
+</div> */}
+
 export default TheatreCard;

@@ -2,18 +2,17 @@
 import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 function TNavbar() {
 
     const [dropdownOpen, setDropdownOpen] = useState(false);
-
+    const navigate=useNavigate();
     const handleDropdownToggle = () => {
       setDropdownOpen(!dropdownOpen);
     };
 
   return (
     <Navbar expand="lg" className="bg-[#221f1f] text-[1.3rem] ">
-
     <Navbar.Toggle aria-controls="basic-navbar-nav" />
     <Navbar.Collapse id="basic-navbar-nav">
 
@@ -33,8 +32,6 @@ function TNavbar() {
         <Link to='/Theatre/Usertheatreinfo' className='mt-2 ml-4 text-[1.2rem]'  style={{ color: 'gold' }}>
         About Theatre
         </Link>
-
-
       </Nav>
 
       <div className='mr-[4rem]' style={{ display: 'flex', alignItems: 'center' }}>
@@ -45,7 +42,7 @@ function TNavbar() {
           onClick={handleDropdownToggle}
         />
         <NavDropdown show={dropdownOpen} onToggle={handleDropdownToggle} id="basic-nav-dropdown" className="text-[gold] mr-[6rem]">
-          <NavDropdown.Item>Profile</NavDropdown.Item>
+          <NavDropdown.Item onClick={()=>{navigate("/Theatre/Profile")}}>Profile</NavDropdown.Item>
           <NavDropdown.Item>Edit Profile</NavDropdown.Item>
           <NavDropdown.Divider />
           <div className="ml-4"><Link to="/">Sign Out</Link></div>
@@ -53,9 +50,6 @@ function TNavbar() {
       </div>
 
     </Navbar.Collapse>
-
-
-
   </Navbar>
   )
 }

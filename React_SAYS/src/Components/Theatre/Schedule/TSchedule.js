@@ -77,13 +77,72 @@ const TSchedule = () => {
     );
     let k = await response.json();
     k = k.confirm;
-    if (k == 1) {
+    if (k === 1) {
       console.log("HI");
       renderDeatils();
     }
+  }
 
 
- 
+
+  const editscreenHandler =async (data)=>{
+
+    let response = await fetch("http://localhost:5000/tschedule/editsavescreen",
+      {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials:'include'
+      },
+     
+    );
+    let k = await response.json();
+    k = k.confirm;
+    if (k === 1) {
+      renderDeatils();
+    }
+  }
+
+
+  const RemoveScreenHandler=async (scrname)=>{
+    const response=await fetch(`http://localhost:5000/tschedule/removescreen`,{
+      method:"POST",
+      headers:{
+        "Content-Type":"application/json"
+      },
+      credentials:'include',
+      body:JSON.stringify({scrname:scrname}),
+      
+    });
+
+   const res=await response.json();
+   console.log(res);
+   if(res.confirm===1)
+   {
+      renderDeatils();
+   }
+
+  }
+
+  const RemoveShowHandler=async (removemname,sname,showtime)=>{
+    const response=await fetch(`http://localhost:5000/tschedule/removeshow`,{
+      method:"POST",
+      headers:{
+        "Content-Type":"application/json"
+      },
+      credentials:'include',
+      body:JSON.stringify({removemname:removemname,screenname:sname,showtime:showtime}),
+      
+    });
+
+   const res=await response.json();
+   console.log(res);
+   if(res.confirm===1)
+   {
+      renderDeatils();
+   }
 
   }
 
@@ -154,7 +213,7 @@ const TSchedule = () => {
                       </button>
                     </td>
                     <td>
-                      <button type="button" className='bg-[blue] w-[6rem] h-[2.2rem] mr-[3rem] rounded-md text-[white] hover:bg-[indianred]'>
+                      <button onClick={()=>RemoveScreenHandler(screeninfo.screenname)} type="button" className='bg-[blue] w-[6rem] h-[2.2rem] mr-[3rem] rounded-md text-[white] hover:bg-[indianred]'>
                         Remove
                       </button>
                     </td>
@@ -222,7 +281,7 @@ const TSchedule = () => {
                       </button>
                     </td>
                     <td>
-                      <button type="button" className='bg-[blue] w-[6rem] h-[2.2rem] mr-[1rem] rounded-md text-[white] hover:bg-[indianred]'>
+                      <button onClick={()=>RemoveShowHandler(show.MovieName,show.screenname,show.showtime)} type="button" className='bg-[blue] w-[6rem] h-[2.2rem] mr-[1rem] rounded-md text-[white] hover:bg-[indianred]'>
                         Remove
                       </button>
                     </td>

@@ -1,17 +1,42 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import TNavbar from "../TCommon/navbar.js";
 import './theatredashboard.module.css';
-import { Navbar, Container, Nav, NavDropdown } from 'react-bootstrap';
+import { Container} from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import internalcss from './theatredashboard.module.css';
+// import { useNavigate } from "react-router-dom";
+
 
 function Theatredashboard() {
 
   const [modalShow, setModalShow] = React.useState(false);
+  // const navigate=useNavigate();
+  const [treviews,settreviews]=useState([]);
+
+
+  const getDetails=async ()=>{
+
+
+  const response=await fetch(`http://localhost:5000/tdashboard`,{
+      method:"GET",
+      headers:{
+        "Content-Type":"application/json"
+      },
+      credentials:'include'
+    });
+
+  const res=await response.json();
+  settreviews(res.treviewsarr);
+  }
+
+
+  useEffect(()=>{
+    getDetails();
+  },[]);
 
   return (
     <>
@@ -79,36 +104,41 @@ function Theatredashboard() {
               </thead>
 
               <tbody>
-
-                <tr>
-                  <td>
-                    1
-                  </td>
-                  <td>
-                    saiteja@gmail.com
-                  </td>
-                  <td>
-                    SAITEJA
-                  </td>
-                  <td>
-                    2
-                  </td>
-                  <td style={{ display: "none" }}>
-                    {/* <%=treviewsarr[i]["reviewdesc"]%> */}
-                  </td>
-                  <td>
-    
-                    <Button className="bg-blue-600" variant="primary" onClick={() => setModalShow(true)}>
-                       See Full Review
-                    </Button>
-
-                    <MyVerticallyCenteredModal
-                      show={modalShow}
-                      onHide={() => setModalShow(false)}
-                    />
-                  </td>
-                </tr>
-
+                {treviews.map((review,index) =>{
+                   return (<tr key={index}>
+                    <td>
+                      {index+1}
+                    </td>
+                    <td>
+                      {review.usermailid}
+                    </td>
+                    <td>
+                      {review.username}
+                    </td>
+                    <td>
+                      {review.rating}
+                    </td>
+                    <td style={{ display: "none" }}>
+                      {review.reviewdesc}
+                    </td>
+                    <td>
+      
+                      <Button className="bg-blue-600" variant="primary" onClick={() => setModalShow(true)}>
+                         See Full Review
+                      </Button>
+  
+                      <MyVerticallyCenteredModal
+                        show={modalShow}
+                        onHide={() => setModalShow(false)}
+                        review={review}
+                      />
+                    </td>
+                  </tr>)
+                    
+                   
+ 
+                })}
+                
               </tbody>
             </table>
           </div>
@@ -149,8 +179,8 @@ function MyVerticallyCenteredModal(props) {
                 </div>
 
                 <div class={internalcss.nameUser}>
-                  <strong>N.T.Rama Rao</strong>
-                  <span>#ishuru@gmail.com</span>
+                  <strong>{props.review.username}</strong>
+                  <span>{props.review.usermailid}</span>
                 </div>
               </div>
               <div class={internalcss.ratingdiv}>
@@ -160,7 +190,7 @@ function MyVerticallyCenteredModal(props) {
             </div>
 
             <div class={internalcss.clientComment}>
-              <p>Theatre is very good at maintainence....</p>
+              <p>{props.review.reviewdesc}</p>
             </div>
           </div>
 

@@ -247,13 +247,20 @@ router.post("/addshow", async function (req, res) {
 
 router.post("/removeshow", async function (req, res) {
   let removemname = req.body.removemname;
+  let screenname = req.body.screenname;
+  let showtime = req.body.showtime;
   let value = await movieshowinfo.find({
     tReferenceNumber: req.cookies.currtheatrereffnum,
   });
   let movieshowdetails = value[0]["showdetails"];
   let updatedmovieshowdetails = [];
   for (let i = 0; i < movieshowdetails.length; i++) {
-    if (movieshowdetails[i]["MovieName"] != removemname) {
+    if (movieshowdetails[i]["MovieName"] === removemname && movieshowdetails[i]["screenname"]===screenname && movieshowdetails[i]["showtime"]===showtime) {
+      continue;
+    }
+
+    else
+    {
       updatedmovieshowdetails.push(movieshowdetails[i]);
     }
   }

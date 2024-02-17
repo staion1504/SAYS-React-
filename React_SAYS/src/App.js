@@ -190,7 +190,6 @@ const router = createBrowserRouter([
   {
     path:"Theatre/Registor",
     element:<Register type="theatre"/>
-  
   }
 
 ]);
