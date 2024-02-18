@@ -14,13 +14,7 @@ router.get("/", async function (req, res) {
     treviewsarr='';
   }
 
-  if (req.cookies.isTlogin) {
     res.json({ treviewsarr: treviewsarr,isLogin:true });
-  }
-
-  else
-  res.json({isLogin:false});
-   
 });
 
 module.exports = router;

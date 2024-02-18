@@ -27,6 +27,7 @@ const TheatreReview = () => {
           });
     
         const res=await response.json();
+        console.log(res);
         setreviews(res.reviewdata);
         settname(res.tname);
        }
@@ -65,7 +66,7 @@ const TheatreReview = () => {
       
       return (
         <>
-          <div className={styles.body}>
+          <div className={styles.body} style={{fontFamily:'poppins'}}>
             <section id="testimonials">
               <div className={styles.testimonialHeading}>
                <div className='flex'>
@@ -169,9 +170,9 @@ const TheatreReview = () => {
                 </div>
               </div>
     
-              <a className={styles.a} href="#">
+             
                <Link to="/User/HomePage"><button className={styles.backbtn}>Back</button></Link>
-              </a>
+              
             </section>
           </div>
         </>

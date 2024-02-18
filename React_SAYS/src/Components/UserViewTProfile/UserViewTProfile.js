@@ -10,7 +10,6 @@ import {faMapMarkerAlt} from '@fortawesome/free-solid-svg-icons';
 
 
 const UserVIewTProfile = () => {
-    // ?treff=SAYSTheatrePVN@gmail.com
     const { search } = useLocation();
     const params = new URLSearchParams(search);
     const treff = (params.get('treff'));
@@ -46,7 +45,7 @@ const UserVIewTProfile = () => {
   
   
     return (
-    <div className={classes.body}>
+    <div className={classes.body} style={{fontFamily:'serif'}}>
     <div className={classes.reviewlink}><button  className={classes.Reviewbutton} onClick={onClickHandler}> Review This Theatre</button></div>
    <div className={classes.main}>
        <div className={classes.container1}>
@@ -78,67 +77,71 @@ const UserVIewTProfile = () => {
            <div className={classes.container3}>
                <Row>
                 <Col> 
-                   <h4 className='text-[gold]'>Screen</h4>
-                   <p className={classes.ptag}>{Tdetails.screentype} </p> 
+                   <h4 className='text-[gold] font-serif text-[1.3rem]'>Screen</h4>
+                   <p className={classes.ptag} style={{fontStyle:"italic"}}>{Tdetails.screentype} </p> 
                 </Col>
 
                 <Col> 
-                   <h4 className='text-[gold]'>Snacks</h4>
-                   <p className={classes.ptag}>{Tdetails.snacks}</p>
+                   <h4 className='text-[gold] font-serif text-[1.3rem]'>Snacks</h4>
+                   <p className={classes.ptag} style={{fontStyle:"italic"}}>{Tdetails.snacks}</p>
                 </Col>
 
                 <Col> 
-                    <h4 className='text-[gold]'>AC/Non-AC</h4>
-                    <p className={classes.ptag}>{Tdetails.Ttype}</p>
+                    <h4 className='text-[gold] font-serif text-[1.3rem]'>AC/Non-AC</h4>
+                    <p className={classes.ptag} style={{fontStyle:"italic"}}>{Tdetails.Ttype}</p>
                 </Col>
 
                 <Col> 
-                     <h4 className='text-[gold]'>Sound</h4>
-                     <p className={classes.ptag}>{Tdetails.sound}</p>
+                     <h4 className='text-[gold] font-serif text-[1.3rem]'>Sound</h4>
+                     <p className={classes.ptag} style={{fontStyle:"italic"}}>{Tdetails.sound}</p>
                 </Col>
                </Row>
            </div>
 
 
            <div className={classes.container4}>
+            <div className='flex justify-center'>
                <h2 className={classes.aboutheading}>About</h2>
-               <p className='text-[1.25rem]'>
+            </div>
+               <p className='text-[1.25rem] mt-[1.5rem] font-serif' style={{fontStyle:"italic"}}>
                    {Tdetails.about}
                </p>
            </div>
            <div className='mt-[3rem]'>
+               <div className='flex justify-center mt-[1rem]'>
                <h2 className={classes.nearbyplacesheading}>Near by places </h2>
-               <Container>
+               </div>
+               <Container className='mt-[1rem]'>
                 <Row>
                      <Col className=' items-center justify-center'>
                            <div className={classes.image}>  
-                               <p className='ml-[3rem]'>1</p>
-                                <FontAwesomeIcon icon={faMapMarkerAlt} style={{color: "red",fontSize:"3rem"}} className='rounded-full' />
-                               <p className={classes.ptag}>{nearbyplaces.nearbyplace1}</p>
+                               <p className='ml-[4rem] font-serif' style={{fontStyle:"italic"}}>1</p>
+                               <img alt='' className='border-0 ml-[9rem]' src='https://png.pngtree.com/png-clipart/20220916/original/pngtree-red-location-pin-icon-with-folded-map-png-image_8620106.png'/>
+                               <p className={classes.ptag} style={{fontFamily:'serif',fontStyle:'italic'}}>{nearbyplaces.nearbyplace1}</p>
                            </div>
                     </Col> 
 
                     <Col className=' items-center'>
                            <div className={classes.image}>
-                           <p className='ml-[3rem]'>2</p>
-                           <FontAwesomeIcon icon={faMapMarkerAlt} style={{color: "red",fontSize:"3rem"}} className='rounded-full' />
-                               <p className={classes.ptag}>{nearbyplaces.nearbyplace2}</p>
+                           <p className='ml-[4rem] font-serif' style={{fontStyle:"italic"}}>2</p>
+                           <img alt='' className='border-0 ml-[9rem]' src='https://png.pngtree.com/png-clipart/20220916/original/pngtree-red-location-pin-icon-with-folded-map-png-image_8620106.png'/>
+                               <p className={classes.ptag} style={{fontFamily:'serif',fontStyle:'italic'}}>{nearbyplaces.nearbyplace2}</p>
                            </div>
                     </Col> 
 
                     <Col className=' items-center'>
                             <div className={classes.image}>
-                            <p className='ml-[3rem]'>3</p>
-                            <FontAwesomeIcon icon={faMapMarkerAlt} style={{color: "red",fontSize:"3rem"}} className='rounded-full' />
-                               <p className={classes.ptag}>{nearbyplaces.nearbyplace3}</p>
+                            <p className='ml-[4rem] font-serif' style={{fontStyle:"italic"}}>3</p>
+                            <img alt='' className='border-0 ml-[9rem]' src='https://png.pngtree.com/png-clipart/20220916/original/pngtree-red-location-pin-icon-with-folded-map-png-image_8620106.png'/>
+                               <p className={classes.ptag} style={{fontFamily:'serif',fontStyle:'italic'}}>{nearbyplaces.nearbyplace3}</p>
                            </div>
                     </Col> 
 
                     <Col className=' items-center'>
                            <div className={classes.image}>
-                           <p className='ml-[3rem]'>4</p>
-                           <FontAwesomeIcon icon={faMapMarkerAlt} style={{color: "red",fontSize:"3rem"}} className='rounded-full' />
-                               <p className={classes.ptag}>{nearbyplaces.nearbyplace4}</p>
+                           <p className='ml-[4rem] font-serif' style={{fontStyle:"italic"}}>4</p>
+                           <img alt='' className='border-0 ml-[9rem]' src='https://png.pngtree.com/png-clipart/20220916/original/pngtree-red-location-pin-icon-with-folded-map-png-image_8620106.png'/>
+                               <p className={classes.ptag} style={{fontFamily:'serif',fontStyle:'italic'}}>{nearbyplaces.nearbyplace4}</p>
                            </div>
                     </Col>  
                    </Row>

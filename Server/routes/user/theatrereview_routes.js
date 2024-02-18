@@ -8,13 +8,13 @@ const theatrereviewdata = require("../../models/user/theatrereview");
 const userinfo = require("../../models/user/signup");
 
 router.get("/", async (req, res) => {
-  if (req.cookies.isUserLogin) {
+ 
     const tno = req.query.treff;
     let value = await theatresignupinfo.findOne({ tReferenceNumber: tno });
     let tname = value.tName;
     let review2 = await theatrereviewdata.find({ tReferenceNumber: tno });
     res.json({ tname: tname, reviewdata: review2});
-}
+
 });
 
 

@@ -1,72 +1,64 @@
-import React, { useState, useEffect } from "react";
+import React, {useEffect, useState } from "react";
 import styles from "./Reviews.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {faStar as solidStar,faStar as regularStar} from "@fortawesome/free-solid-svg-icons";
 import { faStar as farStar } from "@fortawesome/free-regular-svg-icons";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const Review = () => {
-  const movieobj = {
-    imgurl:
-      "https://s3.ap-south-1.amazonaws.com/media.hittvtelugu.com/wp-content/uploads/2023/11/hai.jpg",
-  };
   const maxStars = 5;
+
+  const { search } = useLocation();
+  const params = new URLSearchParams(search);
+  const moviename = (params.get('name'));
+
+  const [movieobjimgurl,setmovieobjimgurl]=useState({});
+  const [reviewdataarr,setreviewdatarr]=useState([]);
+
+  const [moviereview,setmoviereview]=useState("");
+  const [mrating,setmrating]=useState("");
+
+  const getDetails = async() =>{
+    const response=await fetch(`http://localhost:5000/reviews?name=${moviename}`,{
+      method:"GET",
+      headers:{
+        "Content-Type":"application/json"
+      },
+      credentials:'include'
+    });
+
+  const res=await response.json();
+  console.log(res);
+  setmovieobjimgurl(res.movieobj.imgurl);
+  setreviewdatarr(res.reviewdata);
+  }
   
-  const reviewData = [
-    {
-      criticname: "Saiteja",
-      criticmailid: "saiteja@gmail.com",
-      criticimg: "https://cdn.wallpapersafari.com/46/60/uYOX0V.jpg",
-      reviewdesc: "Excellent movie. Best acting deliverables.",
-      rating: "5",
-    },
-    {
-      criticname: "Mark",
-      criticmailid: "mark@gmail.com",
-      criticimg:
-        "https://media.istockphoto.com/id/685132245/photo/mature-businessman-smiling-over-white-background.jpg?s=612x612&w=0&k=20&c=OJk6U-oCZ31F3TGmarAAg2jVli8ZWTagAcF4P-kNIqA=",
-      reviewdesc:
-        "A delicately handled story,the art of sensitive and sensible picturisation had touched a high watermark.Only complaint is that it could have been shorter by ~30 mins....",
-      rating: "4.9",
-    },
-    {
-      criticname: "Harry",
-      criticmailid: "harry@gmail.com",
-      criticimg:
-        "https://t3.ftcdn.net/jpg/02/58/89/90/360_F_258899001_68CalsKTRk6PZQgWH9JhR4heBlncCko9.jpg",
-      reviewdesc:
-        "Good Film.Good Narrative Style.But the problem was Music & Songs are Not Good.Beyond that,it was the Screenplay that made we watch the film.Nani and Mrunal delivered Nice Performances.Overall Not Great But Good One😊....",
-      rating: "3.4",
-    },
-    {
-      criticname: "John",
-      criticmailid: "john@gmail.com",
-      criticimg:
-        "https://media.istockphoto.com/id/1399565382/photo/young-happy-mixed-race-businessman-standing-with-his-arms-crossed-working-alone-in-an-office.webp?b=1&s=170667a&w=0&k=20&c=ZAXJYLesh6gSd9huAgpy6rjpR4z-IFVH9MpxrKIXCrs=",
-      reviewdesc: "This movie is average :)",
-      rating: "2.6",
-    },
-    {
-      criticname: "Khan",
-      criticmailid: "khan@gmail.com",
-      criticimg:
-        "https://hamariweb.com/profiles/images/profile/0242-674-13671.jpg",
-      reviewdesc: "That is good.",
-      rating: "1",
-    },
-
-    {
-      criticname: "Radhika",
-      criticmailid: "radhika@gmail.com",
-      criticimg:
-        "https://img.freepik.com/free-photo/pretty-smiling-joyfully-female-with-fair-hair-dressed-casually-looking-with-satisfaction_176420-15187.jpg?size=626&ext=jpg&ga=GA1.1.1546980028.1702425600&semt=ais",
-      reviewdesc: "Heart touching movie... Must watch",
-      rating: "1",
-    },
-  ];
-
+  useEffect(()=>{
+     getDetails();
+  },[])
 
   
+  const OnSubmitHandler=async (e)=>{
+          e.preventDefault();
+
+    const response = await fetch(`http://localhost:5000/reviews?name=${moviename}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      credentials: 'include', 
+      body:JSON.stringify({review:moviereview,rating:Number(mrating)}),
+    });
+
+    const k = await response.json();
+    if(k.k===1)
+    {
+      getDetails();
+    }
+
+    setmrating("");
+    setmoviereview("");
+  }
 
   return (
     <>
@@ -75,11 +67,11 @@ const Review = () => {
           <div className={styles.testimonialHeading}>
             <span>Reviews</span>
             <div className={styles.profileImg1}>
-              <img src={movieobj.imgurl} alt="" />
+              <img src={movieobjimgurl} alt="" />
             </div>
           </div>
           <div className={styles.addcomment}>
-            <form method="post">
+            <form>
               <div className={styles.addcomment}>
                 <label htmlFor="comment">Add your Review</label>
                 <span className={styles.comment_box}>
@@ -88,13 +80,15 @@ const Review = () => {
                     type="text"
                     name="review"
                     style={{ backgroundColor: "#221f1f", color: "white" }}
+                    onChange={(e)=>setmoviereview(e.target.value)}
+                    value={moviereview}
                   />
                 </span>
               </div>
 
               <div className={styles.addrating}>
                 <label htmlFor="rating">Add your Rating</label>
-                <select id="rating" className={styles.rating} name="rating">
+                <select value={mrating} onChange={(e)=>setmrating(e.target.value)} className={styles.rating}>
                   <option className={styles.option} value="1">
                     1
                   </option>
@@ -121,6 +115,7 @@ const Review = () => {
                     cursor: "pointer",
                   }}
                   type="submit"
+                  onClick={OnSubmitHandler}
                 >
                   Post
                 </button>
@@ -130,25 +125,18 @@ const Review = () => {
 
           <div className={styles.testimonialBoxContainer}>
             <div className={styles.testimonialBoxContainer}>
-              {reviewData.map((review, index) => (
+              {reviewdataarr.map((review, index) => (
                 <div key={index} className={styles.testimonialBox}>
-                  <div className={styles.boxTop}>
+                  <div className={styles.boxTop} style={{display : 'flex', justifyContent:'space-between'}}>
                     <div className={styles.profile}>
                       <div className={styles.profileImg}>
-                        <img src={review.criticimg} alt="User Profile" />
+                        <img src="https://cdn.wallpapersafari.com/46/60/uYOX0V.jpg" alt="User Profile" />
                       </div>
                       <div className={styles.nameUser}>
                         <strong>{review.criticname}</strong>
-                        <span>{review.criticmailid}</span>
                       </div>
                     </div>
                     <div className={styles.reviews}>
-                      {/* {[...Array(review.rating)].map((_, i) => (
-                          <FontAwesomeIcon key={i} icon={solidStar} />
-                        ))}
-                        {[...Array(5 - review.rating)].map((_, i) => (
-                          <FontAwesomeIcon key={i} icon={farStar} />
-                        ))} */}
                       {[...Array(Math.floor(review.rating))].map((_, j) => (
                         <FontAwesomeIcon key={j} icon={solidStar} />
                       ))}
@@ -163,17 +151,15 @@ const Review = () => {
                     </div>
                   </div>
 
-                  <div className={styles.clientComment}>
+                  <div className={styles.clientComment} style={{marginTop:'1.2rem'}}>
                     <p>{review.reviewdesc}</p>
                   </div>
                 </div>
               ))}
             </div>
           </div>
-
-          <a className={styles.a} href="/movies">
+         
            <Link to="/User/MoviesPage"><button className={styles.backbtn}>Back</button></Link>
-          </a>
         </section>
       </div>
     </>

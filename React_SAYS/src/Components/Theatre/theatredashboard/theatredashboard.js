@@ -33,7 +33,6 @@ function Theatredashboard() {
   settreviews(res.treviewsarr);
   }
 
-
   useEffect(()=>{
     getDetails();
   },[]);

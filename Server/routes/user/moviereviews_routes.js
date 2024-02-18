@@ -11,13 +11,12 @@ const userinfo = require("../../models/user/signup");
 router.get("/", async (req, res) => {
     const mname = req.query.name;
     var movieobj;
-    if (req.cookies.isUserLogin) {
+   
       movieobj = await movieinfo.findOne({ MovieName: mname });
   
       let myobj2 = { movie: mname };
       let x = await moviereviewdata.find(myobj2);
-      res.render("reviewpage", { movieobj: movieobj, reviewdata: x });
-    } else res.redirect("/login");
+      res.json({ movieobj: movieobj, reviewdata: x });
   });
 
 
@@ -40,7 +39,7 @@ router.post("/", async (req, res) => {
     };
     let reviewmodel = new moviereviewdata(myobj1);
     await reviewmodel.save();
-    res.redirect("/reviews?name=" + mname);
+    res.json({k:1});
   });
 
   module.exports = router;
