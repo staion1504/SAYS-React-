@@ -4,23 +4,14 @@ const router = express.Router();
 
 //Database
 const theatresignupinfo = require("../../models/theatre/signup");
-let nearbyplaces = require("../../public/js/theatredashboard/nearbyplaces.js");
+// let nearbyplaces = require("../../public/js/theatredashboard/nearbyplaces.js");
 
 
 router.get("/", function (req, res) {
   theatresignupinfo
     .find({ tReferenceNumber: req.cookies.currtheatrereffnum })
     .then((value) => {
-      let n = nearbyplaces.length;
-      for (let i = 0; i < n; i++) {
-        let a = i + 1;
-        let k = "nearbyplace" + a;
-
-        nearbyplaces[i].pname = value[0][k];
-      }
-      if (req.cookies.isTlogin)
-        res.render("theatreprofilepage", { nearbyplaces: nearbyplaces });
-      else res.redirect("/login");
+      res.json(value[0]);
     })
     .catch((err) => {
       console.log(err);
@@ -191,15 +182,15 @@ router.post("/teditprofile", function (req, res) {
 });
 
 
-router.get("/getdetails", function (req, res) {
-  theatresignupinfo
-    .find({ tReferenceNumber: req.cookies.currtheatrereffnum })
-    .then((value) => {
-      res.json(value);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-});
+// router.get("/getdetails", function (req, res) {
+//   theatresignupinfo
+//     .find({ tReferenceNumber: req.cookies.currtheatrereffnum })
+//     .then((value) => {
+//       res.json(value);
+//     })
+//     .catch((err) => {
+//       console.log(err);
+//     });
+// });
 
 module.exports = router;

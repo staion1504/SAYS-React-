@@ -79,11 +79,9 @@ app.use("/usertheatreprofile", usertheatreprofileroutes);
 //Theatre Dashboard Routes
 
 const Tdashboardroutes = require("./routes/Theatre/Tdashboard_routes");
-
 const Tsignuproutes = require("./routes/Theatre/Tsignup_routes");
 // const Tdashboardroutes = require("./routes/Theatre/Tdashboard_routes");
-
-// const Tprofileroutes = require("./routes/Theatre/Tprofile_routes");
+const Tprofileroutes = require("./routes/Theatre/Tprofile_routes");
 const Tsnackspageroutes = require("./routes/Theatre/Tsnackspage_routes");
 const Tmdashboardroutes = require("./routes/Theatre/Tmdashboard_routes");
 const Tscheduleroutes = require("./routes/Theatre/Tschedule_routes");
@@ -95,7 +93,7 @@ app.use("/tdashboard", Tdashboardroutes);
 
 app.use("/TSignup", Tsignuproutes);
 
-// app.use("/tprofile", Tprofileroutes);
+app.use("/tprofile", Tprofileroutes);
 app.use("/tsnackspage", Tsnackspageroutes);
 app.use("/tmdashboard", Tmdashboardroutes);
 app.use("/tschedule", Tscheduleroutes);
