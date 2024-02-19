@@ -2,6 +2,11 @@ const express = require("express");
 const md5 = require("md5");
 const cors = require('cors');
 const bodyParser = require("body-parser");
+const morgan =require("morgan");
+
+const fs=require("fs");
+const path = require("path");
+
 const app = express();
 app.use(cors({ origin: true, credentials: true })); // Enable CORS for all routes(all reuestes are accepted 3000,8000 ports creditonals for allownig cookies)
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -11,6 +16,10 @@ app.use(express.json());
 app.listen(5000, function () {
   console.log("server straed on port 5000");
 });
+
+//Morgan Middleware
+const accessLogStream=fs.createWriteStream(path.join(__dirname,'/Logs/access.log'),{flags: 'a'});
+app.use(morgan(':method :url :status :res[content-length] - :response-time ms :date[web]', {stream: accessLogStream}));
 
 //Cookie
 const cookieparser = require("cookie-parser");
