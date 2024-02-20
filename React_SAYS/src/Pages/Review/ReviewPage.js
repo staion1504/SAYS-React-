@@ -3,7 +3,9 @@ import Review from '../../Components/Review/Review'
 
 const ReviewPage = () => {
   return (
-    <><Review/></>
+    <>
+    <Review/>
+    </>
   )
 }
 

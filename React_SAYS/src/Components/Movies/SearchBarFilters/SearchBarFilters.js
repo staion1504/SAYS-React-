@@ -3,11 +3,11 @@ import Filters from "./Filtersdiv/Filters";
 import SearchBar from "./SearchBar/SearchBar";
 import Slogan from "./Slogan/Slogan";
 
-const SearchBarFilters=()=>{
+const SearchBarFilters=({LfilterChange,GfilterChange})=>{
     return ( <>  
       <Slogan/>
      <SearchBar/>
-      <Filters/>
+      <Filters LfilterChange={LfilterChange} GfilterChange={GfilterChange}/>
     </>);
 }
 
