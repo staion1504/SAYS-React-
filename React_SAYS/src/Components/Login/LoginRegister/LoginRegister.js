@@ -39,5 +39,5 @@ const LoginRegister=(props)=>{
         </p>
       </div>);
 }
-
+//
 export default LoginRegister;

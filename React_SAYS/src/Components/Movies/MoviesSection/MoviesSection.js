@@ -6,58 +6,22 @@ import classes from './MoviesSection.module.css';
 import ReviewSection   from '../ReviewHub/ReviewSection'
 
 
-import { MyContext2 } from '../../../Contexts/UserSideMoviesContex';
-import { renderMatches } from 'react-router-dom';
+
 
 
 const MoviesSection=(props)=>{
  
-  
-   const [MoviesArray,setMoviesArray]=useState([]);
-   const [movieitemarr,setMovieitemarr]=useState([]);
-   const [ReviewArray,setReviewArray]=useState([]);
-   const[location,setLocation]=useState(""); 
-    
-   async function renderData(){
-    console.log("hi came");
-  let response=await fetch("http://localhost:5000/movies",{
-    method:"GET",
-    headers:{
-      "Content-Type":"application/json"
-    },
-    credentials:'include'
-
-  });
-  console.log("hi came2");
-
-  let x=await response.json();
-  console.log(x);
-  if(props.title==="Latest Movies"){
-    setMoviesArray(x.latestmovies);
-  }
- 
-else
-setMoviesArray(x.upcomingmovies)
-
- setReviewArray(x.reviewdata);
-  setLocation(x.checklocaton);
+  const [movieitemarr,setMovieitemarr]=useState([]);
    
-   } 
-   
-   useEffect(() => {
-     
-   renderData();
-
-   }, [])
   
 
 
  useEffect(()=>{
-  const x= MoviesArray.map((Movie,index)=>{
-    return < MovieCard MovieDetails={Movie} location={location} title={props.title}/>
+  const x= props.MoviesArray.map((Movie,index)=>{
+    return < MovieCard MovieDetails={Movie} location={props.location} title={props.title} key={index}/>
    })
    setMovieitemarr([...x]);
- }, [MoviesArray])
+ }, [props.MoviesArray])
    
                
      return (
@@ -69,7 +33,7 @@ setMoviesArray(x.upcomingmovies)
       <MultiItemCarousel  itemarr={movieitemarr}/>  
     </section>
      
-    {props.title==="Latest Movies"?<></>:<ReviewSection ReviewArray={ReviewArray} />}   
+    {props.title==="Latest Movies"?<></>:<ReviewSection ReviewArray={props.ReviewArray} />}   
 
      </>
  

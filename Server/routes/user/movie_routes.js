@@ -24,36 +24,28 @@ function convertdate(inputDate) {
   return formattedDate;
 }
 async function CheckLatestMoviesForReviewHub(reviewdata) {
-  const date2 = new Date();
-  const today = date2.toISOString().slice(0, 10);
-  let releasedate;
-  let value = await movieinfo.find({});
-  for (let i = 0; i < value.length; i++) {
-    releasedate = value[i].releasedate;
-    releasedate = convertdate(releasedate);
 
-    if (releasedate.localeCompare(today) <= 0) {
-      reviewdata.push(value[i]);
-    }
-  }
-
+  let reviewdataX=[];
   for (let i = 0; i < reviewdata.length; i++) {
     let myobj2 = { movie: reviewdata[i]["MovieName"] };
+    
     let x = await moviereviewdata.find(myobj2).sort({ rating: -1 }).limit(1);
 
-    // console.log(x);
-
+   
     if (x.length != 0) {
-      // console.log(reviewdata[i]['MovieName']);
-      reviewdata[i]["rating"] = x[0]["rating"];
-      reviewdata[i]["reviewdesc"] = x[0]["reviewdesc"];
+     
+      reviewdataX.push({...reviewdata[i],rating:x[0]["rating"],reviewdesc:x[0]["reviewdesc"]});
+      
+   
     } else {
-      reviewdata[i]["rating"] = "";
-      reviewdata[i]["reviewdesc"] = "";
+      reviewdataX.push({...reviewdata[i],rating:"",reviewdesc:""});
+      
     }
   }
+
+  return reviewdataX;
 }
-async function fillLatestandUpcoming(datevalue, city, latestmovies1, upcomingmovies1) {
+async function fillLatestandUpcoming(datevalue, city, latestmovies1, upcomingmovies1, reviewdata1) {
   const date2 = new Date();
   const today = date2.toISOString().slice(0, 10);
   let checkrepeatedmovies = [];
@@ -89,9 +81,12 @@ async function fillLatestandUpcoming(datevalue, city, latestmovies1, upcomingmov
 
     if (rentaldate.localeCompare(today) <= 0) {
 
+      // console.log(value1[0].movies[i]);
 
       if (result.localeCompare(datevalue) >= 0) {
+        // console.log("inside latest2");
         latestmovies1.push(value1[0].movies[i]);
+        reviewdata1.push(value1[0].movies[i]);
 
       }
 
@@ -107,19 +102,21 @@ async function fillLatestandUpcoming(datevalue, city, latestmovies1, upcomingmov
   }
 }
 
-router.get("/", async (req, res) => {
-
+router.post("/", async (req, res) => {
+   
+  let default_city = req.body.location;
   let latestmovies = [];
   let upcomingmovies = [];
   let reviewdata = [];
-  let default_city = "Vijayawada";
+  // let default_city = "Vijayawada";
   const date2 = new Date();
   let today = date2.toISOString().slice(0, 10);
-  await fillLatestandUpcoming(today, default_city, latestmovies, upcomingmovies);
+  await fillLatestandUpcoming(today, default_city, latestmovies, upcomingmovies, reviewdata);
 
   await CheckLatestMoviesForReviewHub(reviewdata);
+   
   // console.log(reviewdata);
-  
+
   res.json({
     checklocaton: default_city,
     checkLangfileter: "",
@@ -394,12 +391,12 @@ router.get("/seatarrangement", async (req, res) => {
   }
   // let movieobj = await movieinfo.findOne({ MovieName: mname });
 
-    res.json({
-      // movieobj: movieobj,
-      userbookingseatarr: userbookingseatarr,
-      infoobj: infoobj,
-    });
- 
+  res.json({
+    // movieobj: movieobj,
+    userbookingseatarr: userbookingseatarr,
+    infoobj: infoobj,
+  });
+
 });
 
 
@@ -423,102 +420,30 @@ router.post("/getsuggestion", async function (req, res) {
   res.json(latestmovies);
 });
 
-router.post("/", async function (req, res) {
-  let lang = req.body.Lang;
-  let genre = req.body.Genre;
-  let city = req.body.location;
-  let datevalue = req.body.date;
+// router.post("/", async function (req, res) {
 
-  console.log(datevalue);
+//   let city = req.body.location;
+//   let datevalue = req.body.date;
+//   let latestmovies = [];
+//   let upcomingmovies = [];
+//   let reviewdata = [];
 
-  let latestmovies1 = [];
-  let upcomingmovies1 = [];
-  let latestmovies2 = [];
-  let upcomingmovies2 = [];
-  let reviewdata = [];
-  // console.log(city);
-  await fillLatestandUpcoming(datevalue, city, latestmovies1, upcomingmovies1);
-  await CheckLatestMoviesForReviewHub(reviewdata);
+//   console.log(city);
+//   await fillLatestandUpcoming(datevalue, city, latestmovies, upcomingmovies,reviewdata);
+//   await CheckLatestMoviesForReviewHub(reviewdata);
 
 
 
-  if (lang == "All" && genre == "All") {
-    res.render("moviepage", {
-      checklocaton: city,
-      checkLangfileter: "",
-      checkGenrefilter: "",
-      latestmovies: latestmovies1,
-      upcomingmovies: upcomingmovies1,
-      reviewdata: reviewdata,
-    });
-  } else if (lang != "All" && genre == "All") {
-    for (let i = 0; i < latestmovies1.length; i++) {
-      if (latestmovies1[i].language == lang) {
-        latestmovies2.push(latestmovies1[i]);
-      }
-    }
-    for (let i = 0; i < upcomingmovies1.length; i++) {
-      if (upcomingmovies1[i].language == lang) {
-        upcomingmovies2.push(upcomingmovies1[i]);
-      }
-    }
-
-    res.render("moviepage", {
-      checklocaton: city,
-      checkLangfileter: lang,
-      checkGenrefilter: "",
-      latestmovies: latestmovies2,
-      upcomingmovies: upcomingmovies2,
-      reviewdata: reviewdata,
-    });
-  } else if (lang == "All" && genre != "All") {
-    for (let i = 0; i < latestmovies1.length; i++) {
-      if (latestmovies1[i].genre.includes(genre)) {
-        latestmovies2.push(latestmovies1[i]);
-      }
-    }
-    for (let i = 0; i < upcomingmovies1.length; i++) {
-      if (upcomingmovies1[i].genre.includes(genre)) {
-        upcomingmovies2.push(upcomingmovies1[i]);
-      }
-    }
-
-    res.render("moviepage", {
-      checklocaton: city,
-      checkLangfileter: "",
-      checkGenrefilter: genre,
-      latestmovies: latestmovies2,
-      upcomingmovies: upcomingmovies2,
-      reviewdata: reviewdata,
-    });
-  } else {
-    for (let i = 0; i < latestmovies1.length; i++) {
-      if (
-        latestmovies1[i].genre.includes(genre) &&
-        latestmovies1[i].language == lang
-      ) {
-        latestmovies2.push(latestmovies1[i]);
-      }
-    }
-
-    for (let i = 0; i < upcomingmovies1.length; i++) {
-      if (
-        upcomingmovies1[i].genre.includes(genre) &&
-        upcomingmovies1[i].language == lang
-      ) {
-        upcomingmovies2.push(upcomingmovies1[i]);
-      }
-    }
-
-    res.render("moviepage", {
-      checklocaton: city,
-      checkLangfileter: lang,
-      checkGenrefilter: genre,
-      latestmovies: latestmovies2,
-      upcomingmovies: upcomingmovies2,
-      reviewdata: reviewdata,
-    });
-  }
-});
+  
+//     res.json({
+//       checklocaton: city,
+//       checkLangfileter: "",
+//       checkGenrefilter: "",
+//       latestmovies: latestmovies,
+//       upcomingmovies: upcomingmovies,
+//       reviewdata: reviewdata,
+//     });
+ 
+// });
 
 module.exports = router;

@@ -10,39 +10,39 @@ const Timings = (props) => {
   const { search } = useLocation();
   const params = new URLSearchParams(search);
   const MovieArray = JSON.parse(params.get('MovieDetails'));
-  const city=params.get('city');
-  
-  const navigate=useNavigate();
+  const city = params.get('city');
 
-  const [showDetails,setshowDetails] =useState([]);
-  
- async function renderTimings(){
-  let response= await fetch(`http://localhost:5000/movies/timings?name=${(MovieArray.MovieName)}&city=${city}`,{
-               
-  method:"GET",
-  headers:{
-    "Content-Type":"application/json"
-    
-  },
-  credentials:'include'
-          
-         
-  });
-  let x=await response.json();
-   console.log(x);
-  setshowDetails(x.showdetailsarray);
- }
+  const navigate = useNavigate();
 
-  useEffect(()=>{
-   
-     renderTimings();
+  const [showDetails, setshowDetails] = useState([]);
+  const [showTime, setshowTime] = useState("Show All");
+  async function renderTimings() {
+    let response = await fetch(`http://localhost:5000/movies/timings?name=${(MovieArray.MovieName)}&city=${city}`, {
 
-  },[])
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json"
 
- function navigateToSeatArragement(time,treff){
-  navigate(`/User/SeatArrangementPage?MovieArray=${JSON.stringify(MovieArray)}&time=${time}&tReff=${treff}`);
+      },
+      credentials: 'include'
 
- }
+
+    });
+    let x = await response.json();
+    console.log(x);
+    setshowDetails(x.showdetailsarray);
+  }
+
+  useEffect(() => {
+
+    renderTimings();
+
+  }, [])
+
+  function navigateToSeatArragement(time, treff) {
+    navigate(`/User/SeatArrangementPage?MovieArray=${JSON.stringify(MovieArray)}&time=${time}&tReff=${treff}`);
+
+  }
 
   return (
     <div className={classes.body}>
@@ -60,13 +60,18 @@ const Timings = (props) => {
         <div className={classes.box2}>
 
           <div className={classes.filters}>
-            <h2 className={classes.movieName} >{movieName}</h2> 
+            <h2 className={classes.movieName} >{movieName}</h2>
             <div className={classes.time_filter}>
               <label htmlFor="time">Select Time</label>
               <form method="post" id="time_filter">
-                <select name="time" id="time" >
+                <select name="time" id="time" onChange={(e) => {
+                  setshowTime(e.target.value);
+                }}>
                   <option value="Show All" >
                     Show All
+                  </option>
+                  <option value="12:00 AM" >
+                    12:00 AM
                   </option>
                   <option value="6:00 AM" >
                     6:00 AM
@@ -83,28 +88,39 @@ const Timings = (props) => {
                   <option value="9:00 PM" >
                     9:00 PM
                   </option>
+                  <option value="12:00 PM" >
+                    12:00 PM
+                  </option>
                 </select>
               </form>
             </div>
           </div>
-          {showDetails.map((showDetail,iterationNumber) => {
-            return (
-              <div className={classes.theatre} key={iterationNumber}>
-                <div className={classes.sub_theatre}>
-                  <h2 className="flex text-[1.2rem] mb-[1rem]">{showDetail.tName}  <IoInformationCircleOutline className="text-[white] ml-[1.2rem]" /> </h2>
+          {showDetails.map((showDetail, iterationNumber) => {
 
-                  {showDetail.timingsarray.map((tArray, index) => {
-                    return (
-                      <span key={index}>
-                        
-                          <button onClick={()=>{navigateToSeatArragement(tArray,showDetail.tReff)}}>{tArray}</button>
-                    
-                      </span>
-                    );
-                  })}
+            if (showTime === "Show All" || showDetail.timingsarray.includes(showTime)) {
+              return (
+                <div className={classes.theatre} key={iterationNumber}>
+                  <div className={classes.sub_theatre}>
+                    <h2 className="flex text-[1.2rem] mb-[1rem]">{showDetail.tName}  <IoInformationCircleOutline className="text-[white] ml-[1.2rem]" /> </h2>
+
+                    {showDetail.timingsarray.map((tArray, index) => {
+                      if (showTime === "Show All" || showTime === tArray) {
+                        return (
+
+                          <span key={index}>
+
+                            <button onClick={() => { navigateToSeatArragement(tArray, showDetail.tReff) }}>{tArray}</button>
+
+                          </span>
+
+                        );
+                      }
+
+                    })}
+                  </div>
                 </div>
-              </div>
-            );
+              );
+            }
           })}
 
         </div>

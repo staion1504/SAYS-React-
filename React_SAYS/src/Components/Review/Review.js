@@ -11,7 +11,7 @@ const Review = () => {
   const { search } = useLocation();
   const params = new URLSearchParams(search);
   const moviename = (params.get('name'));
-
+ 
   const [movieobjimgurl,setmovieobjimgurl]=useState({});
   const [reviewdataarr,setreviewdatarr]=useState([]);
 
