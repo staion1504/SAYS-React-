@@ -23,17 +23,18 @@
   
     .title {
     color: gold;
+    
     margin-top: -0.2em;
     line-height: 1.4;
     font-size: 1.3em;
-    font-weight: 500;
+    font-weight: 600;
     font-family: 'Montserrat', sans-serif;
     transition: all ease-in 100ms;
   }
   
-  .card p {
+  /* .card p {
     color: white;
-  }
+  } */
   
   .card h5 {
     color: white;

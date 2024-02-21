@@ -1,7 +1,7 @@
 const locations=[
     { 
         id:"loc1",
-        locname:"Vijaywada"
+        locname:"Vijayawada"
 
     },
 
