@@ -1,3 +1,5 @@
 POST /login 200 69 - 273.617 ms
 GET /profile/laptopprofilepage/getdetails 200 475 - 255.220 ms
 POST /login 200 69 - 247.930 ms Mon, 19 Feb 2024 18:37:38 GMT
+POST /login 200 69 - 382.875 ms Tue, 20 Feb 2024 16:37:15 GMT
+POST /login 200 69 - 430.319 ms Tue, 20 Feb 2024 16:55:10 GMT

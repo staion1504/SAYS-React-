@@ -2,12 +2,20 @@ const express = require("express");
 const md5 = require("md5");
 const cors = require('cors');
 const bodyParser = require("body-parser");
+
+const multer=require("multer");
+
+const helmet=require("helmet");
+
 const morgan =require("morgan");
 
 const fs=require("fs");
 const path = require("path");
 
 const app = express();
+
+app.use(helmet()); 
+
 app.use(cors({ origin: true, credentials: true })); // Enable CORS for all routes(all reuestes are accepted 3000,8000 ports creditonals for allownig cookies)
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
