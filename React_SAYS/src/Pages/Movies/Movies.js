@@ -103,7 +103,7 @@ const Movies = () => {
     <>
       <NavBar firstsection={SearchBarFilters} pagename="Movies" setLocFilter={setLocFilter} LocFilter={LocFilter} />
       <div className={classes.laptopfirstsection}>
-        <SearchBarFilters LfilterChange={LfilterChange} GfilterChange={GfilterChange} />
+        <SearchBarFilters LfilterChange={LfilterChange} GfilterChange={GfilterChange} latestmovies={LMoviesArray} location={location}/>
       </div>
       <MoviesSection title="Latest Movies" style={{}} Lfilter={Lfilter} Gfilter={Gfilter} MoviesArray={LMoviesArray} ReviewArray={ReviewArray} location={location} />
       <MoviesSection title="Upcoming Movies" style={{ marginTop: "4rem" }} Lfilter={Lfilter} Gfilter={Gfilter} MoviesArray={UMoviesArray} ReviewArray={ReviewArray} location={location} />
