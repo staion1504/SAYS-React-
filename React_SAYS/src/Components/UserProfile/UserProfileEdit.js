@@ -5,7 +5,12 @@ import { Row,Col,Container} from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 const UserProfileEdit = () => {
   
-  const [userdetails,setuserdetails]=useState({});
+  const [fname,setfname]=useState("");
+  const [lname,setlname]=useState("");
+  const [email,setemail]=useState("");
+  const [mobilenum,setmobilenum]=useState(0);
+  const [gender,setgender]=useState("");
+  const [birthdate,setbirthdate]=useState("");
 
   const renderUserDetails=async ()=>{
        const res=await fetch('http://localhost:5000/profile/laptopprofilepage/getdetails',{
@@ -18,7 +23,12 @@ const UserProfileEdit = () => {
 
         const response=await res.json();
         console.log(response[0]);
-        setuserdetails(response[0]);
+        setfname(response[0].firstName);
+        setlname(response[0].lastName);
+        setemail(response[0].email);
+        setmobilenum(response[0].MobileNumber);
+        setgender(response[0].Gender);
+        setbirthdate(response[0].DOB);
   }
 
   useEffect(()=>{
@@ -69,27 +79,26 @@ const UserProfileEdit = () => {
                 <Row className='mt-2'>
                     <Col md={6} lg={6} className='flex flex-col'>
                     <label className="text-[11px]">First Name</label>
-                    <input type="text" className={classes.form_control} placeholder={userdetails.firstName}
-                     value="" name="First_Name"/>
+                    <input type="text" className={classes.form_control}
+                     value={fname} name="First_Name"/>
                     </Col>
 
                     <Col md={6} lg={6} className='flex flex-col'>
                     <label className="text-[11px]">Last Name</label>
                     <input type="text" className={classes.form_control}
-                      placeholder={userdetails.lastName} value="" name="Last_Name"/>
+                      value={lname} name="Last_Name"/>
                     </Col>
                 </Row>
 
                 <Row className='mt-4'>
                   <Col md={12} lg={12} className='flex flex-col'>
                     <label className="text-[11px]">Mobile Number</label>
-                    <input name="Mobile_Number" type="text" 
-                       className={classes.form_control} placeholder="Enter phone number" value="9012341234"/>
+                    <input name="Mobile_Number" type="text" className={classes.form_control} placeholder="Enter phone number" value={mobilenum}/>
                   </Col>
 
                   <Col md={12} lg={12} className='flex flex-col mt-3'>
                     <label className="text-[11px]">Email Id</label>
-                    <input name="email" type="text" className={classes.form_control}
+                    <input name="email" type="text" value={email} className={classes.form_control}
                     placeholder="Enter email id"/>
                   </Col>
 
@@ -100,7 +109,7 @@ const UserProfileEdit = () => {
                 <Row className='mt-4'>
                   <Col md={6} lg={6} className='flex flex-col'>
                     <label className="text-[11px]">Gender</label>
-                    <select className={classes.form_control} required name="gender">
+                    <select value={gender} className={classes.form_control} required name="gender" onChange={(e)=>{setgender(e.target.value)}} >
                         <option disabled selected>Select gender</option>
                         <option value="Male" >Male</option>
                         <option value="Female">Female</option>
@@ -111,7 +120,7 @@ const UserProfileEdit = () => {
                   <Col md={6} lg={6} className='flex flex-col'>
                     <label className="text-[11px]">Date of Birth</label>
                     <input className={classes.form_control}  type="date" 
-                    placeholder="Enter birth date" name="DOB" value=""required/>
+                    placeholder="Enter birth date" name="DOB" value={birthdate} required/>
                   </Col>
 
                   <Col md={6} lg={6} className='flex flex-col mt-3'>

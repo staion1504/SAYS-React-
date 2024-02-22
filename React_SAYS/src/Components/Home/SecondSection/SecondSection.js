@@ -15,7 +15,7 @@ import TheatreCard from './TheatreCard/TheatreCard'
 import classes from './SecondSection.module.css';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-
+import { useNavigate } from 'react-router-dom';
 
 const SecondSection=()=>{ 
   
@@ -24,6 +24,8 @@ const SecondSection=()=>{
   const [flag,setflag]=useState(true);
   const [Titemarr,setTitemarr]=useState([]);
   const [Theatrearr,setTheatrearr]=useState([]);
+
+  const navigate=useNavigate();
 
   const getDetails=async ()=>{
     const response = await fetch(`http://localhost:5000/home`, {
@@ -35,6 +37,14 @@ const SecondSection=()=>{
       body:JSON.stringify({loc:loc}),
     });
 
+    console.log(response.status);
+
+    if(response.status!==200)
+     {
+        navigate("*");
+     }
+   else
+   {
     const res = await response.json();
     if(res.Tdetails.length===0)
     {
@@ -48,6 +58,10 @@ const SecondSection=()=>{
             arr.push(<Link to={`/User/ViewTheatreProfile?treff=${res.Tdetails[i].tReferenceNumber}`}><TheatreCard key={i} Tdetail={res.Tdetails[i]}/></Link>);
     }  
     setTheatrearr(arr);
+
+   }  
+
+
   };
 
   useEffect(()=>{

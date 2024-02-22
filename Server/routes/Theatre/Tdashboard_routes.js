@@ -3,6 +3,7 @@ const router = express.Router();
 
 const theatrereviewdata = require("../../models/user/theatrereview");
 router.get("/", async function (req, res) {
+ 
   let treviewsarr;
   let value = await theatrereviewdata.find({
     tReferenceNumber: req.cookies.currtheatrereffnum,

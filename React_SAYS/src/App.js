@@ -48,7 +48,7 @@ import NewsPage from "./Components/News/MovieNews"
 import Aboutus from "./Components/AboutUs/AboutUs"
 import LandingPage from "./Components/LandingPage/LandingPage";
 import TheatreReview from "./Components/Review/TheatreReview";
-
+import Error from "./Components/Error/Error";
 
 const router = createBrowserRouter([
   
@@ -190,7 +190,15 @@ const router = createBrowserRouter([
   {
     path:"Theatre/Registor",
     element:<Register type="theatre"/>
+  },
+
+
+  {
+    path:"*",
+    element:<Error/>
   }
+
+
 
 ]);
 
