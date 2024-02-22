@@ -103,7 +103,6 @@ app.use("/usertheatreinfo", userTheatreinforoutes);
 
 
 
-
 //Admin Dashboard Routes
 const adminhomeroutes = require("./routes/Admin/adminhome_routes");
 const adminmoviesroutes = require("./routes/Admin/adminmovies_routes");
