@@ -200,7 +200,7 @@ const validation = (req, res, next) => {
 
 
 
-router.post("/", function (req, res) {
+router.post("/",validation, function (req, res) {
 
   // console.log("came");
 
