@@ -4,6 +4,16 @@ const md5 = require("md5");
 //database
 const userinfo = require("../../models/user/signup");
 
+const validation = (req, res, next) => {
+  const { email, password } = req.body;
+  if (email !== undefined && password !== undefined && email !== '' && password !== '') {
+    next();
+  } else {
+    res.status(400).send('Invalid request: Email and password are required.');
+  }
+};
+
+router.use(validation);
 
 
 
