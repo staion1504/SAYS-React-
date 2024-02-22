@@ -196,7 +196,7 @@ const validation = (req, res, next) => {
 };
 
 // Use the custom middleware for all routes
-router.use(validation);
+// router.use(validation);
 
 
 
