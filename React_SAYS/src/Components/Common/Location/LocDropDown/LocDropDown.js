@@ -17,7 +17,7 @@ const LocDropDown = (props) => {
 
   const locfilter = (e) => {
     let enteredval = e.target.value;
-    props.setLocFilter(enteredval);
+    // props.setLocFilter(enteredval);
     let vallen = enteredval.length;
     let locarr = [];
     for (let i = 0; i < locations.length; i++) {

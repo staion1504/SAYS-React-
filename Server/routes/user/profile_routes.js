@@ -4,6 +4,7 @@ const router = express.Router();
 const multer = require('multer');
 const path = require('path');
 
+
 var upload = multer({
   dest: "./FileUploads/UserUploads"
 });
@@ -223,9 +224,12 @@ router.post("/profileeditpage", function (req, res) {
 });
 
 const userUploadsPath = path.join(__dirname, '/FileUploads/UserUploads');
+// console.log(userUploadsPath);
 let originalString = userUploadsPath;
 let modifiedString = originalString.replace(/\\routes\\user/g, '');
+console.log(modifiedString);
 modifiedString = modifiedString.replace(/C:\\/g, '');
+modifiedString = modifiedString.replace(/D:\\/g, '');
 
 router.get("/profilepic", async function (req, res) {
 
@@ -234,12 +238,12 @@ router.get("/profilepic", async function (req, res) {
     res.json("0");
     return;
   }
+   console.log(value1[0].path);
   let yourString = value1[0].path;
   let convertedString = yourString.replace(/\\/g, '/');
   let originalString1 = convertedString;
- let stringWithoutSequence = originalString1.replace("FileUploads/UserUploads/", ""); 
-  
-  
+  let stringWithoutSequence = originalString1.replace("FileUploads/UserUploads/", ""); 
+   
   res.sendFile(`/${modifiedString}/${stringWithoutSequence}`);
  
 });
