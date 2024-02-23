@@ -170,3 +170,4 @@ GET /profile/laptopprofilepage/getdetails 200 475 - 271.276 ms Thu, 22 Feb 2024 
 GET /profile/profilepic 200 89701 - 258.947 ms Thu, 22 Feb 2024 20:37:05 GMT
 POST /profile/profileUpload 200 37 - 564.852 ms Thu, 22 Feb 2024 20:37:14 GMT
 GET /profile/profilepic 200 920686 - 263.326 ms Thu, 22 Feb 2024 20:37:15 GMT
+POST /home 200 4257 - 2415.713 ms Thu, 22 Feb 2024 20:39:35 GMT
