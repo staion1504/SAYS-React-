@@ -82,6 +82,7 @@ app.use("/contactus", contactusroutes);
 app.use("/usertheatreprofile", usertheatreprofileroutes);
 
 
+
 //Theatre Dashboard Routes
 const Tdashboardroutes = require("./routes/Theatre/Tdashboard_routes");
 const Tsignuproutes = require("./routes/Theatre/Tsignup_routes");
