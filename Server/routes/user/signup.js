@@ -200,9 +200,11 @@ const validation = (req, res, next) => {
 
 
 
-router.post("/",validation, function (req, res) {
+router.post("/", validation, function (req, res) {
 
-  // console.log("came");
+
+
+  // res.json("Enter correct details");
 
 
 
