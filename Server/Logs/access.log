@@ -179,3 +179,15 @@ POST  /home 500 28 - 7.977 ms Fri, 23 Feb 2024 11:14:35 GMT
 GET  /profile/profilepic 200 3 - 246.768 ms Fri, 23 Feb 2024 11:14:35 GMT
 POST  /home 500 28 - 6.469 ms Fri, 23 Feb 2024 11:45:37 GMT
 GET  /profile/profilepic 200 3 - 279.779 ms Fri, 23 Feb 2024 11:45:37 GMT
+POST  /TSignup 200 8 - 1010.381 ms Fri, 19 Apr 2024 13:34:41 GMT
+POST  /login 200 22 - 304.113 ms Fri, 19 Apr 2024 13:35:54 GMT
+GET  /adminhome 200 2132 - 1496.124 ms Fri, 19 Apr 2024 13:35:56 GMT
+POST  /adminhome/accepttheatre 200 7 - 913.571 ms Fri, 19 Apr 2024 13:36:12 GMT
+GET  /adminhome 200 1643 - 2203.419 ms Fri, 19 Apr 2024 13:43:55 GMT
+POST  /adminhome/accepttheatre 200 7 - 943.157 ms Fri, 19 Apr 2024 13:45:58 GMT
+GET  /adminhome 200 1151 - 1464.579 ms Fri, 19 Apr 2024 13:46:35 GMT
+POST  /TSignup 200 8 - 953.715 ms Fri, 19 Apr 2024 13:48:57 GMT
+POST  /login 200 22 - 296.204 ms Fri, 19 Apr 2024 13:49:35 GMT
+GET  /adminhome 200 1642 - 1483.379 ms Fri, 19 Apr 2024 13:49:37 GMT
+POST  /adminhome/accepttheatre 200 7 - 1594.015 ms Fri, 19 Apr 2024 13:49:48 GMT
+GET  /adminhome 200 1151 - 1662.498 ms Fri, 19 Apr 2024 13:50:20 GMT
