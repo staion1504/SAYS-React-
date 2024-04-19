@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const userinfo = require("../../models/user/signup");
+const userinfo = require("../../Models/user/signup");
 const md5 = require("md5");
 
 router.get("/", function (req, res) {
@@ -200,9 +200,11 @@ const validation = (req, res, next) => {
 
 
 
-router.post("/",validation, function (req, res) {
+router.post("/", validation, function (req, res) {
 
-  // console.log("came");
+
+
+  // res.json("Enter correct details");
 
 
 

@@ -13,9 +13,10 @@ router.get("/", function (req, res) {
   res.render("TSignup", { show_error: show_error });
 });
 
-// Custom Middleware
-const validation = (req, res, next) => {
-  
+
+
+router.post("/", function (req, res) {
+
   let Theatre_Name = req.body.Theatre_Name;
   let email = req.body.email;
   let num1 = req.body.Contact_Number1;
@@ -199,17 +200,8 @@ const validation = (req, res, next) => {
         });
       }
     });
+
   }
-  next(); // Call the next middleware in the stack
-};
-
-router.use(validation);
-
-router.post("/",validation, function (req, res) {
-
-  // console.log(req.body);
-
-
 
 });
 

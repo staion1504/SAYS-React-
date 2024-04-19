@@ -18,7 +18,7 @@ app.use(helmet());
 
 app.use(cors({ origin: true, credentials: true })); // Enable CORS for all routes(all reuestes are accepted 3000,8000 ports creditonals for allownig cookies)
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.json());
+app.use(express.json());  
 
 
 app.listen(5000, function () {
@@ -27,7 +27,7 @@ app.listen(5000, function () {
 
 //Morgan Middleware
 const accessLogStream=fs.createWriteStream(path.join(__dirname,'/Logs/access.log'),{flags: 'a'});
-app.use(morgan(':method :url :status :res[content-length] - :response-time ms :date[web]', {stream: accessLogStream}));
+app.use(morgan(':method  :url :status :res[content-length] - :response-time ms :date[web]', {stream: accessLogStream}));
 
 //Cookie
 const cookieparser = require("cookie-parser");
@@ -82,6 +82,7 @@ app.use("/contactus", contactusroutes);
 app.use("/usertheatreprofile", usertheatreprofileroutes);
 
 
+
 //Theatre Dashboard Routes
 const Tdashboardroutes = require("./routes/Theatre/Tdashboard_routes");
 const Tsignuproutes = require("./routes/Theatre/Tsignup_routes");
@@ -122,6 +123,7 @@ app.use((err, req, res, next) => {
   console.log(err.message);
   errorStatusCode = err.statusCode || 500;
   res.status(errorStatusCode).json({ error: 'Something broke!' });
+  
 })
 
 
