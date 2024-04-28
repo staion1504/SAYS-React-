@@ -3,7 +3,7 @@ const router = express.Router();
 
 //Database
 const contactusqueries = require("../../models/Admin/contactusqueries");
-const userinfo = require("../../models/user/signup");
+const userinfo = require("../../Models/user/signup");
 
 router.get("/", async function (req, res) {
     // const show_error_contactus = req.cookies.show_error_contactus;

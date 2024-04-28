@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import classes from './TMovies.module.css';
 import TNavbar from '../TCommon/navbar';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -9,7 +9,7 @@ import MovieInfo from '../../Admin/Movies/MovieInfo/MovieInfo';
 import { AddMovie } from './AddMovie/Addmovie';
 import { EditMovie } from './EditMovie/EditMovie';
 import { RentMovie } from './RentMovie/RentMovie';
-import { Await } from 'react-router-dom';
+
 
 
 
@@ -166,10 +166,8 @@ const TMovies = () => {
 
 
         <Row className='flex mt-[1rem]'>
-          {/* <p className='text-[gold] text-[2rem] mt-[1rem]'>OOPS...No Movies Screening Actively!!!</p>      */}
-
-
-          {showMovies.map((Movie, index) =>
+          {showMovies.length === 0 && <p className='text-[gold] text-[2rem] mt-[1rem]'>OOPS...No Movies Screening Actively!!!</p>     }
+          {showMovies.length !== 0  && showMovies.map((Movie, index) =>
             <Col lg={2} key={index}>
               <div className={classes.movie_card}>
                 <img src={Movie.imgurl} alt='' />
@@ -207,8 +205,8 @@ const TMovies = () => {
         </div>
 
         <Row className='flex mt-[1rem] mb-[3rem]' >
-          {/* <p className='text-[gold] text-[2rem] mt-[1rem]'>OOPS...No Upcoming Movies Actively!!!</p>      */}
-          {MoviesArray.map((Movie, index) =>
+         {MoviesArray.length ===0 &&  <p className='text-[gold] text-[2rem] mt-[1rem]'>OOPS...No Upcoming Movies Actively!!!</p>  }   
+          {MoviesArray.length !==0 && MoviesArray.map((Movie, index) =>
             <Col lg={2} key={index}>
               <div className={classes.movie_card}>
                 <img src={Movie.imgurl} alt='' />

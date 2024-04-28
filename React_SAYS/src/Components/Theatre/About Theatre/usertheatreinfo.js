@@ -30,6 +30,7 @@ const Usertheatreinfo = () => {
          });
 
         const res1=await response1.json();  
+        settreff(res1.treffnum);
         const response2=await fetch(`http://localhost:5000/usertheatreinfo/getinfo`,{
             method:"POST",
             headers:{
@@ -41,8 +42,21 @@ const Usertheatreinfo = () => {
           });
       
          const res2=await response2.json();
-         console.log(res2);
-         
+         if(res2.k===1)
+         {
+            setTname("");
+            setTimg1("");
+            setTimg2("");
+            setTimg3("");
+            setscreentype("");
+            setsnack("");
+            setsound("");
+            setTtype("");
+            setabout("");
+         }
+
+         else{
+
          setTname(res2.tinfo.tName);
          setTimg1(res2.tinfo.imgurl1);
          setTimg2(res2.tinfo.imgurl2);
@@ -52,7 +66,11 @@ const Usertheatreinfo = () => {
          setsound(res2.tinfo.sound);
          setTtype(res2.tinfo.Type);
          setabout(res2.tinfo.about);
-         settreff(res2.tinfo.tReferenceNumber);
+
+         }
+         
+         
+         
          
         }
 

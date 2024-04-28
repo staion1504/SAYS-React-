@@ -12,23 +12,21 @@ router.get("/", async function (req, res){
       tReferenceNumber: req.cookies.currtheatrereffnum,
     });
     let tname = value2[0]["tName"];
-    if (req.cookies.isTlogin) {
-      res.render("usertheatreinfo", { tname: tname });
-    } else {
-      res.redirect("/login");
-    }
+    res.json({tname:tname});
   });
   
 router.post("/", async function (req, res) {
     let value = await userTinfo.find({
       tReferenceNumber: req.cookies.currtheatrereffnum,
     });
+
     // let value2 = await theatresignupinfo.find({
     //   tReferenceNumber: req.cookies.currtheatrereffnum,
     // });
     let value2 = await theatresignupinfo.find({
-      tReferenceNumber: req.body.treff,
+      tReferenceNumber: req.cookies.currtheatrereffnum,
     });
+    
     let tname = value2[0]["tName"];
     let imgurl1 = req.body.theatreimgurl1;
     let imgurl2 = req.body.theatreimgurl2;

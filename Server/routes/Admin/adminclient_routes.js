@@ -3,7 +3,7 @@ const router = express.Router();
 
 
 //Database
-const userinfo = require("../../models/user/signup");
+const userinfo = require("../../Models/user/signup");
 const mgamestatus = require("../../models/user/moviegamestatus");
 const quizleaderboard = require("../../models/user/quizleaderboard");
 const ticketinfo = require("../../models/user/ticketsinfo");

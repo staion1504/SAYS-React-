@@ -15,7 +15,7 @@ export const EditMovie = ({show,handleClose}) => {
            <form className='font-semibold'> 
 
                <div className='flex flex-col'>
-                <label className='text-[1.1rem]'>Movie Title:</label>
+                <label className='text-[1.1rem] text-black'>Movie Title:</label>
                 <select className='w-[75%] mt-[0.5rem] border-2 border-[black]'>      
                   <option value="No InActive Movies">No Active Movies</option>   
                   <option value="Salaar">Salaar</option>
@@ -26,7 +26,7 @@ export const EditMovie = ({show,handleClose}) => {
 
       
                <div className='flex flex-col mt-[2rem]'>
-                <label className='text-[1.1rem]'>Status</label>
+                <label className='text-[1.1rem] text-black'>Status</label>
                 <select className='w-[75%] mt-[0.5rem] border-2 border-[black]'>
                   <option value="Active">Active</option>
                   <option value="InActive">InActive</option>          

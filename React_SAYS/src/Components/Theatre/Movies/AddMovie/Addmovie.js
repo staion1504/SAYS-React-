@@ -23,12 +23,14 @@ export const AddMovie = ({ AddedMovieHandler,AddMovieArray, show, handleClose })
         <Modal.Body className='bg-[lightgoldenrodyellow]'>
           <form className='font-semibold' onSubmit={handleSubmit(onSubmit)}>
             <div className='flex flex-col'>
-              <label className='text-[1.1rem]'>Movie Title:</label>
+              <label className='text-[1.1rem] text-black'>Movie Title:</label>
               <select
                 {...register('MovieName')}
                 className='w-[75%] mt-[0.5rem] border-2 border-[black]'
               >
-                {AddMovieArray.map((Movie, index) => (
+
+                {AddMovieArray.length === 0 && <p>No movies</p>}
+                {AddMovieArray.length !== 0 && AddMovieArray.map((Movie, index) => (
                   <option key={index} value={Movie.MovieName}>
                     {Movie.MovieName}
                   </option>
@@ -37,7 +39,7 @@ export const AddMovie = ({ AddedMovieHandler,AddMovieArray, show, handleClose })
             </div>
 
             <div className='flex flex-col mt-[2rem]'>
-              <label className='text-[1.1rem]'>Status</label>
+              <label className='text-[1.1rem] text-black'>Status</label>
               <select
                 {...register('status')}
                 className='w-[75%] mt-[0.5rem] border-2 border-[black]'

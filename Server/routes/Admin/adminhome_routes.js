@@ -5,7 +5,7 @@ const nodemailer= require("nodemailer");
 const contactusqueries = require("../../models/Admin/contactusqueries");
 const theatreverification = require("../../models/Admin/theatreverification");
 const theatresignupinfo = require("../../models/theatre/signup");
-const userinfo = require("../../models/user/signup");
+const userinfo = require("../../Models/user/signup");
 
 
 router.get("/", async function (req, res) {
