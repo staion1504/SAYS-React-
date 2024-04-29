@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const userinfo = require("../../Models/user/signup");
+const userinfo = require("../../models/user/signup");
 const md5 = require("md5");
 
 router.get("/", function (req, res) {

@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const nodemailer = require("nodemailer");
-const userinfo=require("../../Models/user/signup");
+const userinfo=require("../../models/user/signup");
 const theatresignupinfo = require("../../models/theatre/signup");
 
 

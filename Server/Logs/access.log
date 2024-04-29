@@ -561,3 +561,13 @@ POST  /home 200 4933 - 3248.077 ms Mon, 29 Apr 2024 05:26:31 GMT
 POST  /login 200 69 - 704.573 ms Mon, 29 Apr 2024 05:37:54 GMT
 GET  /profile/profilepic 200 3 - 286.195 ms Mon, 29 Apr 2024 05:37:55 GMT
 POST  /home 200 4933 - 3556.504 ms Mon, 29 Apr 2024 05:37:58 GMT
+POST  /login 200 69 - 432.798 ms Mon, 29 Apr 2024 05:49:40 GMT
+GET  /profile/profilepic 200 3 - 240.244 ms Mon, 29 Apr 2024 05:49:41 GMT
+POST  /home 200 4933 - 3781.685 ms Mon, 29 Apr 2024 05:49:44 GMT
+POST  /login 200 69 - 255.596 ms Mon, 29 Apr 2024 06:10:43 GMT
+GET  /profile/profilepic 200 3 - 230.741 ms Mon, 29 Apr 2024 06:10:43 GMT
+POST  /home 200 4933 - 2945.103 ms Mon, 29 Apr 2024 06:10:46 GMT
+POST  /Tlogin 200 102 - 236.172 ms Mon, 29 Apr 2024 06:11:14 GMT
+GET  /tdashboard 200 170 - 244.141 ms Mon, 29 Apr 2024 06:11:14 GMT
+GET  /tmdashboard/gettheatredetails 200 433 - 232.813 ms Mon, 29 Apr 2024 06:11:16 GMT
+GET  /tmdashboard 200 77506 - 7259.086 ms Mon, 29 Apr 2024 06:11:23 GMT

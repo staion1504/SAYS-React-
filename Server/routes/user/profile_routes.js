@@ -10,8 +10,8 @@ var upload = multer({
 });
 
 
-const userinfo = require("../../Models/user/signup");
-const profilepic = require("../../Models/user/profilepic");
+const userinfo = require("../../models/user/signup");
+const profilepic = require("../../models/user/profilepic");
 
 router.get("/laptopprofilepage", function (req, res) {
   if (req.cookies.isUserLogin) res.render("laptopprofilepage");

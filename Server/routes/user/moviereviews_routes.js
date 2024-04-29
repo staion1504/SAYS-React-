@@ -5,7 +5,7 @@ const router = express.Router();
 //Database
 const movieinfo = require("../../models/theatre/movieinfo");
 const moviereviewdata = require("../../models/user/Moviereview");
-const userinfo = require("../../Models/user/signup");
+const userinfo = require("../../models/user/signup");
 
 
 router.get("/", async (req, res) => {
