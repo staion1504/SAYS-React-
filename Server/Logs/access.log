@@ -545,3 +545,10 @@ POST  /usertheatreinfo/getinfo 200 7 - 249.252 ms Sun, 28 Apr 2024 19:42:16 GMT
 GET  /usertheatreinfo/getreffnum 200 43 - 8.085 ms Sun, 28 Apr 2024 19:51:28 GMT
 POST  /usertheatreinfo/getinfo 200 7 - 241.921 ms Sun, 28 Apr 2024 19:51:28 GMT
 POST  /usertheatreinfo 200 7 - 548.294 ms Sun, 28 Apr 2024 19:51:36 GMT
+POST  /usertheatreinfo 200 7 - 748.362 ms Sun, 28 Apr 2024 20:10:59 GMT
+GET  /tschedule/ 200 2488 - 965.571 ms Sun, 28 Apr 2024 20:11:07 GMT
+GET  /usertheatreinfo/getreffnum 200 43 - 1.456 ms Sun, 28 Apr 2024 20:11:08 GMT
+POST  /usertheatreinfo/getinfo 200 681 - 256.898 ms Sun, 28 Apr 2024 20:11:08 GMT
+POST  /login 200 69 - 468.541 ms Mon, 29 Apr 2024 05:22:44 GMT
+POST  /home 500 28 - 9.338 ms Mon, 29 Apr 2024 05:22:44 GMT
+GET  /profile/profilepic 200 3 - 342.802 ms Mon, 29 Apr 2024 05:22:45 GMT
