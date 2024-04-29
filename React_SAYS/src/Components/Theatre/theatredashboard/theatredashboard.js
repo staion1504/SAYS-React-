@@ -89,9 +89,11 @@ function Theatredashboard() {
 
         <div className={internalcss.reviewsandratings}>
           <h4 className="text-[1.4rem] ml-[13rem] " >Review and Rating</h4>
+          {treviews.length === 0  && <p className='text-[gold] text-[2rem] mt-[1rem] ml-[13rem]'>No Theatre Reviews till date... </p>}
 
           <div className={`${internalcss.reviewtable} mt-[1rem] ml-[13rem] w-[75%]`}>
-            <table>
+          {treviews.length!==0 &&
+              <table>
               <thead>
                 <tr className="headingrow">
                   <th>#</th>
@@ -140,6 +142,7 @@ function Theatredashboard() {
                 
               </tbody>
             </table>
+            }
           </div>
 
 

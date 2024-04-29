@@ -3,7 +3,7 @@
 
 // Admin to Theatre array transfer
 
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useState } from 'react';
 
 const MyContext = createContext();
 

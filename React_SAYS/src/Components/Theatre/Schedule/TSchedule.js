@@ -188,49 +188,45 @@ const TSchedule = () => {
 
 
         <Container className='mt-[2rem]'>
-
+        {screens.length === 0 && <p className='text-[gold] text-[2rem] text-center'>OOPS...No Screens In Your Theatre</p>}
           <div className={classes.screentable}>
-            {/* <p className='text-[gold] text-[2rem]'>OOPS...No Screens In Your Theatre</p>                       */}
+            {screens.length!==0 && 
             <table>
-              <thead>
-                <tr className={classes.headingrow}>
-                  <th>#</th>
-                  <th>Screen Name</th>
-                  <th>Screen Capacity</th>
-                  <th>Seating Arrangement</th>
-                  <th>Remove Screen</th>
+            <thead>
+              <tr className={classes.headingrow}>
+                <th>#</th>
+                <th>Screen Name</th>
+                <th>Screen Capacity</th>
+                <th>Seating Arrangement</th>
+                <th>Remove Screen</th>
+              </tr>
+            </thead>
+            <tbody>
+              {screens.map((screeninfo, index) =>
+                <tr key={index + 1}>
+                  <td>{index + 1}</td>
+                  <td>{screeninfo.screenname}</td>
+                  <td>{screeninfo.screencapacity}</td>
+                  <td>
+                    <button type="button" className='bg-[blue] w-[6rem] h-[2.2rem] mr-[3rem] rounded-md text-[white] hover:bg-[indianred]'>
+                      Edit
+                    </button>
+                  </td>
+                  <td>
+                    <button onClick={()=>RemoveScreenHandler(screeninfo.screenname)} type="button" className='bg-[blue] w-[6rem] h-[2.2rem] mr-[3rem] rounded-md text-[white] hover:bg-[indianred]'>
+                      Remove
+                    </button>
+                  </td>
                 </tr>
-              </thead>
-              <tbody>
-                {screens.map((screeninfo, index) =>
-                  <tr key={index + 1}>
-                    <td>{index + 1}</td>
-                    <td>{screeninfo.screenname}</td>
-                    <td>{screeninfo.screencapacity}</td>
-                    <td>
-                      <button type="button" className='bg-[blue] w-[6rem] h-[2.2rem] mr-[3rem] rounded-md text-[white] hover:bg-[indianred]'>
-                        Edit
-                      </button>
-                    </td>
-                    <td>
-                      <button onClick={()=>RemoveScreenHandler(screeninfo.screenname)} type="button" className='bg-[blue] w-[6rem] h-[2.2rem] mr-[3rem] rounded-md text-[white] hover:bg-[indianred]'>
-                        Remove
-                      </button>
-                    </td>
-                  </tr>
 
-                )}
-
-
-
-
-
-              </tbody>
-            </table>
+              )}
+            </tbody>
+          </table>}
 
 
           </div>
-
+          
+        
         </Container>
       </div>
 
@@ -249,50 +245,53 @@ const TSchedule = () => {
 
 
         <div className='mt-[2rem] ml-[8rem]'>
+          {shows.length ===0 && <p className='text-[gold] text-[2rem] text-center'>OOPS...No Screens In Your Theatre</p>}
+          
           <div className={classes.showsdatatable}>
-            {/* <p className='text-[gold] text-[2rem]'>OOPS...No Screens In Your Theatre</p> */}
-            <table>
-              <thead>
-                <tr className={classes.headingrow}>
-                  <th>#</th>
-                  <th>Show Time</th>
-                  <th>Duration</th>
-                  <th>Screen Name</th>
-                  <th>Movie Name</th>
-                  <th>Show From Date</th>
-                  <th>Show To Date</th>
+          {shows.length !==0 &&
+          <table>
+            <thead>
+              <tr className={classes.headingrow}>
+                <th>#</th>
+                <th>Show Time</th>
+                <th>Duration</th>
+                <th>Screen Name</th>
+                <th>Movie Name</th>
+                <th>Show From Date</th>
+                <th>Show To Date</th>
+              </tr>
+            </thead>
+            <tbody>
+        
+              {shows.map((show, index) =>
+
+                <tr key={index}>
+                  <td>{index + 1}</td>
+                  <td>{show.showtime}</td>
+                  <td>{show.duration}</td>
+                  <td>{show.screenname}</td>
+                  <td>{show.MovieName}</td>
+                  <td>{show.fromdate}</td>
+                  <td>{show.todate}</td>
+                  <td>
+                    <button type="button" className='bg-[blue] w-[6rem] h-[2.2rem] rounded-md text-[white] hover:bg-[indianred]'>
+                      Edit
+                    </button>
+                  </td>
+                  <td>
+                    <button onClick={()=>RemoveShowHandler(show.MovieName,show.screenname,show.showtime)} type="button" className='bg-[blue] w-[6rem] h-[2.2rem] mr-[1rem] rounded-md text-[white] hover:bg-[indianred]'>
+                      Remove
+                    </button>
+                  </td>
                 </tr>
-              </thead>
-              <tbody>
 
-                {shows.map((show, index) =>
-
-                  <tr key={index}>
-                    <td>{index + 1}</td>
-                    <td>{show.showtime}</td>
-                    <td>{show.duration}</td>
-                    <td>{show.screenname}</td>
-                    <td>{show.MovieName}</td>
-                    <td>{show.fromdate}</td>
-                    <td>{show.todate}</td>
-                    <td>
-                      <button type="button" className='bg-[blue] w-[6rem] h-[2.2rem] rounded-md text-[white] hover:bg-[indianred]'>
-                        Edit
-                      </button>
-                    </td>
-                    <td>
-                      <button onClick={()=>RemoveShowHandler(show.MovieName,show.screenname,show.showtime)} type="button" className='bg-[blue] w-[6rem] h-[2.2rem] mr-[1rem] rounded-md text-[white] hover:bg-[indianred]'>
-                        Remove
-                      </button>
-                    </td>
-                  </tr>
-
-                )}
+              )}
 
 
-              </tbody>
-            </table>
-          </div>
+            </tbody>
+          </table>}
+        </div>
+          
         </div>
       </div>
 

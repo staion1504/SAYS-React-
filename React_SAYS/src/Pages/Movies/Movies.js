@@ -49,12 +49,12 @@ const Movies = () => {
 
     setLMoviesArray(x.latestmovies.filter((item) => {
 
-      if (Lfilter == 'ALL' && Gfilter == 'ALL') {
+      if (Lfilter === 'ALL' && Gfilter === 'ALL') {
         return true;
-      } else if (Lfilter != 'ALL' && Gfilter == "ALL") {
+      } else if (Lfilter !== 'ALL' && Gfilter === "ALL") {
         return item.language === Lfilter;
       }
-      else if (Lfilter == 'ALL' && Gfilter != "ALL") {
+      else if (Lfilter === 'ALL' && Gfilter !== "ALL") {
         return substringMatches(Gfilter, item.genre);
       }
       else {
@@ -67,12 +67,12 @@ const Movies = () => {
 
     setUMoviesArray(x.upcomingmovies.filter((item) => {
 
-      if (Lfilter == 'ALL' && Gfilter == 'ALL') {
+      if (Lfilter === 'ALL' && Gfilter === 'ALL') {
         return true;
-      } else if (Lfilter != 'ALL' && Gfilter == "ALL") {
+      } else if (Lfilter !== 'ALL' && Gfilter === "ALL") {
         return item.language === Lfilter;
       }
-      else if (Lfilter == 'ALL' && Gfilter != "ALL") {
+      else if (Lfilter === 'ALL' && Gfilter !== "ALL") {
         return substringMatches(Gfilter, item.genre);
       }
       else {

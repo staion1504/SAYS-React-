@@ -115,48 +115,52 @@ const TheatreSnacks = () => {
    {/* <p className='text-[gold] text-[2rem] items-center text-center mt-[2rem]'>OOPS...No Snacks are Present in your Theatre</p>} */}
    
    <Container className='mt-[2rem] flex justify-center'>  
-   <div className={classes.table}>  
-     <table>
-       <thead>
-         <tr className={classes.headingrow}>
-           <th className={classes.th}>#Pic</th>
-           <th className={classes.th}>Snack Name</th>
-           <th className={classes.th}>Category</th>
-           <th className={classes.th}>Price</th>
-         </tr>
-       </thead>
-       
-       <tbody>
+   {snacksarr.length===0 && <p className='text-[gold] text-[2rem] mt-[1rem]'>No Snacks Present in this theatre!!!</p>} 
+   {snacksarr.length!==0 &&
+   <div className={classes.table}> 
+   
+   <table>
+   <thead>
+     <tr className={classes.headingrow}>
+       <th className={classes.th}>#Pic</th>
+       <th className={classes.th}>Snack Name</th>
+       <th className={classes.th}>Category</th>
+       <th className={classes.th}>Price</th>
+     </tr>
+   </thead>
+   
+   <tbody>
+    {snacksarr.map((snack)=>{
+        return(
+        <tr>  
+        <td className={classes.td}>
+            <img src={snack.imgurl} alt="" className={classes.snackpic}/>
+        </td>
+        <td className={classes.td}>{snack.SnackName}</td>
+        <td className={classes.td}>{snack.category}</td>
+        <td className={classes.td} style={{fontWeight:600}}>{snack.price}/-</td>
+        <td className={classes.td}>
+          <div className='flex'>
+             <button onClick={()=>{getsnackdetails(snack)}} className='rounded-md bg-[#0d6efd] hover:bg-[#2196F3] text-white p-2 w-[6rem]'>
+                Edit
+             </button>
 
-        {snacksarr.map((snack)=>{
-            return(
-            <tr>  
-            <td className={classes.td}>
-                <img src={snack.imgurl} alt="" className={classes.snackpic}/>
-            </td>
-            <td className={classes.td}>{snack.SnackName}</td>
-            <td className={classes.td}>{snack.category}</td>
-            <td className={classes.td} style={{fontWeight:600}}>{snack.price}/-</td>
-            <td className={classes.td}>
-              <div className='flex'>
-                 <button onClick={()=>{getsnackdetails(snack)}} className='rounded-md bg-[#0d6efd] hover:bg-[#2196F3] text-white p-2 w-[6rem]'>
-                    Edit
-                 </button>
-
-                 <button onClick={()=>removeHandler(snack)} className='rounded-md bg-[#0d6efd] hover:bg-[#2196F3] ml-[2rem] text-white p-2 w-[6rem]'>
-                    Remove
-                 </button>
-              </div> 
-            </td>
-          </tr>)
-        })}
-         
+             <button onClick={()=>removeHandler(snack)} className='rounded-md bg-[#0d6efd] hover:bg-[#2196F3] ml-[2rem] text-white p-2 w-[6rem]'>
+                Remove
+             </button>
+          </div> 
+        </td>
+      </tr>)
+    })}
      
-          
-       
-       </tbody>
-     </table>
- </div>      
+ 
+      
+   
+   </tbody>
+ </table>
+  
+</div>      }
+   
 
 </Container>
 

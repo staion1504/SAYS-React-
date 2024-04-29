@@ -29,19 +29,19 @@ export const RentMovie = ({ rentMovieHandler, rentedMovies, show, handleClose,to
         </Modal.Header>
         <Modal.Body className='bg-[lightgoldenrodyellow]'>
           <form className='font-semibold' onSubmit={handleSubmit(onSubmit)}>
-            <label htmlFor="movie_title">Movie Title:</label>
+            <label htmlFor="movie_title" className='text-black'>Movie Title:</label>
             <input {...register('MovieName')} className={classes.text} type='text' value={rentedMovies.MovieName} required readOnly />
 
-            <label htmlFor="customer_name">Theatre Name:</label>
+            <label htmlFor="customer_name" className='text-black'>Theatre Name:</label>
             <input {...register('tname')} className={classes.text} type='text' value={tobj.tName} required readOnly />
 
-            <label htmlFor="customer_email">Theatre Mail:</label>
+            <label htmlFor="customer_email" className='text-black'>Theatre Mail:</label>
             <input {...register('temail')} className={classes.email} type='email' value={tobj.temail} required readOnly />
 
-            <label htmlFor="rental_days">Rental Days:</label>
+            <label htmlFor="rental_days" className='text-black'>Rental Days:</label>
             <input {...register('rentaldays')} className={classes.number} type='number' min="1" max="30" required />
 
-            <label htmlFor="rental_date">Rental Date:</label>
+            <label htmlFor="rental_date" className='text-black'>Rental Date:</label>
             <input {...register('rentaldate')} className={classes.date} type='date'  required />
 
             <button className='border-0 bg-[#4CAF50] text-white rounded-[4px] w-[5.5rem] h-[2.5rem] hover:bg-[#3e8e41]' type="submit">Rent</button>
