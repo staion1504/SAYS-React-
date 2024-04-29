@@ -39,6 +39,13 @@ router.get("/", async function (req, res) {
     // else res.redirect("/login");
   });
 
+
+
+  
+
+
+
+
   router.post("/", async function (req, res) {
     let email = req.body.email;
     let message = req.body.message;

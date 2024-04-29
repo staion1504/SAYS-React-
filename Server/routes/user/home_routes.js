@@ -12,7 +12,6 @@ router.get("/", function (req, res) {
 
 router.post("/", async (req, res, next) => {
   try {
-    console.log(rq);
     const loc = req.body.loc;
     const treffarr = [];
 
