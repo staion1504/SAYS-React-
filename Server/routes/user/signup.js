@@ -11,6 +11,81 @@ router.get("/", function (req, res) {
 });
 
 
+/**
+ * @swagger
+ * /Signup:
+ *   post:
+ *     summary: Sign up for a new user account
+ *     tags: [USER SIGNUP]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               First_Name:
+ *                 type: string
+ *                 description: First name of the user
+ *               Last_Name:
+ *                 type: string
+ *                 description: Last name of the user
+ *               DOB:
+ *                 type: string
+ *                 description: Date of birth of the user
+ *               email:
+ *                 type: string
+ *                 description: Email address of the user
+ *               Mobile_Number:
+ *                 type: string
+ *                 description: Mobile number of the user
+ *               gender:
+ *                 type: string
+ *                 description: Gender of the user
+ *               Login_password:
+ *                 type: string
+ *                 description: Password for logging in
+ *               Profile_password:
+ *                 type: string
+ *                 description: Password for profile access
+ *               Card_Name:
+ *                 type: string
+ *                 description: Name on the card
+ *               Card_Number:
+ *                 type: string
+ *                 description: Card number
+ *               CVV:
+ *                 type: string
+ *                 description: CVV of the card
+ *               Expiry:
+ *                 type: string
+ *                 description: Expiry date of the card
+ *     responses:
+ *       '200':
+ *         description: Successful sign-up
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: string
+ *               description: Redirect URL to login page
+ *               example: "/login"
+ *       '400':
+ *         description: Bad request or validation error
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: string
+ *               description: Error message indicating the validation issue
+ *       '500':
+ *         description: Internal server error
+ */
+
+
+
+
+
+
+
 // Custom Middleware
 const validation = (req, res, next) => {
   let email = req.body.email;

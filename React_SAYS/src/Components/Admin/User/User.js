@@ -17,6 +17,7 @@ const User = () => {
       headers: {
         'Content-Type': 'application/json',
       },
+      credentials: 'include',
     });
     const x = await response.json();
      const usersarr=[];
@@ -35,7 +36,7 @@ const User = () => {
     const RemoveHandler=async (uid)=>{
       
       let response = await fetch("http://localhost:5000/Adminclient/removeuser", {
-        method: 'POST',
+        method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
         },

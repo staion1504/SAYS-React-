@@ -2,12 +2,12 @@ import 'bootstrap/dist/css/bootstrap.css';
 import Dropdown from 'react-bootstrap/Dropdown';
 import profileimg from '../../../../Assests/NavBar/image.jpg';
 import classes from './ProfileDropDown.module.css';
-import { Link } from 'react-router-dom';
+import { Link ,useNavigate} from 'react-router-dom';
 import { useState,useEffect } from 'react';
 const ProfileDropDown=(props)=>{
 
   const [imageSrc, setImageSrc] = useState("https://png.pngtree.com/png-vector/20190501/ourmid/pngtree-users-icon-design-png-image_1014936.jpg");
-
+  const navigate=useNavigate();
   const renderUserpic = async () => {
     // console.log("hi");
     const res = await fetch('http://localhost:5000/profile/profilepic', {
@@ -29,7 +29,22 @@ const ProfileDropDown=(props)=>{
   useEffect(() => {
     renderUserpic();
   }, []);
+  
+   
+  async function signout(){
 
+   await fetch('http://localhost:5000/signout', {
+    method: 'get',
+    headers: {
+      "Content-Type": 'application/json'
+    },
+    credentials: 'include',
+  });
+  
+  navigate('/');
+
+  }
+  
       const styleobj1=props.flag==="M"?{backgroundColor:"black"}:{backgroundColor:"#181616",height:"3.5rem"};
 
      const styleobj2=props.flag==="M"?{marginTop:"1.5rem"}:{}               
@@ -45,7 +60,8 @@ const ProfileDropDown=(props)=>{
               <Dropdown.Item><Link to="/User/RecentBookings"><span className={classes.dropdownlist}>Recent Booking</span></Link></Dropdown.Item>
               <Dropdown.Item><Link to="/User/EditProfile"><span className={classes.dropdownlist}>Change Passwords</span></Link></Dropdown.Item>
               <Dropdown.Divider/>
-              <Dropdown.Item><Link to="/"><span className={classes.dropdownlist}>Sign Out</span></Link></Dropdown.Item>
+              {/* <Dropdown.Item><Link to="/"><span className={classes.dropdownlist}>Sign Out</span></Link></Dropdown.Item> */}
+              <Dropdown.Item onClick={signout}><span className={classes.dropdownlist}>Sign Out</span></Dropdown.Item>
             </Dropdown.Menu>
         </Dropdown>
         </div>);

@@ -26,6 +26,51 @@ router.get("/profileeditpage", function (req, res) {
     res.render("profileeditpage", { error: show_error });
   else res.redirect("/login");
 });
+/**
+ * @swagger
+ * /profile/profileeditpage/checklogin:
+ *   post:
+ *     summary: Check user profile login credentials for profile editing page
+ *     tags: [USER PROFILE]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               email:
+ *                 type: string
+ *                 description: User's email address
+ *               password:
+ *                 type: string
+ *                 description: User's password
+ *     responses:
+ *       '200':
+ *         description: Successful response
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 s:
+ *                   type: boolean
+ *                   description: Indicates whether login credentials are valid
+ *                   example: true
+ *       '404':
+ *         description: User login credentials are invalid
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 s:
+ *                   type: boolean
+ *                   description: Indicates that login credentials are invalid
+ *                   example: false
+ *       '500':
+ *         description: Internal server error
+ */
 
 router.post("/profileeditpage/checklogin", function (req, res) {
   let User_ReferenceNumber = req.body.email;
@@ -51,7 +96,7 @@ router.post("/profileeditpage/checklogin", function (req, res) {
     });
 });
 
-router.post("/profileeditpage", function (req, res) {
+router.put("/profileeditpage", function (req, res) {
   let document = {};
   let User_ReferenceNumber = req.cookies.UserReferenceNumber;
   let email = req.body.email;

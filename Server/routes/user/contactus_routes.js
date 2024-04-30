@@ -41,10 +41,6 @@ router.get("/", async function (req, res) {
 
 
 
-  
-
-
-
 
   router.post("/", async function (req, res) {
     let email = req.body.email;
