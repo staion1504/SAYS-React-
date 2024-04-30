@@ -4,9 +4,30 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faEnvelopesBulk } from '@fortawesome/free-solid-svg-icons';
-import {Link} from "react-router-dom";
+import {Link,useNavigate} from "react-router-dom";
+
+
 
 const AdminNav = ({signout}) => {
+
+  const naviagte=useNavigate()
+  
+async function Logout(){
+  
+  
+
+  await fetch('http://localhost:5000/signout', {
+    method: 'get',
+    headers: {
+      "Content-Type": 'application/json'
+    },
+    credentials: 'include',
+  });
+  
+  naviagte('/');
+
+} 
+
   return (
     <Navbar expand="lg" className="bg-[#221f1f]">
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -24,9 +45,10 @@ const AdminNav = ({signout}) => {
             <FontAwesomeIcon icon={faEnvelopesBulk} style={{color:"#ffd700",}} className='text-[1.5rem]'/>
           </Link>
           {signout && 
-          <Link className='mr-6' to="/">
-            <button className=' border-0 bg-[red] text-white rounded-[5px] w-[5rem] h-[2rem]'>LogOut</button>
-          </Link>}
+          <Link className='mr-6' onClick={Logout} >
+            <button className=' border-0 bg-[red] text-white rounded-[5px] w-[5rem] h-[2rem]' >LogOut</button>
+          </Link>
+         }
          </div>
       </Navbar.Collapse>
   </Navbar>

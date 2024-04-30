@@ -10,6 +10,26 @@ function TNavbar() {
     const handleDropdownToggle = () => {
       setDropdownOpen(!dropdownOpen);
     };
+   
+    async function signout(){
+       
+      console.log("hi");
+
+      await fetch('http://localhost:5000/Tsignout', {
+        method: 'get',
+        headers: {
+          "Content-Type": 'application/json'
+        },
+        credentials: 'include',
+      });
+      
+      navigate('/');
+
+
+
+    }
+     
+
 
   return (
     <Navbar expand="lg" className="bg-[#221f1f] text-[1.3rem] ">
@@ -45,7 +65,7 @@ function TNavbar() {
           <NavDropdown.Item onClick={()=>{navigate("/Theatre/Profile")}}>Profile</NavDropdown.Item>
           <NavDropdown.Item>Edit Profile</NavDropdown.Item>
           <NavDropdown.Divider />
-          <div className="ml-4"><Link to="/">Sign Out</Link></div>
+          <div className="ml-4" onClick={signout}>Sign Out</div>
         </NavDropdown>
       </div>
 

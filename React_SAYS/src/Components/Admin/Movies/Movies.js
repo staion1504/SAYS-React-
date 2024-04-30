@@ -39,6 +39,7 @@ export const Movies = () => {
     headers: {
       'Content-Type': 'application/json',
     },
+    credentials: 'include',
   });
   const x = await response.json();
   console.log(x);
@@ -112,7 +113,7 @@ export const Movies = () => {
 
   const RemoveHandler=async ()=>{
     let response = await fetch("http://localhost:5000/Adminmovies/adminremovemovie", {
-    method: 'POST',
+    method: 'DELETE',
     headers: {
       'Content-Type': 'application/json',
     },

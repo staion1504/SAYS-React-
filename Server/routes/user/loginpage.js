@@ -15,6 +15,44 @@ const validation = (req, res, next) => {
 
 router.use(validation);
 
+/**
+ * @swagger
+ * /login:
+ *   post:
+ *     summary: User login
+ *     tags: [USER LOGIN]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               email:
+ *                 type: string
+ *                 description: User's email address
+ *                 example: surya@gmail.com
+ *               password:
+ *                 type: string
+ *                 description: User's password (hashed)
+ *                 example: Surya@123 
+ *     responses:
+ *       '200':
+ *         description: User login successful
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 result:
+ *                   type: string
+ *                   description: Indicates the result of the login attempt
+ *                   example: User Login success
+ *                 UserReferenceNumber:
+ *                   type: string
+ *                   description: Unique identifier of the user
+ *                   example: SAYS@1234567890
+ */
 
 router.post("/", function (req, res) {
 
@@ -29,17 +67,22 @@ router.post("/", function (req, res) {
     } else {
 
       console.log("User Login success");
+      
       res.cookie("UserReferenceNumber", value[0].UserReferenceNumber);
       if (email == "saysadmin@gmail.com") {
+        res.cookie("islogin", "admin");
         res.json({
           result: "adminhome"
         })
       }
-      else
+      else{
+        res.cookie("islogin", "user");
         res.json({
           result: "home",
           UserReferenceNumber: value[0].UserReferenceNumber
         });
+      }
+       
     }
   });
 });

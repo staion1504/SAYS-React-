@@ -29,11 +29,12 @@ const Theatre = () => {
     const RemoveHandler=async (tid)=>{
     
     let response = await fetch("http://localhost:5000/Admintheatre/removetheatre", {
-      method: 'POST',
+      method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
       },
-      body:JSON.stringify({tid : tid})
+      body:JSON.stringify({tid : tid}),
+      credentials: 'include'
     });
     const res = await response.json();
     

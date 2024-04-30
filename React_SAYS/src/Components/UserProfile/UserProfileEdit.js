@@ -36,7 +36,25 @@ const UserProfileEdit = () => {
   },[]);  
   
   
-  
+  // const updateDetails=async ()=>{
+      
+  //    let obj;
+
+  //   const res=await fetch('http://localhost:5000/profile/profileeditpage',{
+  //     method:'put',
+  //     headers: {
+  //        "Content-Type": 'application/json'
+  //     },
+  //     body:JSON.stringify(obj),
+  //     credentials:'include',
+  //    });
+
+  //    const response=await res.json();
+     
+        
+
+
+  // }
   
   
   return (

@@ -77,7 +77,7 @@ const SeatArrangement = () => {
 
         let k=await res2.json();
         let res3 = await fetch('http://localhost:5000/movies/seatarrangement/updateseatsarr', {
-            method: 'post',
+            method: 'put',
             body: JSON.stringify(obj3),
             headers: {
                 "Content-Type": 'application/json'
