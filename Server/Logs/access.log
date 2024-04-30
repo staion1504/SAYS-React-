@@ -1,0 +1,6 @@
+POST  /login 200 67 - 337.211 ms Tue, 30 Apr 2024 13:27:53 GMT
+GET  /profile/profilepic 200 3 - 489.077 ms Tue, 30 Apr 2024 13:27:54 GMT
+POST  /home 200 4933 - 4001.663 ms Tue, 30 Apr 2024 13:27:57 GMT
+POST  /login 200 67 - 316.200 ms Tue, 30 Apr 2024 17:15:14 GMT
+GET  /profile/profilepic 200 3 - 287.726 ms Tue, 30 Apr 2024 17:15:14 GMT
+POST  /home 200 4933 - 3390.789 ms Tue, 30 Apr 2024 17:15:17 GMT

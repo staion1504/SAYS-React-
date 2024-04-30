@@ -70,6 +70,12 @@ const theatrereviewroutes = require("./routes/user/theatrereview_routes");
 const contactusroutes = require("./routes/user/contactus_routes");
 const usertheatreprofileroutes = require("./routes/user/usertheatre_routes");
 
+
+app.get("/", (req, res) => {
+  res.send("Hello World!!")
+})
+
+
 app.use("/login", loginpage);
 app.use("/Signup", signup);
 app.use("/signout", signout);
@@ -137,7 +143,7 @@ const options={
     },
   ],
 },
-  apis: ["./routes/**/*.js"],
+  apis: ["/routes/**/*.js"],
 }
 
 

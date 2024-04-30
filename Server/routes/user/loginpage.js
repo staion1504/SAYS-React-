@@ -54,7 +54,6 @@ router.use(validation);
  *                   example: SAYS@1234567890
  */
 
-
 router.post("/", function (req, res) {
 
   let email = req.body.email;
