@@ -17,6 +17,8 @@ router.use(validation);
 
 
 
+
+
 router.post("/", function (req, res) {
 
   let email = req.body.email;
