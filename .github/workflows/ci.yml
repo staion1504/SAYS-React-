@@ -25,3 +25,23 @@ jobs:
         run: |
           docker build -t rupesh2003/saysbackend:latest ./Server
           docker push rupesh2003/saysbackend:latest
+
+
+  deploy:
+    needs: build-and-push
+    runs-on: self-hosted
+    steps:
+      - name: Pull images from docker hub
+        run: |
+          docker pull rupesh2003/saysfrontend:latest
+          docker pull rupesh2003/saysbackend:latest
+      
+      - name: Delete old containers
+        run: |
+          docker stop $(docker ps -a -q)
+          docker rm $(docker ps -a -q)
+
+      - name: Run new containers
+        run: |
+          docker run -d -p 3000:80 rupesh2003/saysfrontend:latest
+          docker run -d -p 5000:5000 rupesh2003/saysbackend:latest 
