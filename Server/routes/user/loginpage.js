@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const md5 = require("md5");
 //database
-const userinfo = require("../../models/user/signup");
+const userinfo = require("../../Models/user/signup");
 
 const validation = (req, res, next) => {
   const { email, password } = req.body;
@@ -14,9 +14,6 @@ const validation = (req, res, next) => {
 };
 
 router.use(validation);
-
-
-
 
 
 router.post("/", function (req, res) {
