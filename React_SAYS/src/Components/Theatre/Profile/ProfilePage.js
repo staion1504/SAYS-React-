@@ -5,13 +5,16 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { Link } from 'react-router-dom';
+import URL from '../../../URL';
+
+
 
 const TheatreProfile = () => {
   const [Tdetails,setTdetails]=useState({});
   
   const getdetails = async () =>{
    
-     const response = await fetch("http://localhost:5000/tprofile",
+     const response = await fetch(URL+"/tprofile",
      {
        method: "GET",
        headers: {

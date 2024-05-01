@@ -2,6 +2,9 @@ import React, { useEffect, useState } from "react";
 import TNavbar from "../TCommon/navbar.js";
 import UtiInfoCss from './usertheatreinfo.module.css';
 import { useNavigate } from "react-router-dom";
+import URL from "../../../URL.js";
+
+
 
 const Usertheatreinfo = () => {
     const [edit,setedit]=useState(false);
@@ -21,7 +24,7 @@ const Usertheatreinfo = () => {
 
 
     const getDetails=async ()=>{
-        const response1=await fetch(`http://localhost:5000/usertheatreinfo/getreffnum`,{
+        const response1=await fetch(URL+`/usertheatreinfo/getreffnum`,{
            method:"GET",
             headers:{
                 "Content-Type":"application/json"
@@ -31,7 +34,7 @@ const Usertheatreinfo = () => {
 
         const res1=await response1.json();  
         settreff(res1.treffnum);
-        const response2=await fetch(`http://localhost:5000/usertheatreinfo/getinfo`,{
+        const response2=await fetch(URL+`/usertheatreinfo/getinfo`,{
             method:"POST",
             headers:{
               "Content-Type":"application/json"
@@ -78,7 +81,7 @@ const Usertheatreinfo = () => {
         const OnclickHandler=async (e)=>{
             e.preventDefault();
             setedit(!edit);
-            const response3=await fetch(`http://localhost:5000/usertheatreinfo`,{
+            const response3=await fetch(URL+`/usertheatreinfo`,{
                  method:"POST",
                  headers:{
                    "Content-Type":"application/json"

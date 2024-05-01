@@ -3,6 +3,9 @@ import classes from './User.module.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import AdminNav from '../../Common/Admin/Navbar/AdminNav';
 import {Container} from 'react-bootstrap';
+import URL from '../../../URL';
+
+
 
 
 
@@ -12,7 +15,7 @@ const User = () => {
   const [users,setusers]=useState([]);
 
   const get_users_func=async ()=>{
-    let response = await fetch("http://localhost:5000/Adminclient", {
+    let response = await fetch(URL+"/Adminclient", {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -35,7 +38,7 @@ const User = () => {
 
     const RemoveHandler=async (uid)=>{
       
-      let response = await fetch("http://localhost:5000/Adminclient/removeuser", {
+      let response = await fetch(URL+"/Adminclient/removeuser", {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',

@@ -5,6 +5,9 @@ import TheatreRegistration from '../TheatreRegistration';
 import { useForm } from 'react-hook-form';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import URL from '../../../URL';
+
+
 const RegForm = (props) => {
 
     const { handleSubmit, register } = useForm();
@@ -21,7 +24,7 @@ const RegForm = (props) => {
             api = "TSignup";
         }
         // console.log(api);
-        let response = await fetch("http://localhost:5000/" + api, {
+        let response = await fetch(URL+"/" + api, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

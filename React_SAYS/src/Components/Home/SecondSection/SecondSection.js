@@ -16,6 +16,9 @@ import classes from './SecondSection.module.css';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import URL from '../../../URL';
+
+
 
 const SecondSection=()=>{ 
   
@@ -28,7 +31,7 @@ const SecondSection=()=>{
   const navigate=useNavigate();
 
   const getDetails=async ()=>{
-    const response = await fetch(`http://localhost:5000/home`, {
+    const response = await fetch(URL+`/home`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

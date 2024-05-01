@@ -3,6 +3,10 @@ import 'bootstrap/dist/css/bootstrap.css';
 import classes from './UserProfileEdit.module.css';
 import { Row,Col,Container} from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import URL from '../../URL';
+
+
+
 const UserProfileEdit = () => {
   
   const [fname,setfname]=useState("");
@@ -13,7 +17,7 @@ const UserProfileEdit = () => {
   const [birthdate,setbirthdate]=useState("");
 
   const renderUserDetails=async ()=>{
-       const res=await fetch('http://localhost:5000/profile/laptopprofilepage/getdetails',{
+       const res=await fetch(URL+'/profile/laptopprofilepage/getdetails',{
          method:'get',
          headers: {
             "Content-Type": 'application/json'

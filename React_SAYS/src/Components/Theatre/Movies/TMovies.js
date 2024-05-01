@@ -9,6 +9,9 @@ import MovieInfo from '../../Admin/Movies/MovieInfo/MovieInfo';
 import { AddMovie } from './AddMovie/Addmovie';
 import { EditMovie } from './EditMovie/EditMovie';
 import { RentMovie } from './RentMovie/RentMovie';
+import URL from '../../../URL';
+
+
 
 
 
@@ -28,7 +31,7 @@ const TMovies = () => {
  async function rentMovieHandler(data) {
 
     setShow4(false);
-     let response=await fetch("http://localhost:5000/tmdashboard/rental",{
+     let response=await fetch(URL+"/tmdashboard/rental",{
 
       method: "POST",
           headers: {
@@ -52,7 +55,7 @@ const TMovies = () => {
   async function AddedMovieHandler(data) {
     console.log(data);
     let res = await fetch(
-      "http://localhost:5000/tmdashboard/addmovie",
+      URL+"/tmdashboard/addmovie",
       {
         method: "POST",
         headers: {
@@ -72,7 +75,7 @@ const TMovies = () => {
     const gettheatredetails = async () => {
       console.log("came in");
       let res = await fetch(
-        "http://localhost:5000/tmdashboard/gettheatredetails",
+        URL+"/tmdashboard/gettheatredetails",
         {
           method: "GET",
           headers: {
@@ -93,7 +96,7 @@ const TMovies = () => {
   let renderdata=  async () => {
 
 
-    let response = await fetch("http://localhost:5000/tmdashboard", {
+    let response = await fetch(URL+"/tmdashboard", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

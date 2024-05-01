@@ -8,6 +8,9 @@ import Modal from 'react-bootstrap/Modal';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import internalcss from './theatredashboard.module.css';
+import URL from "../../../URL.js";
+
+
 // import { useNavigate } from "react-router-dom";
 
 
@@ -21,7 +24,7 @@ function Theatredashboard() {
   const getDetails=async ()=>{
 
 
-  const response=await fetch(`http://localhost:5000/tdashboard`,{
+  const response=await fetch(URL+`/tdashboard`,{
       method:"GET",
       headers:{
         "Content-Type":"application/json"

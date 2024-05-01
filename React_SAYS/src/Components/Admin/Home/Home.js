@@ -6,7 +6,7 @@ import { Row,Col,Container } from 'react-bootstrap';
 import ProgressBar from 'react-bootstrap/ProgressBar';
 import { useState } from 'react';
 import QueryModal from './QueryModal';
-import URL from "../../../URL"
+import URL from '../../../URL';
 
 
 const Home = () => {
@@ -45,7 +45,7 @@ const Home = () => {
 
 
   const AcceptHandler=async (temail)=>{
-    const response = await fetch("http://localhost:5000/adminhome/accepttheatre",
+    const response = await fetch(URL+"/adminhome/accepttheatre",
     {
       method: "POST",
       body: JSON.stringify({temail:temail}),
@@ -61,7 +61,7 @@ const Home = () => {
   }
 
   const RejectHandler=async (temail)=>{
-    const response = await fetch("http://localhost:5000/adminhome/rejecttheatre",
+    const response = await fetch(URL+"/adminhome/rejecttheatre",
     {
       method: "POST",
       body: JSON.stringify({temail:temail}),

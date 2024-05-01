@@ -4,6 +4,9 @@ import NavBar from '../../Components/Common/NavBar/NavBar';
 import MoviesSection from '../../Components/Movies/MoviesSection/MoviesSection';
 import Footer from '../../Components/Common/Footer/Footer';
 import { useState, useEffect } from 'react';
+import URL from '../../URL';
+
+
 const Movies = () => {
 
   const [Lfilter, setLfilter] = useState("ALL");  //state for filter show or hide
@@ -34,7 +37,7 @@ const Movies = () => {
 
   async function renderData(DefLoc) {
     // console.log("hi came");
-    let response = await fetch("http://localhost:5000/movies", {
+    let response = await fetch(URL+"/movies", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
