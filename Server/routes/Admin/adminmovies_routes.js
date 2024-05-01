@@ -5,7 +5,7 @@ const router = express.Router();
 const movieinfo = require("../../models/theatre/movieinfo");
 const rentalmovieinfo = require("../../models/theatre/rentalmovieslist");
 
-
+const redisClient  = require('../../redis.js');
 /**
  * @swagger
  * /Adminmovies:
@@ -80,8 +80,9 @@ const rentalmovieinfo = require("../../models/theatre/rentalmovieslist");
  *                   description: Error message
  */
 
-router.get("/", async function (req, res) {
+router.get("/", cache,async function (req, res) {
    
+  
    
   if(req.cookies.islogin!="admin"){
     res.status(404).json({
@@ -96,13 +97,25 @@ router.get("/", async function (req, res) {
       rentalmovieslocarr.push(value1[i]["city"]);
     }
   }
-
-  res.json({
+  data={
     rentalmoviearr: rentalmoviearr,
     rentalmovieslocarr: rentalmovieslocarr,
-  });
+  }
+  await redisClient.set('Admin_Movies', JSON.stringify(data));
+  res.json(data);
 });
 
+async function cache(req, res, next) {
+
+  const cachedData = await redisClient.get('Admin_Movies');
+        if (cachedData) {
+            console.log('Data retrieved from cache');
+            return res.json(JSON.parse(cachedData));
+        } else {
+      next();
+    }
+  
+}
 
 
 /**
