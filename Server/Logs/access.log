@@ -86,3 +86,8 @@ POST  /home 200 4933 - 3469.272 ms Wed, 01 May 2024 17:54:04 GMT
 GET  /profile/profilepic 200 3 - 297.880 ms Wed, 01 May 2024 17:54:06 GMT
 POST  /movies 200 32370 - 2917.460 ms Wed, 01 May 2024 17:54:08 GMT
 POST  /movies 200 32370 - 2920.090 ms Wed, 01 May 2024 17:54:08 GMT
+GET  /api-docs/ 200 3106 - 57.376 ms Wed, 01 May 2024 18:08:28 GMT
+GET  /api-docs/swagger-ui-init.js 200 117757 - 2.945 ms Wed, 01 May 2024 18:08:28 GMT
+GET  /api-docs/swagger-ui-standalone-preset.js 200 230304 - 15.985 ms Wed, 01 May 2024 18:08:28 GMT
+GET  /api-docs/swagger-ui.css 200 152071 - 37.278 ms Wed, 01 May 2024 18:08:28 GMT
+GET  /api-docs/swagger-ui-bundle.js 200 1427395 - 26.245 ms Wed, 01 May 2024 18:08:28 GMT
