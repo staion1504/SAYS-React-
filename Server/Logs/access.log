@@ -168,3 +168,10 @@ GET  /movies/seatarrangement?name=The%20Dark%20Knight%20Rises&tReff=SAYSTheatreC
 POST  /movies/seatarrangement/addticket 200 7 - 1791.671 ms Wed, 01 May 2024 21:21:37 GMT
 PUT  /movies/seatarrangement/updateseatsarr 200 7 - 602.699 ms Wed, 01 May 2024 21:21:38 GMT
 GET  /recentbooking/ 200 1074 - 292.946 ms Wed, 01 May 2024 21:21:38 GMT
+POST  /login 400 65 - 304.721 ms Wed, 01 May 2024 21:50:41 GMT
+GET  /profile/profilepic 200 3 - 285.442 ms Wed, 01 May 2024 21:50:41 GMT
+GET  /signout 200 23 - 3.767 ms Wed, 01 May 2024 21:50:43 GMT
+POST  /home 200 4923 - 2855.320 ms Wed, 01 May 2024 21:50:44 GMT
+POST  /login 200 22 - 286.333 ms Wed, 01 May 2024 21:50:49 GMT
+GET  /adminhome 200 1460 - 1453.624 ms Wed, 01 May 2024 21:50:51 GMT
+GET  /Adminmovies 200 91987 - 592.274 ms Wed, 01 May 2024 21:50:51 GMT

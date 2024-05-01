@@ -416,8 +416,8 @@ router.delete("/adminremovemovie", async function (req, res) {
   let value11 = await rentalmovieinfo.find({});
   let rentalmovieslocarr = [];
   for (let i = 0; i < value11.length; i++) {
-    if (!rentalmovieslocarr.includes(value1[i]["city"])) {
-      rentalmovieslocarr.push(value1[i]["city"]);
+    if (!rentalmovieslocarr.includes(value11[i]["city"])) {
+      rentalmovieslocarr.push(value11[i]["city"]);
     }
   }
   data = {
