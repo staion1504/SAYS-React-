@@ -111,11 +111,11 @@ router.get("/gettheatredetails", function (req, res) {
 
 router.post("/getmoviedetails", function (req, res) {
  
-  if(req.cookies.islogin!="theatre"&&req.cookies.islogin!="admin"){
-    res.status(404).json({
-      result: "notloggedin"
-    });
-  }
+  // if(req.cookies.islogin!="theatre"&&req.cookies.islogin!="admin"){
+  //   res.status(404).json({
+  //     result: "notloggedin"
+  //   });
+  // }
   
   console.log("hi");
 
