@@ -10,6 +10,8 @@ import { useState } from 'react';
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 import { Link } from 'react-router-dom';
+import URL from '../../URL';
+
 
 
 
@@ -23,7 +25,7 @@ const UserProfile = () => {
 
   const renderUserpic = async () => {
     // console.log("hi");
-    const res = await fetch('http://localhost:5000/profile/profilepic', {
+    const res = await fetch(URL+'/profile/profilepic', {
       method: 'get',
       headers: {
         "Content-Type": 'application/json'
@@ -40,7 +42,7 @@ const UserProfile = () => {
   }
 
   const renderUserDetails = async () => {
-    const res = await fetch('http://localhost:5000/profile/laptopprofilepage/getdetails', {
+    const res = await fetch(URL+'/profile/laptopprofilepage/getdetails', {
       method: 'get',
       headers: {
         "Content-Type": 'application/json'
@@ -74,7 +76,7 @@ const UserProfile = () => {
       const formData = new FormData();
       formData.append('file', file);
 
-      fetch('http://localhost:5000/profile/profileUpload', {
+      fetch(URL+'/profileUpload', {
         method: 'POST',
         body: formData,
         credentials: 'include'

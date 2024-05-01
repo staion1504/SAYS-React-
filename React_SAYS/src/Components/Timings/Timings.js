@@ -2,6 +2,9 @@ import React, { useEffect, useState } from "react";
 import classes from "./Timings.module.css";
 import { IoInformationCircleOutline } from "react-icons/io5";
 import { useLocation, useNavigate } from 'react-router-dom';
+import URL from "../../URL";
+
+
 
 
 const Timings = (props) => {
@@ -17,7 +20,7 @@ const Timings = (props) => {
   const [showDetails, setshowDetails] = useState([]);
   const [showTime, setshowTime] = useState("Show All");
   async function renderTimings() {
-    let response = await fetch(`http://localhost:5000/movies/timings?name=${(MovieArray.MovieName)}&city=${city}`, {
+    let response = await fetch(URL+`/movies/timings?name=${(MovieArray.MovieName)}&city=${city}`, {
 
       method: "GET",
       headers: {

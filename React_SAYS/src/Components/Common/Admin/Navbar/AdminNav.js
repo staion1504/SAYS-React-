@@ -5,6 +5,9 @@ import Navbar from 'react-bootstrap/Navbar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faEnvelopesBulk } from '@fortawesome/free-solid-svg-icons';
 import {Link,useNavigate} from "react-router-dom";
+import URL from '../../../../URL';
+
+
 
 
 
@@ -16,7 +19,7 @@ async function Logout(){
   
   
 
-  await fetch('http://localhost:5000/signout', {
+  await fetch(URL+'/signout', {
     method: 'get',
     headers: {
       "Content-Type": 'application/json'

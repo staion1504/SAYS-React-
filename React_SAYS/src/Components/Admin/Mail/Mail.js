@@ -3,6 +3,9 @@ import classes from './Mail.module.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import AdminNav from '../../Common/Admin/Navbar/AdminNav';
 import { useNavigate } from 'react-router-dom';
+import URL from '../../../URL';
+
+
 
 const Mail = () => {
   const navigate = useNavigate();
@@ -12,7 +15,7 @@ const Mail = () => {
   const [tomail,settomail] = useState("");
 
   const SubmitMail =async (x) => {
-    const response = await fetch("http://localhost:5000/adminmassmail", {
+    const response = await fetch(URL+"/adminmassmail", {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

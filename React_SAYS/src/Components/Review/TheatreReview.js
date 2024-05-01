@@ -5,6 +5,9 @@ import {faStar as solidStar,faStar as regularStar} from "@fortawesome/free-solid
 import { faStar as farStar } from "@fortawesome/free-regular-svg-icons";
 import { Link } from "react-router-dom";
 import { useLocation} from 'react-router-dom';
+import URL from '../../URL';
+
+
 
 const TheatreReview = () => {
     const { search } = useLocation();
@@ -18,7 +21,7 @@ const TheatreReview = () => {
 
 
     const LoadDetails=async (treff)=>{
-        const response=await fetch(`http://localhost:5000/treviews?treff=${treff}`,{
+        const response=await fetch(URL+`/treviews?treff=${treff}`,{
             method:"GET",
             headers:{
               "Content-Type":"application/json"
@@ -40,7 +43,7 @@ const TheatreReview = () => {
 
 
       const postreview = async (treview,rating) =>{
-        const response = await fetch(`http://localhost:5000/treviews?treff=${treff}`, {
+        const response = await fetch(URL+`/treviews?treff=${treff}`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',

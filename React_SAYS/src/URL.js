@@ -1,3 +1,3 @@
-const URL = "https://saysbackend.onrender.com"
+const URL = "http://localhost:5000"
 
 module.exports = URL
