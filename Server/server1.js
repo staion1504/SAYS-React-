@@ -21,10 +21,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());  
 
 
-app.listen(5000, function () {
-  console.log("server straed on port 5000");
-});
-
 //Morgan Middleware
 const accessLogStream=fs.createWriteStream(path.join(__dirname,'/Logs/access.log'),{flags: 'a'});
 app.use(morgan(':method  :url :status :res[content-length] - :response-time ms :date[web]', {stream: accessLogStream}));
@@ -158,8 +154,7 @@ app.use((err, req, res, next) => {
   // console.log("Error Printed");
   console.log(err.message);
   errorStatusCode = err.statusCode || 500;
-  res.status(errorStatusCode).json({ error: 'Something broke!' });
-  
+  res.status(errorStatusCode).json({ error: 'Something broke!' }); 
 })
 
 
