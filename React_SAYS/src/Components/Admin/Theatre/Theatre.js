@@ -19,6 +19,7 @@ const Theatre = () => {
       headers: {
         'Content-Type': 'application/json',
       },
+      credentials:'include'
     });
     const res = await response.json();
     settheatres(res.theatres);

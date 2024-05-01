@@ -43,7 +43,8 @@ const User = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body:JSON.stringify({uid : uid})
+        body:JSON.stringify({uid : uid}),
+        credentials: 'include'
       });
       const res = await response.json();
       

@@ -91,7 +91,8 @@ export const Movies = () => {
     headers: {
       'Content-Type': 'application/json',
     },
-    body:JSON.stringify(x)
+    body:JSON.stringify(x),
+    credentials: 'include'
   });
   const x1 = await response.json();
      
@@ -118,7 +119,8 @@ export const Movies = () => {
     headers: {
       'Content-Type': 'application/json',
     },
-    body:JSON.stringify({moviename : removemovie})
+    body:JSON.stringify({moviename : removemovie}),
+    credentials: 'include'
   });
   const res = await response.json();
   

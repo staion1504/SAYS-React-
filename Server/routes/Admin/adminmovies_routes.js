@@ -322,7 +322,20 @@ router.post("/adminrentalmovieinfo", async function (req, res) {
   if (value3) {
     console.log("Rental movies inserted ");
   }
-  // await redis.set('Admin_Movies', JSON.stringify(data));
+
+  let rentalmoviearr = await movieinfo.find({});
+  let value1 = await rentalmovieinfo.find({});
+  let rentalmovieslocarr = [];
+  for (let i = 0; i < value1.length; i++) {
+    if (!rentalmovieslocarr.includes(value1[i]["city"])) {
+      rentalmovieslocarr.push(value1[i]["city"]);
+    }
+  }
+  data = {
+    rentalmoviearr: rentalmoviearr,
+    rentalmovieslocarr: rentalmovieslocarr,
+  }
+  await redis.set('Admin_Movies', JSON.stringify(data));
   res.json("added");
 });
 
@@ -398,6 +411,20 @@ router.delete("/adminremovemovie", async function (req, res) {
   await movieinfo.deleteOne({ MovieId: mid });
   await rentalmovieinfo.deleteMany({ MovieId: mid });
   console.log("Movie Removed by Admin");
+
+  let rentalmoviearr = await movieinfo.find({});
+  let value11 = await rentalmovieinfo.find({});
+  let rentalmovieslocarr = [];
+  for (let i = 0; i < value11.length; i++) {
+    if (!rentalmovieslocarr.includes(value1[i]["city"])) {
+      rentalmovieslocarr.push(value1[i]["city"]);
+    }
+  }
+  data = {
+    rentalmoviearr: rentalmoviearr,
+    rentalmovieslocarr: rentalmovieslocarr,
+  }
+  await redis.set('Admin_Movies', JSON.stringify(data));
   res.json({ k: 1 });
 });
 
