@@ -6,6 +6,7 @@ import { Row,Col,Container } from 'react-bootstrap';
 import ProgressBar from 'react-bootstrap/ProgressBar';
 import { useState } from 'react';
 import QueryModal from './QueryModal';
+import URL from "../../../URL"
 
 
 const Home = () => {
@@ -19,7 +20,10 @@ const Home = () => {
   const [tverificationarr,settverificationarr]=useState([]);
 
   const getdetails=async ()=>{
-    const response2 = await fetch("http://localhost:5000/adminhome", {
+    
+
+   console.log(URL+'/adminhome');
+    const response2 = await fetch(URL+'/adminhome', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -35,8 +39,6 @@ const Home = () => {
   }
 
 
-
-  
   useEffect(()=>{
     getdetails();
   },[]);

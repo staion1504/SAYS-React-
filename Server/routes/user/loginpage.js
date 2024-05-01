@@ -61,7 +61,7 @@ router.post("/", function (req, res) {
 
   userinfo.find({ email: email, LoginPassword: password }).then((value) => {
     if (value.length == 0) {
-      res.json({
+      res.status(400).json({
         result: "error",
       });
     } else {
@@ -71,13 +71,13 @@ router.post("/", function (req, res) {
       res.cookie("UserReferenceNumber", value[0].UserReferenceNumber);
       if (email == "saysadmin@gmail.com") {
         res.cookie("islogin", "admin");
-        res.json({
+        res.status(200).json({
           result: "adminhome"
         })
       }
       else{
         res.cookie("islogin", "user");
-        res.json({
+        res.status(400).json({
           result: "home",
           UserReferenceNumber: value[0].UserReferenceNumber
         });

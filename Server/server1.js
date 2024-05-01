@@ -17,23 +17,9 @@ const app = express();
 app.use(helmet()); 
 
 app.use(cors({ origin: true, credentials: true })); // Enable CORS for all routes(all reuestes are accepted 3000,8000 ports creditonals for allownig cookies)
-
-app.use(
-  cors({
-    origin: ["http://localhost:3000","http://3.108.54.68:3000","https://mind-meld-react.vercel.app"],
-    methods: ["POST", "GET", "HEAD", "PUT", "DELETE"],
-    credentials: true,
-  })
-);
-
-
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());  
 
-
-app.listen(5000, function () {
-  console.log("server straed on port 5000");
-});
 
 //Morgan Middleware
 const accessLogStream=fs.createWriteStream(path.join(__dirname,'/Logs/access.log'),{flags: 'a'});
@@ -82,7 +68,7 @@ const usertheatreprofileroutes = require("./routes/user/usertheatre_routes");
 
 
 app.get("/", (req, res) => {
-  res.send("Hello World fine!!")
+  res.send("Hello World!!")
 })
 
 
@@ -168,8 +154,7 @@ app.use((err, req, res, next) => {
   // console.log("Error Printed");
   console.log(err.message);
   errorStatusCode = err.statusCode || 500;
-  res.status(errorStatusCode).json({ error: 'Something broke!' });
-  
+  res.status(errorStatusCode).json({ error: 'Something broke!' }); 
 })
 
 
