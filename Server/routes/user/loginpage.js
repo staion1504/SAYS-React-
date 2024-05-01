@@ -77,7 +77,7 @@ router.post("/", function (req, res) {
       }
       else{
         res.cookie("islogin", "user");
-        res.status(400).json({
+        res.status(200).json({
           result: "home",
           UserReferenceNumber: value[0].UserReferenceNumber
         });
