@@ -157,4 +157,6 @@ app.use((err, req, res, next) => {
   res.status(errorStatusCode).json({ error: 'Something broke!' }); 
 })
 
+module.exports = app;
+
 

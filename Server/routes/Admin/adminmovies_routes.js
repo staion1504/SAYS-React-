@@ -5,7 +5,8 @@ const router = express.Router();
 const movieinfo = require("../../models/theatre/movieinfo");
 const rentalmovieinfo = require("../../models/theatre/rentalmovieslist");
 
-const redisClient  = require('../../redis.js');
+const redis = require('../../redis.js');
+
 /**
  * @swagger
  * /Adminmovies:
@@ -80,16 +81,24 @@ const redisClient  = require('../../redis.js');
  *                   description: Error message
  */
 
-router.get("/", cache,async function (req, res) {
-   
-  
-   
-  if(req.cookies.islogin!="admin"){
+router.get("/",  async function (req, res) {
+
+
+
+  if (req.cookies.islogin != "admin") {
     res.status(404).json({
       result: "Admin Should login"
     });
   }
-   let rentalmoviearr = await movieinfo.find({});
+  try{
+  const cachedData = await redis.get('Admin_Movies');
+  if (cachedData) {
+    console.log('Data retrieved from cache');
+    // console.log(JSON.parse(cachedData));
+    return res.json(cachedData);
+  } 
+
+  let rentalmoviearr = await movieinfo.find({});
   let value1 = await rentalmovieinfo.find({});
   let rentalmovieslocarr = [];
   for (let i = 0; i < value1.length; i++) {
@@ -97,25 +106,22 @@ router.get("/", cache,async function (req, res) {
       rentalmovieslocarr.push(value1[i]["city"]);
     }
   }
-  data={
+  data = {
     rentalmoviearr: rentalmoviearr,
     rentalmovieslocarr: rentalmovieslocarr,
   }
-  await redisClient.set('Admin_Movies', JSON.stringify(data));
-  res.json(data);
+  await redis.set('Admin_Movies', JSON.stringify(data));
+  res.json(data);}
+  catch (error) {
+    console.error("Error:", error);
+    return res.status(500).json({ message: "Internal server error" });
+  }
+
 });
 
-async function cache(req, res, next) {
 
-  const cachedData = await redisClient.get('Admin_Movies');
-        if (cachedData) {
-            console.log('Data retrieved from cache');
-            return res.json(JSON.parse(cachedData));
-        } else {
-      next();
-    }
   
-}
+  
 
 
 /**
@@ -225,100 +231,100 @@ async function cache(req, res, next) {
 
 
 router.post("/adminrentalmovieinfo", async function (req, res) {
-  if(req.cookies.islogin!="admin"){
+  if (req.cookies.islogin != "admin") {
     res.status(404).json({
       result: "Admin Should login"
     });
   }
-    let mName = req.body.mName;
-    let theatreimgurl = req.body.theatreimgurl;
-    let lang = req.body.lang;
-    let rd = req.body.rd;
-    let duration = req.body.duration;
-    let genre = req.body.genre;
-    let locs = req.body.locs;
-    let cn1 = req.body.cn1;
-    let cimg1 = req.body.cimg1;
-    let cn2 = req.body.cn2;
-    let cimg2 = req.body.cimg2;
-    let cn3 = req.body.cn3;
-    let cimg3 = req.body.cimg3;
-    let cn4 = req.body.cn4;
-    let cimg4 = req.body.cimg4;
-    let cn5 = req.body.cn5;
-    let cimg5 = req.body.cimg5;
-    let aboutmovie = req.body.about;
-    let mid = "SAYS@" + mName;
-  
-    let value = await movieinfo.find({ MovieId: mid });
-    if (value.length == 0) {
-      let newdocument = new movieinfo();
-      newdocument.MovieName = mName;
-      newdocument.MovieId = mid;
-      newdocument.imgurl = theatreimgurl;
-      newdocument.releasedate = rd;
-      newdocument.duration = duration;
-      newdocument.genre = genre;
-      newdocument.about = aboutmovie;
-      newdocument.language = lang;
-      let castobjarr = [
-        {
-          castname: cn1,
-          castimg: cimg1,
-        },
-  
-        {
-          castname: cn2,
-          castimg: cimg2,
-        },
-  
-        {
-          castname: cn3,
-          castimg: cimg3,
-        },
-  
-        {
-          castname: cn4,
-          castimg: cimg4,
-        },
-  
-        {
-          castname: cn5,
-          castimg: cimg5,
-        },
-      ];
-  
-      newdocument.cast = castobjarr;
-      let value2 = await newdocument.save();
-      if (value2) {
-        console.log("New Document Added to movie info with data");
-      }
+  let mName = req.body.mName;
+  let theatreimgurl = req.body.theatreimgurl;
+  let lang = req.body.lang;
+  let rd = req.body.rd;
+  let duration = req.body.duration;
+  let genre = req.body.genre;
+  let locs = req.body.locs;
+  let cn1 = req.body.cn1;
+  let cimg1 = req.body.cimg1;
+  let cn2 = req.body.cn2;
+  let cimg2 = req.body.cimg2;
+  let cn3 = req.body.cn3;
+  let cimg3 = req.body.cimg3;
+  let cn4 = req.body.cn4;
+  let cimg4 = req.body.cimg4;
+  let cn5 = req.body.cn5;
+  let cimg5 = req.body.cimg5;
+  let aboutmovie = req.body.about;
+  let mid = "SAYS@" + mName;
+
+  let value = await movieinfo.find({ MovieId: mid });
+  if (value.length == 0) {
+    let newdocument = new movieinfo();
+    newdocument.MovieName = mName;
+    newdocument.MovieId = mid;
+    newdocument.imgurl = theatreimgurl;
+    newdocument.releasedate = rd;
+    newdocument.duration = duration;
+    newdocument.genre = genre;
+    newdocument.about = aboutmovie;
+    newdocument.language = lang;
+    let castobjarr = [
+      {
+        castname: cn1,
+        castimg: cimg1,
+      },
+
+      {
+        castname: cn2,
+        castimg: cimg2,
+      },
+
+      {
+        castname: cn3,
+        castimg: cimg3,
+      },
+
+      {
+        castname: cn4,
+        castimg: cimg4,
+      },
+
+      {
+        castname: cn5,
+        castimg: cimg5,
+      },
+    ];
+
+    newdocument.cast = castobjarr;
+    let value2 = await newdocument.save();
+    if (value2) {
+      console.log("New Document Added to movie info with data");
     }
-  
-    let locsarr = locs.split(",");
-    for (let i = 0; i < locsarr.length; i++) {
-      locsarr[i] =
-        locsarr[i].charAt(0).toUpperCase() + locsarr[i].slice(1).toLowerCase();
-    }
-  
-    let rentalarrobj = [];
-    for (let i = 0; i < locsarr.length; i++) {
-      let obj1 = {
-        MovieId: mid,
-        MovieName: mName,
-        city: locsarr[i],
-      };
-  
-      rentalarrobj.push(obj1);
-    }
-  
-    let value3 = await rentalmovieinfo.insertMany(rentalarrobj);
-    if (value3) {
-      console.log("Rental movies inserted ");
-    }
-  
-    res.json("added");
-  });
+  }
+
+  let locsarr = locs.split(",");
+  for (let i = 0; i < locsarr.length; i++) {
+    locsarr[i] =
+      locsarr[i].charAt(0).toUpperCase() + locsarr[i].slice(1).toLowerCase();
+  }
+
+  let rentalarrobj = [];
+  for (let i = 0; i < locsarr.length; i++) {
+    let obj1 = {
+      MovieId: mid,
+      MovieName: mName,
+      city: locsarr[i],
+    };
+
+    rentalarrobj.push(obj1);
+  }
+
+  let value3 = await rentalmovieinfo.insertMany(rentalarrobj);
+  if (value3) {
+    console.log("Rental movies inserted ");
+  }
+  // await redis.set('Admin_Movies', JSON.stringify(data));
+  res.json("added");
+});
 
 /**
  * @swagger
@@ -378,8 +384,8 @@ router.post("/adminrentalmovieinfo", async function (req, res) {
 
 
 router.delete("/adminremovemovie", async function (req, res) {
-  
-  if(req.cookies.islogin!="admin"){
+
+  if (req.cookies.islogin != "admin") {
     res.status(404).json({
       result: "Admin Should login"
     });
@@ -392,7 +398,7 @@ router.delete("/adminremovemovie", async function (req, res) {
   await movieinfo.deleteOne({ MovieId: mid });
   await rentalmovieinfo.deleteMany({ MovieId: mid });
   console.log("Movie Removed by Admin");
-  res.json({k:1});
+  res.json({ k: 1 });
 });
 
 
@@ -500,8 +506,8 @@ router.delete("/adminremovemovie", async function (req, res) {
 
 
 router.post("/getmovieinfo", async function (req, res) {
-   
-  if(req.cookies.islogin!="admin"){
+
+  if (req.cookies.islogin != "admin") {
     res.status(404).json({
       result: "Admin Should login"
     });

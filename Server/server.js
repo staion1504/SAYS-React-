@@ -2,7 +2,8 @@ const express = require("express");
 const md5 = require("md5");
 const cors = require('cors');
 const bodyParser = require("body-parser");
-
+const dotenv = require("dotenv");
+dotenv.config();
 const multer=require("multer");
 
 const helmet=require("helmet");
@@ -20,7 +21,7 @@ app.use(cors({ origin: true, credentials: true })); // Enable CORS for all route
 
 app.use(
   cors({
-    origin: ["http://localhost:3000","http://3.108.54.68:3000","https://mind-meld-react.vercel.app"],
+    origin: ["http://localhost:3000","https://says-react-dzvu.vercel.app/"],
     methods: ["POST", "GET", "HEAD", "PUT", "DELETE"],
     credentials: true,
   })
@@ -52,8 +53,8 @@ app.use(cookieparser());
 //MongoDB Altas Connection
 const mongoose = require("mongoose");
 
-const dburl =
-  "mongodb+srv://staion1504:aCYw1ZQ3wVZY7ku4@cluster0.xjrpfdo.mongodb.net/SAYS?retryWrites=true&w=majority";
+const dburl =process.env.mongodb_URL;
+  // "mongodb+srv://staion1504:aCYw1ZQ3wVZY7ku4@cluster0.xjrpfdo.mongodb.net/SAYS?retryWrites=true&w=majority";
 
 
 mongoose
@@ -82,7 +83,7 @@ const usertheatreprofileroutes = require("./routes/user/usertheatre_routes");
 
 
 app.get("/", (req, res) => {
-  res.send("Hello World fine!!")
+  res.send("Hello World........!!")
 })
 
 
