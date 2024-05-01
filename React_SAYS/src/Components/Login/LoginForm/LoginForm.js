@@ -53,7 +53,7 @@ const LoginForm = (props) => {
     });
 
     const output = await response.json();
-    // console.log(output);
+    console.log(output);
 
     switch (output.result) {
       case "home":
@@ -73,6 +73,7 @@ const LoginForm = (props) => {
         break;
 
       case "adminhome":
+        console.log("hi ra tester");
         navigate("/Admin")
         break;
 
