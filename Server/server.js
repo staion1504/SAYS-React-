@@ -139,7 +139,7 @@ const options={
   },
   servers: [
     {
-      url: "http://3.110.188.55:5000/",
+      url: "http://localhost:5000",
     },
   ],
 },

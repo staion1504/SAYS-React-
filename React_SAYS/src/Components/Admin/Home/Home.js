@@ -34,6 +34,9 @@ const Home = () => {
   settverificationarr(res2.theatreverificationarr);
   }
 
+
+
+  
   useEffect(()=>{
     getdetails();
   },[]);
