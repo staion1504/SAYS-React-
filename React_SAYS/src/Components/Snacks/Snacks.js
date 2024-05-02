@@ -6,6 +6,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faIndianRupeeSign,faStar,faPlusCircle,faCartShopping } from '@fortawesome/free-solid-svg-icons';
 import Cart from './Cart';
 import Card from './Card';
+import URL from '../../URL';
+
+
 
 const Snacks = () => {
   
@@ -27,7 +30,7 @@ const Snacks = () => {
   const renderSnacks=async ()=>{
     console.log("hi came");
     const res = await fetch(
-      "http://localhost:5000/snacks/",
+      URL+"/snacks/",
       {
         method: "get",
         headers: {
@@ -57,7 +60,7 @@ const Snacks = () => {
     const ticketid= event.target.value;
      setticketid(ticketid);
     const res = await fetch(
-      "http://localhost:5000/snacks/",
+      URL+"/snacks/",
       {
         method: "post",
         body: JSON.stringify({Ticketid:ticketid}),

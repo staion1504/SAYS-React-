@@ -5,6 +5,9 @@ import { Link } from 'react-router-dom';
 import { Container,Row} from 'react-bootstrap';
 import Seat from './Seat/Seat';
 import { useLocation, useNavigate } from 'react-router-dom';
+import URL from '../../URL';
+
+
 const SeatArrangement = () => {
 
     
@@ -21,7 +24,7 @@ const SeatArrangement = () => {
     
      async function renderSeats(){
 
-      let res=await fetch(`http://localhost:5000/movies/seatarrangement?name=${MovieArray.MovieName}&tReff=${tReff}&time=${time}`,{
+      let res=await fetch(URL+`/movies/seatarrangement?name=${MovieArray.MovieName}&tReff=${tReff}&time=${time}`,{
         method:"GET",
         headers:{
             "Content-Type":"application/json"
@@ -65,7 +68,7 @@ const SeatArrangement = () => {
         }
         
         
-        let res2 = await fetch('http://localhost:5000/movies/seatarrangement/addticket', {
+        let res2 = await fetch(URL+'/movies/seatarrangement/addticket', {
             method: 'post',
             body: JSON.stringify(obj1),
             headers: {
@@ -76,7 +79,7 @@ const SeatArrangement = () => {
 
 
         let k=await res2.json();
-        let res3 = await fetch('http://localhost:5000/movies/seatarrangement/updateseatsarr', {
+        let res3 = await fetch(URL+'/movies/seatarrangement/updateseatsarr', {
             method: 'put',
             body: JSON.stringify(obj3),
             headers: {

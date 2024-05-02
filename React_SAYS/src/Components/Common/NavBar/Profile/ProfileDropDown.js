@@ -4,13 +4,16 @@ import profileimg from '../../../../Assests/NavBar/image.jpg';
 import classes from './ProfileDropDown.module.css';
 import { Link ,useNavigate} from 'react-router-dom';
 import { useState,useEffect } from 'react';
+import URL from '../../../../URL';
+
+
 const ProfileDropDown=(props)=>{
 
   const [imageSrc, setImageSrc] = useState("https://png.pngtree.com/png-vector/20190501/ourmid/pngtree-users-icon-design-png-image_1014936.jpg");
   const navigate=useNavigate();
   const renderUserpic = async () => {
     // console.log("hi");
-    const res = await fetch('http://localhost:5000/profile/profilepic', {
+    const res = await fetch(URL+'/profile/profilepic', {
       method: 'get',
       headers: {
         "Content-Type": 'application/json'
@@ -33,7 +36,7 @@ const ProfileDropDown=(props)=>{
    
   async function signout(){
 
-   await fetch('http://localhost:5000/signout', {
+   await fetch(URL+'/signout', {
     method: 'get',
     headers: {
       "Content-Type": 'application/json'

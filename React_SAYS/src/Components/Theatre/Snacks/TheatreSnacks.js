@@ -4,6 +4,9 @@ import classes from './TheatreSnacks.module.css';
 import TNavbar from "../TCommon/navbar";
 import AddSnack from "./AddSnack";
 import EditSnack from "./EditSnack";
+import URL from "../../../URL";
+
+
 
 
 
@@ -24,7 +27,7 @@ const TheatreSnacks = () => {
   const renderSnacks = async () => {
 
     const res = await fetch(
-      "http://localhost:5000/tsnackspage/",
+      URL+"/tsnackspage/",
       {
         method: "get",
         headers: {
@@ -47,7 +50,7 @@ const TheatreSnacks = () => {
 
       
       const res = await fetch(
-        "http://localhost:5000/tsnackspage/removesnack",
+        URL+"/tsnackspage/removesnack",
         {
           method: "post",
           body: JSON.stringify(obj),
@@ -75,7 +78,7 @@ const TheatreSnacks = () => {
     }
 
     const res = await fetch(
-      "http://localhost:5000/tsnackspage/getsnackdetails",
+      URL+"/tsnackspage/getsnackdetails",
       {
         method: "post",
         body: JSON.stringify(obj),

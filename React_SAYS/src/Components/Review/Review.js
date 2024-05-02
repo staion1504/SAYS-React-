@@ -4,6 +4,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {faStar as solidStar,faStar as regularStar} from "@fortawesome/free-solid-svg-icons";
 import { faStar as farStar } from "@fortawesome/free-regular-svg-icons";
 import { Link, useLocation } from "react-router-dom";
+import URL from "../../URL";
+
+
 
 const Review = () => {
   const maxStars = 5;
@@ -19,7 +22,7 @@ const Review = () => {
   const [mrating,setmrating]=useState("");
 
   const getDetails = async() =>{
-    const response=await fetch(`http://localhost:5000/reviews?name=${moviename}`,{
+    const response=await fetch(URL+`/reviews?name=${moviename}`,{
       method:"GET",
       headers:{
         "Content-Type":"application/json"

@@ -7,6 +7,9 @@ import Carousel from 'react-bootstrap/Carousel';
 import { useLocation,useNavigate} from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faMapMarkerAlt} from '@fortawesome/free-solid-svg-icons';
+import URL from '../../URL';
+
+
 
 
 const UserVIewTProfile = () => {
@@ -19,7 +22,7 @@ const UserVIewTProfile = () => {
     // const [treff,settreff]=useState("");
 
    const LoadDetails=async (treff)=>{
-    const response=await fetch(`http://localhost:5000/usertheatreprofile?treff=${treff}`,{
+    const response=await fetch(URL+`/usertheatreprofile?treff=${treff}`,{
         method:"GET",
         headers:{
           "Content-Type":"application/json"

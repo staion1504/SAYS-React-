@@ -101,11 +101,11 @@ router.get("/", function (req, res) {
 });
 
 router.post("/", async (req, res, next) => {
-  if(req.cookies.islogin!="user"&&req.cookies.islogin!="admin"){
-    res.status(404).json({
-      result: "notloggedin"
-    });
-  }
+  // if(req.cookies.islogin!="user"&&req.cookies.islogin!="admin"){
+  //   res.status(404).json({
+  //     result: "notloggedin"
+  //   });
+  // }
   try {
     const loc = req.body.loc;
     // console.log(loc);

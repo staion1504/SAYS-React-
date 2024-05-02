@@ -11,6 +11,7 @@ import AddMovies from './AddMovies/AddMovies';
 import MovieInfo from './MovieInfo/MovieInfo';
 
 import { MyContext } from "../../../Contexts/MoviesContext";
+import URL from '../../../URL';
 
 export const Movies = () => {
 
@@ -34,7 +35,7 @@ export const Movies = () => {
   const [MoviesInfo, setMoviesInfo] = useState();
 
   const renderMovies =useCallback( async () => {
-  let response = await fetch("http://localhost:5000/Adminmovies", {
+  let response = await fetch(URL+"/Adminmovies", {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -85,12 +86,13 @@ export const Movies = () => {
     };
      
     console.log(x);
-    let response = await fetch("http://localhost:5000/Adminmovies/adminrentalmovieinfo", {
+    let response = await fetch(URL+"/Adminmovies/adminrentalmovieinfo", {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
-    body:JSON.stringify(x)
+    body:JSON.stringify(x),
+    credentials: 'include'
   });
   const x1 = await response.json();
      
@@ -112,12 +114,13 @@ export const Movies = () => {
   const [removemovie,setremovemovie]=useState("Select Movie");
 
   const RemoveHandler=async ()=>{
-    let response = await fetch("http://localhost:5000/Adminmovies/adminremovemovie", {
+    let response = await fetch(URL+"/Adminmovies/adminremovemovie", {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json',
     },
-    body:JSON.stringify({moviename : removemovie})
+    body:JSON.stringify({moviename : removemovie}),
+    credentials: 'include'
   });
   const res = await response.json();
   

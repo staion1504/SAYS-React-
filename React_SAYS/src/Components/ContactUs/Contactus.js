@@ -5,6 +5,9 @@ import { Container } from 'react-bootstrap';
 import classes from './ContactUs.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faMapMarkerAlt,faPhoneAlt,faEnvelope} from '@fortawesome/free-solid-svg-icons';
+import URL from '../../URL';
+
+
 
 
 const Contactus = () => {
@@ -16,7 +19,7 @@ const Contactus = () => {
 
 
  const getusermail=async ()=>{
-    const response2 = await fetch("http://localhost:5000/contactus", {
+    const response2 = await fetch(URL+"/contactus", {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -30,7 +33,7 @@ const Contactus = () => {
  }
 
  const SubmitMessage=async (x) => {
-    const response = await fetch("http://localhost:5000/contactus", {
+    const response = await fetch(URL+"/contactus", {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

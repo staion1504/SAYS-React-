@@ -4,6 +4,9 @@ import TNavbar from '../TCommon/navbar';
 import { Container } from 'react-bootstrap';
 import AddScreen from './AddScreen/AddScreen';
 import AddShow from './AddShow/AddShow';
+import URL from '../../../URL';
+
+
 
 const TSchedule = () => {
 
@@ -30,7 +33,7 @@ const TSchedule = () => {
 
   async function renderDeatils() {
 
-    let res = await fetch("http://localhost:5000/tschedule/", {
+    let res = await fetch(URL+"/tschedule/", {
 
       method: "GET",
       headers: {
@@ -64,7 +67,7 @@ const TSchedule = () => {
     console.log(data);
 
     let response = await fetch(
-      "http://localhost:5000/tschedule/addscreen",
+      URL+"/tschedule/addscreen",
       {
         method: "POST",
         body: JSON.stringify(data),
@@ -87,7 +90,7 @@ const TSchedule = () => {
 
   const editscreenHandler =async (data)=>{
 
-    let response = await fetch("http://localhost:5000/tschedule/editsavescreen",
+    let response = await fetch(URL+"/tschedule/editsavescreen",
       {
         method: "POST",
         body: JSON.stringify(data),
@@ -107,7 +110,7 @@ const TSchedule = () => {
 
 
   const RemoveScreenHandler=async (scrname)=>{
-    const response=await fetch(`http://localhost:5000/tschedule/removescreen`,{
+    const response=await fetch(URL+`/tschedule/removescreen`,{
       method:"POST",
       headers:{
         "Content-Type":"application/json"
@@ -127,7 +130,7 @@ const TSchedule = () => {
   }
 
   const RemoveShowHandler=async (removemname,sname,showtime)=>{
-    const response=await fetch(`http://localhost:5000/tschedule/removeshow`,{
+    const response=await fetch(URL+`/tschedule/removeshow`,{
       method:"POST",
       headers:{
         "Content-Type":"application/json"
@@ -150,7 +153,7 @@ const TSchedule = () => {
 
 
     let response = await fetch(
-      "http://localhost:5000/tschedule/addshow",
+      URL+"/tschedule/addshow",
       {
         method: "POST",
         body: JSON.stringify(data),

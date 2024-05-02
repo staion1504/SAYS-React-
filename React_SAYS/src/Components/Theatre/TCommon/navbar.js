@@ -3,6 +3,9 @@ import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
 import { Link, useNavigate } from "react-router-dom";
+import URL from "../../../URL";
+
+
 function TNavbar() {
 
     const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -15,7 +18,7 @@ function TNavbar() {
        
       console.log("hi");
 
-      await fetch('http://localhost:5000/Tsignout', {
+      await fetch(URL+'/Tsignout', {
         method: 'get',
         headers: {
           "Content-Type": 'application/json'

@@ -8,6 +8,9 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from 'react-redux';
 import { ref } from '../../../ReduxStores/LoginRedux';
+import URL from '../../../URL';
+
+
 
 
 const LoginForm = (props) => {
@@ -40,7 +43,7 @@ const LoginForm = (props) => {
     else {
       api = "Tlogin";
     }
-    let response = await fetch("http://localhost:5000/" + api, {
+    let response = await fetch(URL+"/" + api, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -50,7 +53,7 @@ const LoginForm = (props) => {
     });
 
     const output = await response.json();
-    // console.log(output);
+    console.log(output);
 
     switch (output.result) {
       case "home":
@@ -70,6 +73,7 @@ const LoginForm = (props) => {
         break;
 
       case "adminhome":
+        console.log("hi ra tester");
         navigate("/Admin")
         break;
 

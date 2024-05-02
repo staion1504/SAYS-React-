@@ -3,6 +3,9 @@ import 'bootstrap/dist/css/bootstrap.css';
 import Modal from 'react-bootstrap/Modal';
 import { Row, Col } from 'react-bootstrap';
 import classes from './AddSnack.module.css';
+import URL from '../../../URL';
+
+
 
 const AddSnack = ({show,handleClose,renderSnacks}) => {
   
@@ -37,7 +40,7 @@ const onSubmitHandler = async () => {
       };
 
       let res = await fetch(
-        "http://localhost:5000/tsnackspage/addsnack",
+        URL+"/tsnackspage/addsnack",
         {
           method: "post",
           body: JSON.stringify(obj),

@@ -4,6 +4,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import AdminNav from '../../Common/Admin/Navbar/AdminNav';
 import {Container} from 'react-bootstrap';
 import { useState,useEffect } from 'react';
+import URL from '../../../URL';
+
+
 
 
 const Theatre = () => {
@@ -11,11 +14,12 @@ const Theatre = () => {
   const [theatres,settheatres]=useState([]);
 
   const get_theatres_func=async ()=>{
-    let response = await fetch("http://localhost:5000/Admintheatre", {
+    let response = await fetch(URL+"/Admintheatre", {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
       },
+      credentials:'include'
     });
     const res = await response.json();
     settheatres(res.theatres);
@@ -28,7 +32,7 @@ const Theatre = () => {
 
     const RemoveHandler=async (tid)=>{
     
-    let response = await fetch("http://localhost:5000/Admintheatre/removetheatre", {
+    let response = await fetch(URL+"/Admintheatre/removetheatre", {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
