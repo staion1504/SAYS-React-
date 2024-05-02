@@ -32,6 +32,15 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());  
 
 
+// var cookieSession = require('cookie-session')
+// app.use(cookieSession({
+//   name: 'session',
+//   keys: ["string"],
+
+//   // Cookie Options
+//   maxAge: 24 * 60 * 60 * 1000 // 24 hours
+// }))
+
 app.listen(5000, function () {
   console.log("server straed on port 5000");
 });

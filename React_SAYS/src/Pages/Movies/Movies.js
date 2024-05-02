@@ -43,6 +43,7 @@ const Movies = () => {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({ location: DefLoc }),
+      mode: 'cors',
       credentials: 'include'
 
     });

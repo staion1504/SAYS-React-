@@ -263,7 +263,7 @@ router.get("/", async function (req, res) {
     }
   }
   
-    res.json({
+    res.json({  
       rentalmoviearr: rentalmoviearr,
       activemoviearr: activemoviearr,
       inactivemoviearr: inactivemoviearr,
