@@ -26,28 +26,6 @@ app.use(
     credentials: true,
   })
 );
-// Middleware to enable CORS
-app.use((req, res, next) => {
-  // Allow requests from any origin (not recommended for production)
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  // Allow the following HTTP methods
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-  // Allow the following headers to be sent with the request
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-  // Allow credentials to be included in cross-origin requests
-  res.setHeader('Access-Control-Allow-Credentials', true);
-  // Set the maximum age for preflight requests (in seconds)
-  res.setHeader('Access-Control-Max-Age', '3600');
-
-  // Handle preflight requests
-  if (req.method === 'OPTIONS') {
-      // Respond with a 200 status code
-      return res.sendStatus(200);
-  }
-
-  // Move to the next middleware
-  next();
-});
 
 
 app.use(bodyParser.urlencoded({ extended: true }));
