@@ -62,7 +62,8 @@ router.get("/", async (req, res) => {
   let value1 = await ticketinfo.find({
     UserReferenceNumber: req.cookies.UserReferenceNumber,
   });
-  if (value1 != null)
+  // console.log(value1);
+  if (value1.length!=0){
     ticketarr = value1[0]["Ticketinfo"];
   let n = ticketarr.length;
 
@@ -108,12 +109,19 @@ router.get("/", async (req, res) => {
     //   fooditem: value3,
     //   ticketarr: ticketarr,
     // });
-
+  
     res.json({
       TicketId: ticketid,
       fooditem: value3,
       ticketarr: ticketarr,
-    });
+    });}
+    else{
+      res.json({
+        TicketId: [],
+        fooditem: [],
+        ticketarr: [],
+      });
+    }
   } 
   // else res.redirect("/login");
 );
