@@ -34,16 +34,28 @@ app.use(express.json());
 
 
 const session=require('express-session')
-app.use(session({
-  secret: 'secret',
-  resave: false,
-  saveUninitialized: false,
-  cookie: { 
-    secure: true, // required for cookies to work on HTTPS
-      httpOnly: false,
-      sameSite: 'none'
-  }
-}));
+const store = MemoryStore(session);
+
+app.set("trust proxy", 1); // in production
+app.use(
+    session({
+        name: "auth",
+        secret: "secret",
+            proxy: true, // in production 
+        cookie: {
+            maxAge: 1000 * 60 * 5,
+            httpOnly: true,
+            sameSite: "none", // in production
+            secure: true, // in production
+        },
+        resave: false,
+        store: new store({
+            checkPeriod: 1000 * 60 * 60,
+        }),
+        rolling: true,
+        saveUninitialized: false,
+    })
+);
 
 
 
