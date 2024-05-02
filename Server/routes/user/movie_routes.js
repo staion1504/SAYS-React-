@@ -181,11 +181,11 @@ async function fillLatestandUpcoming(datevalue, city, latestmovies1, upcomingmov
 
 router.post("/", async (req, res) => {
   
-  if(req.cookies.islogin!="user"&&req.cookies.islogin!="admin"){
-    res.status(404).json({
-      result: "notloggedin"
-    });
-  }
+  // if(req.cookies.islogin!="user"&&req.cookies.islogin!="admin"){
+  //   res.status(404).json({
+  //     result: "notloggedin"
+  //   });
+  // }
   
 
   let default_city = req.body.location;
@@ -293,11 +293,11 @@ router.get("/individualmovie", async (req, res) => {
  */
 router.get("/timings", async (req, res) => {
 
-  if(req.cookies.islogin!="user"&&req.cookies.islogin!="admin"){
-    res.status(404).json({
-      result: "notloggedin"
-    });
-  }
+  // if(req.cookies.islogin!="user"&&req.cookies.islogin!="admin"){
+  //   res.status(404).json({
+  //     result: "notloggedin"
+  //   });
+  // }
 
   const mname = req.query.name;
   const mcity = req.query.city;
@@ -436,11 +436,11 @@ router.post("/timings", async function (req, res) {
 
 router.post("/seatarrangement/getseatarr", async function (req, res) {
   
-  if(req.cookies.islogin!="user"&&req.cookies.islogin!="admin"){
-    res.status(404).json({
-      result: "notloggedin"
-    });
-  }
+  // if(req.cookies.islogin!="user"&&req.cookies.islogin!="admin"){
+  //   res.status(404).json({
+  //     result: "notloggedin"
+  //   });
+  // }
 
   let tReff = req.body.tReff;
   let screenname = req.body.sname;
@@ -526,11 +526,11 @@ router.post("/seatarrangement/getseatarr", async function (req, res) {
 
 router.post("/seatarrangement/addticket", async function (req, res) {
 
-  if(req.cookies.islogin!="user"&&req.cookies.islogin!="admin"){
-    res.status(404).json({
-      result: "notloggedin"
-    });
-  }
+  // if(req.cookies.islogin!="user"&&req.cookies.islogin!="admin"){
+  //   res.status(404).json({
+  //     result: "notloggedin"
+  //   });
+  // }
 
   let treff = req.body.tReff;
   let MovieName = req.body.MovieName;
@@ -660,11 +660,11 @@ router.post("/seatarrangement/addticket", async function (req, res) {
  */
 
 router.put("/seatarrangement/updateseatsarr", async function (req, res) {
-  if(req.cookies.islogin!="user"&&req.cookies.islogin!="admin"){
-    res.status(404).json({
-      result: "notloggedin"
-    });
-  }
+  // if(req.cookies.islogin!="user"&&req.cookies.islogin!="admin"){
+  //   res.status(404).json({
+  //     result: "notloggedin"
+  //   });
+  // }
    
   let seatarr = req.body.seatarr;
   let treff = req.body.tReff;
@@ -778,11 +778,11 @@ router.put("/seatarrangement/updateseatsarr", async function (req, res) {
 
 router.get("/seatarrangement", async (req, res) => {
   
-  if(req.cookies.islogin!="user"&&req.cookies.islogin!="admin"){
-    res.status(404).json({
-      result: "notloggedin"
-    });
-  }
+  // if(req.cookies.islogin!="user"&&req.cookies.islogin!="admin"){
+  //   res.status(404).json({
+  //     result: "notloggedin"
+  //   });
+  // }
 
   const mname = req.query.name;
   const treffnum = req.query.tReff;
