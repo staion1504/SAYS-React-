@@ -32,32 +32,14 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());  
 
 
+var cookieSession = require('cookie-session')
+app.use(cookieSession({
+  name: 'session',
+  keys: ["string"],
 
-const session=require('express-session')
-const store = MemoryStore(session);
-
-app.set("trust proxy", 1); // in production
-app.use(
-    session({
-        name: "auth",
-        secret: "secret",
-            proxy: true, // in production 
-        cookie: {
-            maxAge: 1000 * 60 * 5,
-            httpOnly: true,
-            sameSite: "none", // in production
-            secure: true, // in production
-        },
-        resave: false,
-        store: new store({
-            checkPeriod: 1000 * 60 * 60,
-        }),
-        rolling: true,
-        saveUninitialized: false,
-    })
-);
-
-
+  // Cookie Options
+  maxAge: 24 * 60 * 60 * 1000 // 24 hours
+}))
 
 app.listen(5000, function () {
   console.log("server straed on port 5000");

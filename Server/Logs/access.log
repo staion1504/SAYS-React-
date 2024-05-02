@@ -56,3 +56,10 @@ GET  /profile/profilepic 200 3 - 304.526 ms Thu, 02 May 2024 01:21:23 GMT
 GET  /profile/profilepic 200 3 - 284.506 ms Thu, 02 May 2024 01:21:44 GMT
 GET  /signout 200 23 - 1.118 ms Thu, 02 May 2024 01:21:45 GMT
 POST  /home 200 4923 - 3117.716 ms Thu, 02 May 2024 01:21:47 GMT
+POST  /login 200 65 - 934.398 ms Thu, 02 May 2024 01:46:01 GMT
+GET  /profile/profilepic 200 3 - 354.534 ms Thu, 02 May 2024 01:46:01 GMT
+GET  /profile/profilepic 200 3 - 311.787 ms Thu, 02 May 2024 01:46:05 GMT
+GET  /profile/laptopprofilepage/getdetails 200 474 - 309.781 ms Thu, 02 May 2024 01:46:05 GMT
+POST  /home 200 4923 - 4531.052 ms Thu, 02 May 2024 01:46:06 GMT
+GET  /profile/laptopprofilepage/getdetails 200 474 - 359.385 ms Thu, 02 May 2024 01:46:28 GMT
+GET  /profile/profilepic 200 3 - 352.812 ms Thu, 02 May 2024 01:46:28 GMT
