@@ -4,7 +4,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "jest",
+    "test": "jest --reporters=default --reporters=jest-html-reporter",
     "start": "nodemon app.js"
   },
   "author": "",
@@ -30,5 +30,8 @@
     "supertest": "^7.0.0",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.0"
+  },
+  "devDependencies": {
+    "jest-html-reporter": "^3.10.2"
   }
 }

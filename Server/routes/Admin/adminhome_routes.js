@@ -77,11 +77,11 @@ const userinfo = require("../../models/user/signup");
 
 router.get("/", async function (req, res) {
 
-  // if(req.cookies.islogin!="admin"){
-  //   res.status(404).json({
-  //     result: "Admin Should login"
-  //   });
-  // }
+  if(req.cookies.islogin!="admin"){
+    res.status(404).json({
+      result: "Admin Should login"
+    });
+  }
 
   let msgobjarr = [];
   let theatreverificationarr = [];
