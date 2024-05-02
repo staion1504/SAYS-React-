@@ -35,11 +35,13 @@ app.use(express.json());
 
 const session=require('express-session')
 app.use(session({
-  secret:'secret',
-  resave:false,
-  cookie:{maxAge:30000},
-  saveUninitialized:false
-}))
+  secret: 'secret',
+  resave: false,
+  saveUninitialized: false,
+  cookie: { 
+    maxAge: 24 * 60 * 60 * 1000 // 1 day in milliseconds
+  }
+}));
 
 
 
