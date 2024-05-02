@@ -39,7 +39,9 @@ app.use(session({
   resave: false,
   saveUninitialized: false,
   cookie: { 
-    maxAge: 24 * 60 * 60 * 1000 // 1 day in milliseconds
+    secure: true, // required for cookies to work on HTTPS
+      httpOnly: false,
+      sameSite: 'none'
   }
 }));
 
