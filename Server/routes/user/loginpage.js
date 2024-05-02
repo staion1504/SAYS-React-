@@ -67,16 +67,18 @@ router.post("/", function (req, res) {
     } else {
 
       console.log("User Login success");
-      
+      req.session.UserReferenceNumber= value[0].UserReferenceNumber;
       res.cookie("UserReferenceNumber", value[0].UserReferenceNumber);
       if (email == "saysadmin@gmail.com") {
         res.cookie("islogin", "admin");
+        req.session.islogin= "admin";
         res.status(200).json({
           result: "adminhome"
         })
       }
       else{
         res.cookie("islogin", "user");
+        req.session.islogin= "user";
         res.status(200).json({
           result: "home",
           UserReferenceNumber: value[0].UserReferenceNumber

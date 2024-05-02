@@ -32,6 +32,17 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());  
 
 
+
+const session=require('express-session')
+app.use(session({
+  secret:'secret',
+  resave:false,
+  cookie:{maxAge:30000},
+  saveUninitialized:false
+}))
+
+
+
 app.listen(5000, function () {
   console.log("server straed on port 5000");
 });

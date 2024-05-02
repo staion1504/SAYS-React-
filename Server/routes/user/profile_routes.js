@@ -294,9 +294,10 @@ router.get("/profilepic", async function (req, res) {
 });
 
 router.get("/laptopprofilepage/getdetails", async function (req, res) {
+  console.log(req.session.UserReferenceNumber);
   userinfo
     .find({
-      UserReferenceNumber: req.cookies.UserReferenceNumber,
+      UserReferenceNumber: req.session.UserReferenceNumber,
     })
     .then((value) => {
       res.json(value);
