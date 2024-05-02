@@ -78,7 +78,7 @@ const userinfo = require("../../models/user/signup");
 router.get("/", async function (req, res) {
 
   if(req.cookies.islogin!="admin"){
-    res.status(404).json({
+    res.json({
       result: "Admin Should login"
     });
   }

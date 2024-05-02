@@ -93,7 +93,7 @@ router.post("/", async function (req, res) {
     })
 
   if (value.length == 0) {
-    res.json({
+    res.status(400).json({
       result: "error",
     });
   }
@@ -105,7 +105,7 @@ router.post("/", async function (req, res) {
       value[0].city.slice(1).toLowerCase();
    res.cookie("currtheatrecity", k);
    res.cookie("islogin","theatre");
-    res.json({
+    res.status(200).json({
       result: "theatre",
       currtheatrereffnum: value[0].tReferenceNumber,
       currtheatrecity: k

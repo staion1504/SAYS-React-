@@ -111,7 +111,7 @@ router.get("/",  async function (req, res) {
     rentalmovieslocarr: rentalmovieslocarr,
   }
   await redis.set('Admin_Movies', JSON.stringify(data));
-  res.json(data);}
+  res.status(200).json(data);}
   catch (error) {
     console.error("Error:", error);
     return res.status(500).json({ message: "Internal server error" });
@@ -516,7 +516,7 @@ router.post("/getmovieinfo", async function (req, res) {
   let mname = req.body.mname;
   let value1 = await movieinfo.find({ MovieName: mname });
   let movieobj = value1[0];
-  res.json(movieobj);
+  res.status(200).json(movieobj);
 });
 
 module.exports = router;
